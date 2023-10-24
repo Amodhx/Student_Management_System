@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="863.0" prefWidth="1535.0" style="-fx-background-color: rgba(253, 253, 253, 1);" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.finalproject02.controller.loginController">
+   <children>
+      <AnchorPane layoutX="643.0" prefHeight="866.0" prefWidth="330.0" style="-fx-background-color: rgba(5, 75, 180, 1); -fx-background-radius: 50; -fx-border-radius: 50;" />
+      <AnchorPane layoutX="920.0" prefHeight="866.0" prefWidth="618.0" style="-fx-background-color: rgba(5, 75, 180, 1); -fx-background-radius: 0; -fx-border-radius: 0;">
+         <children>
+            <ImageView fitHeight="416.0" fitWidth="627.0" layoutX="-141.0" layoutY="303.0">
+               <image>
+                  <Image url="@../assets/dahs.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="21.0" layoutY="161.0" text="Excel Education" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="41.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
+      <ImageView fitHeight="294.0" fitWidth="294.0" layoutX="59.0" layoutY="94.0">
+         <image>
+            <Image url="@../assets/E.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="75.0" layoutY="439.0" text="Welcome" textFill="#054bb4">
+         <font>
+            <Font name="Arial Bold" size="23.0" />
+         </font>
+      </Label>
+      <Label layoutX="75.0" layoutY="479.0" text="Please login to your account" textFill="#8a8a8a">
+         <font>
+            <Font name="Arial Bold" size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="username" layoutX="74.0" layoutY="530.0" prefHeight="34.0" prefWidth="274.0" promptText="   User name" style="-fx-background-color: rgba(74, 111, 167, 1); -fx-background-radius: 8;" />
+      <TextField fx:id="password" layoutX="74.0" layoutY="585.0" prefHeight="34.0" prefWidth="274.0" promptText="    Password" style="-fx-background-color: rgba(74, 111, 167, 1); -fx-background-radius: 8;" />
+      <JFXButton fx:id="loginbutton" buttonType="RAISED" layoutX="74.0" layoutY="652.0" onAction="#onloggingclick" prefHeight="34.0" prefWidth="274.0" style="-fx-background-color: rgba(35, 67, 115, 1); -fx-background-radius: 8;" text="Login" textFill="#fcfcfc">
+         <font>
+            <Font name="Arial Bold" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <Label layoutX="77.0" layoutY="707.0" text="Already haven`t an account ?" textFill="#8a8a8a">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="signup" layoutX="265.0" layoutY="707.0" onMouseClicked="#onsignupclick" text="Sign up" textFill="#e40000">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="116.0" layoutY="592.0" textFill="WHITE">
+         <font>
+            <Font name="Arial" size="17.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="16.0" fitWidth="18.0" layoutX="323.0" layoutY="593.0">
+         <image>
+            <Image url="@../assets/pass.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="16.0" fitWidth="18.0" layoutX="322.0" layoutY="539.0">
+         <image>
+            <Image url="@../assets/user.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

@@ -1,0 +1,8 @@
+.button {
+    -fx-background-radius: 0px 15px 15px 0px ;
+}
+.textfield{
+    -fx-background-radius: 10px;
+}
+
+/* You can style the button further as needed */
