@@ -4,23 +4,31 @@ import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import lk.ijse.finalproject02.DTO.UserDTO;
+import lk.ijse.finalproject02.Model.Studentmodel;
 import lk.ijse.finalproject02.Model.Usermodel;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-public class loginController {
+public class loginController implements Initializable {
 
     @FXML
     private JFXButton loginbutton;
+    @FXML
+    private Label passwordwronglable;
 
     @FXML
     private TextField password;
@@ -30,6 +38,12 @@ public class loginController {
 
     @FXML
     private TextField username;
+
+    @FXML
+    void onbackusername(KeyEvent event) {
+        passwordwronglable.setText("");
+
+    }
     private  void openUI(String uiName){
         try {
             Parent parent = FXMLLoader.load(getClass().getResource(uiName));
@@ -56,7 +70,9 @@ public class loginController {
                 Stage stage = (Stage) loginbutton.getScene().getWindow();
                 stage.close();
             }else {
-                System.out.println("not correct");
+                passwordwronglable.setText("Incorrect login credential");
+                username.setText("");
+                password.setText("");
             }
         }
 
@@ -67,4 +83,7 @@ public class loginController {
 
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+    }
 }

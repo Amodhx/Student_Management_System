@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.LineChart?>
-<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -13,6 +10,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="863.0" prefWidth="1535.0" style="-fx-background-color: rgba(241, 241, 241, 1);" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.finalproject02.controller.dashboardController">
    <children>
+      <AnchorPane fx:id="pane" layoutX="210.0" layoutY="58.0" prefHeight="806.0" prefWidth="1327.0" style="-fx-background-color: rgba(241, 241, 241, 1);" />
       <AnchorPane prefHeight="863.0" prefWidth="210.0" style="-fx-background-color: rgba(5, 75, 180, 1);">
          <children>
             <Label layoutX="78.0" layoutY="18.0" style="-fx-background-radius: 15;" text="Excel" textFill="WHITE">
@@ -141,114 +139,11 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <Label layoutX="281.0" layoutY="118.0" style="-fx-background-radius: 15;" text="Overview">
-         <font>
-            <Font name="Arial Bold" size="38.0" />
-         </font>
-      </Label>
-      <Label layoutX="281.0" layoutY="172.0" style="-fx-background-radius: 15;" text="Here`s the info  as at " textFill="#4f4f4f">
-         <font>
-            <Font name="Arial Bold" size="16.0" />
-         </font>
-      </Label>
-      <Label layoutX="519.0" layoutY="172.0" style="-fx-background-radius: 15;" text="Today" textFill="#4f4f4f">
-         <font>
-            <Font name="Arial Bold" size="16.0" />
-         </font>
-      </Label>
       <Label fx:id="time" layoutX="451.0" layoutY="172.0" style="-fx-background-radius: 15;" textFill="#4f4f4f">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <AnchorPane layoutX="282.0" layoutY="278.0" prefHeight="99.0" prefWidth="243.0" style="-fx-background-color: rgba(255, 255, 255, 1); -fx-background-radius: 10;">
-         <children>
-            <ImageView layoutX="17.0" layoutY="14.0">
-               <image>
-                  <Image url="@../assets/toclass.png" />
-               </image>
-            </ImageView>
-            <Label fx:id="studentcount" layoutX="101.0" layoutY="17.0" style="-fx-background-radius: 15;" text="96">
-               <font>
-                  <Font name="Arial Bold" size="38.0" />
-               </font>
-            </Label>
-            <Label layoutX="102.0" layoutY="62.0" style="-fx-background-radius: 15;" text="Total Students" textFill="#9b9898">
-               <font>
-                  <Font name="Arial Bold" size="16.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="573.0" layoutY="278.0" prefHeight="99.0" prefWidth="243.0" style="-fx-background-color: rgba(255, 255, 255, 1); -fx-background-radius: 10;">
-         <children>
-            <ImageView layoutX="17.0" layoutY="16.0">
-               <image>
-                  <Image url="@../assets/tostu.png" />
-               </image>
-            </ImageView>
-            <Label fx:id="classcount" layoutX="103.0" layoutY="19.0" style="-fx-background-radius: 15;" text="27">
-               <font>
-                  <Font name="Arial Bold" size="38.0" />
-               </font>
-            </Label>
-            <Label layoutX="98.0" layoutY="63.0" style="-fx-background-radius: 15;" text="Total Classes" textFill="#9b9898">
-               <font>
-                  <Font name="Arial Bold" size="16.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="869.0" layoutY="277.0" prefHeight="99.0" prefWidth="243.0" style="-fx-background-color: rgba(255, 255, 255, 1); -fx-background-radius: 10;">
-         <children>
-            <ImageView layoutX="19.0" layoutY="16.0">
-               <image>
-                  <Image url="@../assets/totea.png" />
-               </image>
-            </ImageView>
-            <Label fx:id="teachercount" layoutX="108.0" layoutY="20.0" style="-fx-background-radius: 15;" text="11">
-               <font>
-                  <Font name="Arial Bold" size="38.0" />
-               </font>
-            </Label>
-            <Label layoutX="112.0" layoutY="62.0" style="-fx-background-radius: 15;" text="Total Teachers" textFill="#9b9898">
-               <font>
-                  <Font name="Arial Bold" size="16.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="1163.0" layoutY="277.0" prefHeight="99.0" prefWidth="243.0" style="-fx-background-color: rgba(255, 255, 255, 1); -fx-background-radius: 10;">
-         <children>
-            <ImageView layoutX="19.0" layoutY="16.0">
-               <image>
-                  <Image url="@../assets/tostu.png" />
-               </image>
-            </ImageView>
-            <Label fx:id="seminarcount" layoutX="114.0" layoutY="16.0" style="-fx-background-radius: 15;" text="09">
-               <font>
-                  <Font name="Arial Bold" size="38.0" />
-               </font>
-            </Label>
-            <Label layoutX="116.0" layoutY="58.0" style="-fx-background-radius: 15;" text="Upcoming Seminar" textFill="#9b9898">
-               <font>
-                  <Font name="Arial Bold" size="16.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="283.0" layoutY="433.0" prefHeight="358.0" prefWidth="734.0" style="-fx-background-color: rgba(255, 255, 255, 1); -fx-background-radius: 10;">
-         <children>
-            <LineChart layoutX="20.0" layoutY="10.0" prefHeight="346.0" prefWidth="701.0" style="-fx-background-color: rgba(255, 255, 255, 1);">
-              <xAxis>
-                <CategoryAxis side="BOTTOM" />
-              </xAxis>
-              <yAxis>
-                <NumberAxis side="LEFT" />
-              </yAxis>
-            </LineChart>
-         </children></AnchorPane>
-      <AnchorPane layoutX="1101.0" layoutY="432.0" prefHeight="358.0" prefWidth="322.0" style="-fx-background-color: rgba(255, 255, 255, 1); -fx-background-radius: 10;" />
       <ImageView layoutX="1224.0" layoutY="14.0">
          <image>
             <Image url="@../assets/notifi.png" />

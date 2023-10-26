@@ -6,11 +6,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import lk.ijse.finalproject02.DTO.UserDTO;
+import lk.ijse.finalproject02.Model.Usermodel;
 
 public class Main extends Application {
 
     public static void main(String[] args) {
+
         launch(args);
+
     }
     @Override
     public void start(Stage stage) throws Exception {

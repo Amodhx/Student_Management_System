@@ -3,21 +3,24 @@ package lk.ijse.finalproject02.controller;
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class dashboardController implements Initializable {
 
-    @FXML
-    private ImageView dashimage;
+
 
     @FXML
     private JFXButton attendencebutton;
@@ -25,8 +28,7 @@ public class dashboardController implements Initializable {
     @FXML
     private JFXButton classbutton;
 
-    @FXML
-    private Label classcount;
+
 
 
     @FXML
@@ -37,8 +39,7 @@ public class dashboardController implements Initializable {
     @FXML
     private JFXButton mailbutton;
 
-    @FXML
-    private Label seminarcount;
+
 
     @FXML
     private JFXButton settingbutton;
@@ -46,20 +47,16 @@ public class dashboardController implements Initializable {
     @FXML
     private JFXButton studentbutton;
 
-    @FXML
-    private Label studentcount;
+
 
     @FXML
     private JFXButton teacherbutton;
 
     @FXML
-    private Label teachercount;
-
-    @FXML
     private TextField textfield;
 
     @FXML
-    private Label time;
+    private AnchorPane pane;
 
     @FXML
     void onattendenceclick(ActionEvent event) {
@@ -81,6 +78,7 @@ public class dashboardController implements Initializable {
         colourRemove();
         studentbutton1.setStyle("-fx-background-color:rgba(203, 231, 235, 1) ");
         studentbutton1.setTextFill(Color.rgb(5, 75, 180, 1));
+        changePage("/view/db-form.fxml");
     }
 
     @FXML
@@ -122,6 +120,7 @@ public class dashboardController implements Initializable {
         colourRemove();
         studentbutton.setStyle("-fx-background-color:rgba(203, 231, 235, 1) ");
         studentbutton.setTextFill(Color.rgb(5, 75, 180, 1));
+        changePage("/view/student-form.fxml");
 
     }
 
@@ -136,8 +135,19 @@ public class dashboardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         colourRemove();
+        changePage("/view/db-form.fxml");
         studentbutton1.setStyle("-fx-background-color:rgba(203, 231, 235, 1) ");
         studentbutton1.setTextFill(Color.rgb(5, 75, 180, 1));
+    }
+    public void changePage(String uiName){
+        try {
+            Parent parent = FXMLLoader.load(getClass().getResource(uiName));
+            pane.getChildren().clear();
+            pane.getChildren().add(parent);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
     public void colourRemove(){
         studentbutton1.setStyle("-fx-background-color:rgba(5, 75, 180, 1) ");

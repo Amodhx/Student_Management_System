@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="806.0" prefWidth="1327.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.finalproject02.controller.studentController">
+   <children>
+      <Label layoutX="98.0" layoutY="84.0" style="-fx-background-radius: 15;" text="Student Portal">
+         <font>
+            <Font name="Arial Bold" size="23.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="addstudentButton" buttonType="RAISED" layoutX="1113.0" layoutY="95.0" onAction="#onaddStudentClick" style="-fx-background-color: rgba(5, 75, 180, 1); -fx-background-radius: 10;" text="+Add Student" textFill="WHITE">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </JFXButton>
+      <TableView layoutX="98.0" layoutY="203.0" prefHeight="571.0" prefWidth="1136.0">
+        <columns>
+          <TableColumn prefWidth="196.7999725341797" text="Name" />
+          <TableColumn prefWidth="263.199951171875" text="Class" />
+            <TableColumn prefWidth="246.39996337890625" text="E-mail" />
+            <TableColumn prefWidth="186.40008544921875" text="Contact number" />
+            <TableColumn prefWidth="247.19989013671875" text="Gender" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
