@@ -14,7 +14,7 @@ public class StudentDTO {
     private String lastName;
     private String gender;
     private String NIC;
-    private int classId;
+    private String classId;
     private String contactnumber;
     private String email;
     private int parentId;

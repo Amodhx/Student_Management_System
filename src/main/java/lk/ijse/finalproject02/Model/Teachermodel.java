@@ -41,7 +41,7 @@ public class Teachermodel {
         int x = 0 ;
         try {
             Connection connection =DBConnection.getInstance().getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("select count(teacherID) from teacher group by teacherID;");
+            PreparedStatement preparedStatement = connection.prepareStatement("select count(teacherID) from teacher;");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 x = resultSet.getInt(1);

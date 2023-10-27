@@ -19,13 +19,13 @@
             <Font name="Arial Bold" size="16.0" />
          </font>
       </JFXButton>
-      <TableView layoutX="98.0" layoutY="203.0" prefHeight="571.0" prefWidth="1136.0">
+      <TableView fx:id="table" layoutX="98.0" layoutY="203.0" prefHeight="571.0" prefWidth="1136.0">
          <columns>
-            <TableColumn prefWidth="196.7999725341797" text="Name" />
-            <TableColumn prefWidth="263.199951171875" text="Subject" />
-            <TableColumn prefWidth="246.39996337890625" text="E-mail" />
-            <TableColumn prefWidth="186.40008544921875" text="Contact number" />
-            <TableColumn prefWidth="247.19989013671875" text="Gender" />
+            <TableColumn fx:id="tablename" prefWidth="196.7999725341797" text="Name" />
+            <TableColumn fx:id="tablesubject" prefWidth="263.199951171875" text="Subject" />
+            <TableColumn fx:id="tablemail" prefWidth="246.39996337890625" text="E-mail" />
+            <TableColumn fx:id="tablecontact" prefWidth="186.40008544921875" text="Contact number" />
+            <TableColumn fx:id="tablegender" prefWidth="247.19989013671875" text="Gender" />
          </columns>
       </TableView>
    </children>

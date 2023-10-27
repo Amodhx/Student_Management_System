@@ -20,7 +20,7 @@ public class Studentmodel {
             ps.setString(2,student.getLastName());
             ps.setString(3,student.getGender());
             ps.setString(4,student.getNIC());
-            ps.setInt(5,student.getClassId());
+            ps.setString(5,student.getClassId());
             ps.setString(6,student.getContactnumber());
             ps.setString(7,student.getEmail());
             ps.setInt(8,student.getParentId());
@@ -59,7 +59,7 @@ public class Studentmodel {
             ResultSet rs=ps.executeQuery();
 
             while (rs.next()){
-                StudentDTO st=new StudentDTO(rs.getInt(1), rs.getString(2), rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6),rs.getString(7),rs.getString(8),rs.getInt(9));
+                StudentDTO st=new StudentDTO(rs.getInt(1), rs.getString(2), rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getInt(9));
                 ar.add(st);
             }
         }catch (SQLException e){

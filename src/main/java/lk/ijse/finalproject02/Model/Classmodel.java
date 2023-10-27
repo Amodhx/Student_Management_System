@@ -34,7 +34,7 @@ public class Classmodel {
         int x = 0;
         try {
             Connection connection = DBConnection.getInstance().getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("select count(classId) from class group by classId;");
+            PreparedStatement preparedStatement = connection.prepareStatement("select count(classId) from class;");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 x = resultSet.getInt(1);
