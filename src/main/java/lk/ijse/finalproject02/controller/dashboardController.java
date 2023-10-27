@@ -63,6 +63,7 @@ public class dashboardController implements Initializable {
         colourRemove();
         attendencebutton.setStyle("-fx-background-color:rgba(203, 231, 235, 1) ");
         attendencebutton.setTextFill(Color.rgb(5, 75, 180, 1));
+        changePage("/view/attendence-form.fxml");
 
     }
 
@@ -95,6 +96,7 @@ public class dashboardController implements Initializable {
         colourRemove();
         mailbutton.setStyle("-fx-background-color:rgba(203, 231, 235, 1) ");
         mailbutton.setTextFill(Color.rgb(5, 75, 180, 1));
+        changePage("/view/mailsend-form.fxml");
 
     }
 

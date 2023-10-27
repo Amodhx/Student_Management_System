@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="806.0" prefWidth="1327.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.finalproject02.controller.dbformController">
    <children>
       <Label layoutX="72.0" layoutY="63.0" style="-fx-background-radius: 15;" text="Overview">
@@ -22,7 +21,7 @@
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="310.0" layoutY="117.0" style="-fx-background-radius: 15;" text="Today" textFill="#4f4f4f">
+      <Label layoutX="322.0" layoutY="117.0" style="-fx-background-radius: 15;" text="Today" textFill="#4f4f4f">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
@@ -116,5 +115,10 @@
          </children>
       </AnchorPane>
       <AnchorPane layoutX="892.0" layoutY="377.0" prefHeight="358.0" prefWidth="322.0" style="-fx-background-color: rgba(255, 255, 255, 1); -fx-background-radius: 10;" />
+      <Label fx:id="timeadd" layoutX="240.0" layoutY="117.0" style="-fx-background-radius: 15;" textFill="#4f4f4f">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

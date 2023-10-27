@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="pane" prefHeight="806.0" prefWidth="1327.0" style="-fx-background-color: rgba(241, 241, 241, 1);" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.finalproject02.controller.attendenceformController">
+   <children>
+      <AnchorPane layoutX="192.0" layoutY="191.0" prefHeight="200.0" prefWidth="856.0" style="-fx-background-color: rgba(255, 255, 255, 1); -fx-background-radius: 10;">
+         <children>
+            <Label layoutX="37.0" layoutY="18.0" style="-fx-background-radius: 15;" text="Create Attendence Sheet">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Label>
+            <JFXComboBox fx:id="createclassIdcombo" layoutX="37.0" layoutY="111.0" prefHeight="26.0" prefWidth="304.0" />
+            <Label layoutX="37.0" layoutY="80.0" style="-fx-background-radius: 15;" text="ClassID">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="361.0" layoutY="80.0" style="-fx-background-radius: 15;" text="Enter the date">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="enterthedate" layoutX="361.0" layoutY="112.0" prefHeight="30.0" prefWidth="304.0" />
+            <ImageView layoutX="759.0" layoutY="30.0">
+               <image>
+                  <Image url="@../assets/vclad.png" />
+               </image>
+            </ImageView>
+            <JFXButton fx:id="createbutton" buttonType="RAISED" layoutX="684.0" layoutY="153.0" onAction="#oncreateclikc" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: rgba(5, 75, 180, 1); -fx-background-radius: 12;" text="Create" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+      <Label layoutX="118.0" layoutY="104.0" style="-fx-background-radius: 15;" text="Presence Tracker">
+         <font>
+            <Font name="Arial Bold" size="23.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="193.0" layoutY="477.0" prefHeight="200.0" prefWidth="856.0" style="-fx-background-color: rgba(255, 255, 255, 1); -fx-background-radius: 10;">
+         <children>
+            <Label layoutX="36.0" layoutY="19.0" style="-fx-background-radius: 15;" text="View Attendence Sheet">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Label>
+            <JFXComboBox fx:id="viewclassIdcombo" layoutX="38.0" layoutY="113.0" prefHeight="26.0" prefWidth="304.0" />
+            <Label layoutX="38.0" layoutY="82.0" style="-fx-background-radius: 15;" text="ClassID">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="386.0" layoutY="78.0" style="-fx-background-radius: 15;" text="Select the date">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+            </Label>
+            <JFXComboBox fx:id="sekectthedatecombo" layoutX="387.0" layoutY="112.0" prefHeight="26.0" prefWidth="304.0" />
+            <ImageView layoutX="755.0" layoutY="37.0">
+               <image>
+                  <Image url="@../assets/clae.png" />
+               </image>
+            </ImageView>
+            <JFXButton fx:id="viewbutton" buttonType="RAISED" layoutX="690.0" layoutY="164.0" onAction="#onviewCLikc" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: rgba(5, 75, 180, 1); -fx-background-radius: 12;" text="View" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

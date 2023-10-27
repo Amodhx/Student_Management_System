@@ -11,4 +11,5 @@ public class AttendenceDTO {
     private int attendenceId;
     private int studentId;
     private String markattendence;
+    private String date;
 }

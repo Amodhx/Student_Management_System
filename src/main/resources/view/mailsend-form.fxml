@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="806.0" prefWidth="1327.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.finalproject02.controller.mailsendformController">
+   <children>
+      <Label layoutX="118.0" layoutY="104.0" style="-fx-background-radius: 15;" text="Email Dispatcher">
+         <font>
+            <Font name="Arial Bold" size="23.0" />
+         </font>
+      </Label>
+      <JFXComboBox fx:id="gradecombo" layoutX="701.0" layoutY="259.0" prefHeight="26.0" prefWidth="304.0" style="-fx-background-radius: 10;" />
+      <JFXComboBox fx:id="classcombo" layoutX="121.0" layoutY="261.0" prefHeight="26.0" prefWidth="304.0" style="-fx-background-radius: 10;" />
+      <Label layoutX="121.0" layoutY="228.0" style="-fx-background-radius: 15;" text="Class">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="708.0" layoutY="228.0" style="-fx-background-radius: 15;" text="Grade">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="subject" layoutX="119.0" layoutY="361.0" prefHeight="364.0" prefWidth="889.0" style="-fx-background-radius: 10;" />
+      <Label layoutX="120.0" layoutY="334.0" style="-fx-background-radius: 15;" text="Subject">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="sendButton" buttonType="RAISED" layoutX="953.0" layoutY="750.0" onAction="#onsendclick" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: rgba(5, 75, 180, 1); -fx-background-radius: 12;" text="Send" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>
