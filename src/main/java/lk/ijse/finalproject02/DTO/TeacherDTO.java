@@ -8,14 +8,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class StudentDTO {
-    private int studentid;
+public class TeacherDTO {
+    private int teacherId;
     private String firstName;
     private String lastName;
     private String gender;
-    private String NIC;
-    private int classId;
-    private String contactnumber;
+    private String DOB;
+    private String subject;
+    private String contactNumber;
     private String email;
-    private int parentId;
+    private String NIC;
+    private String city;
+    private String address;
+
 }

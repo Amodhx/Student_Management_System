@@ -129,6 +129,7 @@ public class dashboardController implements Initializable {
         colourRemove();
         teacherbutton.setStyle("-fx-background-color:rgba(203, 231, 235, 1) ");
         teacherbutton.setTextFill(Color.rgb(5, 75, 180, 1));
+        changePage("/view/teacher-form.fxml");
 
     }
 
