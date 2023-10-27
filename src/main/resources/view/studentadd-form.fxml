@@ -60,7 +60,7 @@
             <JFXComboBox fx:id="classIdcombo" layoutX="411.0" layoutY="174.0" prefHeight="26.0" prefWidth="304.0" />
          </children>
       </AnchorPane>
-      <Label layoutX="108.0" layoutY="94.0" style="-fx-background-radius: 15;" text="Student Portal">
+      <Label layoutX="108.0" layoutY="94.0" style="-fx-background-radius: 15;" text="Student Add">
          <font>
             <Font name="Arial Bold" size="23.0" />
          </font>
