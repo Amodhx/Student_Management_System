@@ -37,6 +37,26 @@ public class Teachermodel {
         }
         return false;
     }
+    public static String  getTeacherName(int id){
+        String  fname = null ;
+        String lname = null;
+        try {
+            Connection connection = DBConnection .getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("select firstName,lastName from teacher where teacherID = ?");
+            preparedStatement.setInt(1,id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                fname = resultSet.getString(1);
+                lname = resultSet.getString(2);
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return fname + " " + lname ;
+    }
     public static int getteachersCount(){
         int x = 0 ;
         try {

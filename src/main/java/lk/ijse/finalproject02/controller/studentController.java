@@ -13,7 +13,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.finalproject02.DTO.ClassDetailDTO;
 import lk.ijse.finalproject02.DTO.StudentDTO;
+import lk.ijse.finalproject02.DTO.tm.Studenttm;
+import lk.ijse.finalproject02.Model.ClassDetailmodel;
 import lk.ijse.finalproject02.Model.Studentmodel;
 
 import java.io.IOException;
@@ -23,19 +26,19 @@ import java.util.ResourceBundle;
 
 public class studentController implements Initializable {
     @FXML
-    private TableColumn<StudentDTO,String> tableclass;
+    private TableColumn<Studenttm,String> tableclass;
 
     @FXML
-    private TableColumn<StudentDTO,String> tablecontact;
+    private TableColumn<Studenttm,String> tablecontact;
 
     @FXML
-    private TableColumn<StudentDTO,String> tablegender;
+    private TableColumn<Studenttm,String> tablegender;
 
     @FXML
-    private TableColumn<StudentDTO,String> tablemail;
+    private TableColumn<Studenttm,String> tablemail;
 
     @FXML
-    private TableColumn<StudentDTO,String> tablename;
+    private TableColumn<Studenttm,String> tablename;
 
     @FXML
     private JFXButton addstudentButton;
@@ -62,17 +65,24 @@ public class studentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ArrayList<StudentDTO> allStudents = Studentmodel.getAllStudents();
-        ObservableList<StudentDTO> observableList = FXCollections.observableArrayList();
-        observableList.addAll(allStudents);
+        ArrayList<ClassDetailDTO> classDetailDTOS = ClassDetailmodel.getAllClassDetails();
+        ObservableList<Studenttm> observableList = FXCollections.observableArrayList();
 
+        for (int i = 0; i <allStudents.size() ; i++) {
+            int iddd = allStudents.get(i).getStudentid();
+            String classIDD = ClassDetailmodel.getclassID(iddd);
+            Studenttm studenttm = new Studenttm(allStudents.get(i).getFirstName(),classIDD,allStudents.get(i).getEmail(),allStudents.get(i).getContactnumber(),allStudents.get(i).getGender());
+            observableList.add(studenttm);
+        }
 
-
-        tablename.setCellValueFactory(new PropertyValueFactory<StudentDTO,String>("firstName"));
-        tableclass.setCellValueFactory(new PropertyValueFactory<StudentDTO,String>("classId"));
-        tablemail.setCellValueFactory(new PropertyValueFactory<StudentDTO,String>("email"));
-        tablecontact.setCellValueFactory(new PropertyValueFactory<StudentDTO,String>("contactnumber"));
-        tablegender.setCellValueFactory(new PropertyValueFactory<StudentDTO,String>("gender"));
+        tablename.setCellValueFactory(new PropertyValueFactory<Studenttm,String>("name"));
+        tableclass.setCellValueFactory(new PropertyValueFactory<Studenttm,String>("classi"));
+        tablemail.setCellValueFactory(new PropertyValueFactory<Studenttm,String>("mail"));
+        tablecontact.setCellValueFactory(new PropertyValueFactory<Studenttm,String>("contact"));
+        tablegender.setCellValueFactory(new PropertyValueFactory<Studenttm,String>("gender"));
         table.setItems(observableList);
+
+
 
 
     }

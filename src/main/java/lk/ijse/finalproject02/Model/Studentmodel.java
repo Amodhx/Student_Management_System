@@ -15,15 +15,14 @@ public class Studentmodel {
         Connection con;
         try {
             con= DBConnection.getInstance().getConnection();
-            PreparedStatement ps=con.prepareStatement("insert into student values (0,?,?,?,?,?,?,?,?)");
+            PreparedStatement ps=con.prepareStatement("insert into student values (0,?,?,?,?,?,?,?)");
             ps.setString(1,student.getFirstName());
             ps.setString(2,student.getLastName());
             ps.setString(3,student.getGender());
             ps.setString(4,student.getNIC());
-            ps.setString(5,student.getClassId());
-            ps.setString(6,student.getContactnumber());
-            ps.setString(7,student.getEmail());
-            ps.setInt(8,student.getParentId());
+            ps.setString(5,student.getContactnumber());
+            ps.setString(6,student.getEmail());
+            ps.setInt(7,student.getParentId());
 
             int aff=ps.executeUpdate();
             return aff>0;
@@ -50,6 +49,24 @@ public class Studentmodel {
         }
         return x;
     }
+    public static  ArrayList<StudentDTO> getStudentClassVise(String classID){
+        ArrayList<StudentDTO> arrayList = new ArrayList<>();
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(" select s.* from student s join class_detail c on s.studentId = c.studentId  where classId = ?");
+            preparedStatement.setString(1,classID);
+            ResultSet rs =preparedStatement.executeQuery();
+            while (rs.next()){
+                StudentDTO st = new StudentDTO(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getInt(8));
+                arrayList.add(st);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return arrayList;
+    }
     public static ArrayList<StudentDTO> getAllStudents(){
         ArrayList<StudentDTO> ar=new ArrayList<>();
 
@@ -59,7 +76,7 @@ public class Studentmodel {
             ResultSet rs=ps.executeQuery();
 
             while (rs.next()){
-                StudentDTO st=new StudentDTO(rs.getInt(1), rs.getString(2), rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getInt(9));
+                StudentDTO st = new StudentDTO(rs.getInt(1), rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getInt(8));
                 ar.add(st);
             }
         }catch (SQLException e){

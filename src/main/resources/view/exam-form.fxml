@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="806.0" prefWidth="1327.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.finalproject02.controller.examformController">
+   <children>
+      <Label layoutX="108.0" layoutY="94.0" style="-fx-background-radius: 15;" text="Evaluation Test">
+         <font>
+            <Font name="Arial Bold" size="23.0" />
+         </font>
+      </Label>
+      <TableView fx:id="table" layoutX="108.0" layoutY="213.0" prefHeight="571.0" prefWidth="1136.0" stylesheets="@../css/onclick.css">
+         <columns>
+            <TableColumn fx:id="tablename" prefWidth="196.7999725341797" style="-fx-alignment: center;" text="Name" />
+            <TableColumn fx:id="tablesubject" prefWidth="263.199951171875" text="Subject" />
+            <TableColumn fx:id="tablegrade" prefWidth="246.39996337890625" text="Grade" />
+            <TableColumn fx:id="tablemarks" prefWidth="186.40008544921875" text="Exam mark" />
+            <TableColumn fx:id="tableavarage" prefWidth="247.19989013671875" text="Average" />
+         </columns>
+      </TableView>
+      <JFXButton fx:id="addevebutton" buttonType="RAISED" layoutX="1123.0" layoutY="105.0" onAction="#onaddevaluationclikc" style="-fx-background-color: rgba(5, 75, 180, 1); -fx-background-radius: 10;" text="+Add Evaluation" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

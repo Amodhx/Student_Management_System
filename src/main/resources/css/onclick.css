@@ -2,5 +2,16 @@
     -fx-background-color: rgba(255, 255, 255, 1);
 }
 .table-view{
-    -fx-alignment: center
+
+
+}
+.table-column{
+    -fx-alignment: center;
+}
+
+.anchorpane{
+    -fx-border-color: Black;
+    -fx-border-image-width: 4px;
+    -fx-border-style: solid;
+    -fx-background-radius: 12;
 }

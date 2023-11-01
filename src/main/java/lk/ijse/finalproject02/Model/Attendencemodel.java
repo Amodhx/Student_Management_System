@@ -15,11 +15,10 @@ public class Attendencemodel {
         Connection connection;
         try {
             connection = DBConnection.getInstance().getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT into attendence values (?,?,?,?)");
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT into attendence values (?,?,?)");
             preparedStatement.setInt(1,0);
-            preparedStatement.setInt(2,attendenceDTO.getStudentId());
-            preparedStatement.setString(3,attendenceDTO.getMarkattendence());
-            preparedStatement.setString(4,attendenceDTO.getDate());
+            preparedStatement.setString(2,attendenceDTO.getClassID());
+            preparedStatement.setString(3,attendenceDTO.getDate());
 
             int is = preparedStatement.executeUpdate();
 
@@ -40,7 +39,7 @@ public class Attendencemodel {
             PreparedStatement preparedStatement = connection.prepareStatement("select  * from  attendence");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
-                AttendenceDTO attendenceDTO = new AttendenceDTO(resultSet.getInt(1),resultSet.getInt(2),resultSet.getString(3),resultSet.getString(4));
+                AttendenceDTO attendenceDTO = new AttendenceDTO(resultSet.getInt(1),resultSet.getString(2),resultSet.getString(3));
                 attendenceDTOS.add(attendenceDTO);
             }
         }catch (SQLException e){

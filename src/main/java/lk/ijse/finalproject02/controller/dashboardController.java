@@ -88,6 +88,7 @@ public class dashboardController implements Initializable {
         colourRemove();
         exambutton.setStyle("-fx-background-color: rgba(255, 255, 255, 1)");
         exambutton.setTextFill(Color.rgb(5, 75, 180, 1));
+        changePage("/view/exam-form.fxml");
 
     }
 

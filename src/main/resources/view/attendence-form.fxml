@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane fx:id="pane" prefHeight="806.0" prefWidth="1327.0" style="-fx-background-color: rgba(241, 241, 241, 1);" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.finalproject02.controller.attendenceformController">
    <children>
       <AnchorPane layoutX="192.0" layoutY="191.0" prefHeight="200.0" prefWidth="856.0" style="-fx-background-color: rgba(255, 255, 255, 1); -fx-background-radius: 10;">
@@ -19,7 +18,7 @@
                   <Font name="Arial Bold" size="20.0" />
                </font>
             </Label>
-            <JFXComboBox fx:id="createclassIdcombo" layoutX="37.0" layoutY="111.0" prefHeight="26.0" prefWidth="304.0" />
+            <JFXComboBox fx:id="createclassIdcombo" layoutX="37.0" layoutY="111.0" onAction="#oncreateclassIDcombo" prefHeight="26.0" prefWidth="304.0" />
             <Label layoutX="37.0" layoutY="80.0" style="-fx-background-radius: 15;" text="ClassID">
                <font>
                   <Font name="Arial" size="16.0" />
@@ -41,6 +40,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </JFXButton>
+            <TextField fx:id="createteacherName" layoutX="37.0" layoutY="153.0" prefHeight="30.0" prefWidth="304.0" promptText="Teacher Name" />
          </children>
       </AnchorPane>
       <Label layoutX="118.0" layoutY="104.0" style="-fx-background-radius: 15;" text="Presence Tracker">
@@ -55,7 +55,7 @@
                   <Font name="Arial Bold" size="20.0" />
                </font>
             </Label>
-            <JFXComboBox fx:id="viewclassIdcombo" layoutX="38.0" layoutY="113.0" prefHeight="26.0" prefWidth="304.0" />
+            <JFXComboBox fx:id="viewclassIdcombo" layoutX="38.0" layoutY="113.0" onAction="#onviewclassIdcombo" prefHeight="26.0" prefWidth="304.0" />
             <Label layoutX="38.0" layoutY="82.0" style="-fx-background-radius: 15;" text="ClassID">
                <font>
                   <Font name="Arial" size="16.0" />
@@ -77,6 +77,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </JFXButton>
+            <TextField fx:id="viewteachername" layoutX="37.0" layoutY="157.0" prefHeight="30.0" prefWidth="304.0" promptText="Teacher Name" />
          </children>
       </AnchorPane>
    </children>

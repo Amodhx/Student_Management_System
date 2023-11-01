@@ -11,14 +11,14 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.finalproject02.DTO.ClassDTO;
+import lk.ijse.finalproject02.DTO.ClassDetailDTO;
 import lk.ijse.finalproject02.DTO.ParentDTO;
 import lk.ijse.finalproject02.DTO.StudentDTO;
-import lk.ijse.finalproject02.Model.Classmodel;
-import lk.ijse.finalproject02.Model.Parentmodel;
-import lk.ijse.finalproject02.Model.Studentmodel;
+import lk.ijse.finalproject02.Model.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -67,12 +67,25 @@ public class studentaddController implements Initializable {
     private JFXButton saveButton;
 
     @FXML
+    private TextField teachername;
+
+    @FXML
+    void onselectedclassId(ActionEvent event) {
+        String classID = (String) classIdcombo.getValue();
+
+        int teacherID = Classmodel.getTeacherid(classID);
+        String teacherN = Teachermodel.getTeacherName(teacherID);
+        teachername.setText(teacherN);
+
+    }
+
+    @FXML
     void onsavaeclick(ActionEvent event) {
         String parenname = parentname.getText();
         String parencontact = parentcontact.getText();
         String parenjob = parentjob.getText();
         String parenmail = parentemail.getText();
-        ParentDTO parentDTO = new ParentDTO(0,parenname,parencontact,parencontact,parenmail);
+        ParentDTO parentDTO = new ParentDTO(0,parenname,parencontact,parenjob,parenmail);
         boolean issave = Parentmodel.saveParent(parentDTO);
         ArrayList<ParentDTO> parentDTOS = Parentmodel.getallParent();
 
@@ -81,12 +94,17 @@ public class studentaddController implements Initializable {
         String lname = lastname.getText();
         String gender = (String) gendercombo.getValue();
         String Nic = nic.getText();
-        String classId = (String) classIdcombo.getValue();
         String contact = contactnumber.getText();
         String mail = email.getText();
         int parentId = Integer.parseInt(String.valueOf(parentDTOS.get(parentDTOS.size()-1).getParentId()));
-        StudentDTO studentDTO = new StudentDTO(0,fname,lname,gender,Nic,classId,contact,mail,parentId);
+        StudentDTO studentDTO = new StudentDTO(0,fname,lname,gender,Nic,contact,mail,parentId);
         boolean is = Studentmodel.savStudent(studentDTO);
+
+        ArrayList<StudentDTO> studentDTOS = Studentmodel.getAllStudents();
+        int studentid = studentDTOS.get(studentDTOS.size() - 1).getStudentid();
+        String classIDd = (String) classIdcombo.getValue();
+        ClassDetailDTO classDetailDTO = new ClassDetailDTO(studentid,classIDd,"" );
+        Boolean aBoolean = ClassDetailmodel.saveClassDetail(classDetailDTO);
         Parent parent = null;
         try {
             parent = FXMLLoader.load(getClass().getResource("/view/student-form.fxml"));

@@ -30,6 +30,24 @@ public class Classmodel {
         }
         return false;
     }
+    public static int getTeacherid(String id){
+        int teacherid = 0;
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("select teacherID from class where classId = ?");
+            preparedStatement.setString(1,id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                teacherid = resultSet.getInt(1);
+            };
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return teacherid;
+    }
+
     public static int getClassCount(){
         int x = 0;
         try {

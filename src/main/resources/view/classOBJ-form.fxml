@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="148.0" prefWidth="1100.0" style="-fx-background-color: rgba(64, 101, 157, 1); -fx-background-radius: 15;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.finalproject02.controller.classOBJController">
+   <children>
+      <Label fx:id="classname" alignment="CENTER" layoutX="46.0" layoutY="54.0" style="-fx-background-radius: 15;" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="31.0" />
+         </font>
+      </Label>
+      <Label layoutX="396.0" layoutY="20.0" style="-fx-background-radius: 15;" text="Teacher name &amp; ID" textFill="#b4b4b4">
+         <font>
+            <Font name="Arial Italic" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="teachername" alignment="CENTER" layoutX="452.0" layoutY="58.0" style="-fx-background-radius: 15;" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="teacherID" alignment="CENTER" layoutX="514.0" layoutY="85.0" style="-fx-background-radius: 15;" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="708.0" layoutY="20.0" style="-fx-background-radius: 15;" text="Student Count" textFill="#b4b4b4">
+         <font>
+            <Font name="Arial Italic" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="studentcount" alignment="CENTER" layoutX="792.0" layoutY="58.0" style="-fx-background-radius: 15;" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="908.0" layoutY="20.0" style="-fx-background-radius: 15;" text="Grade" textFill="#b4b4b4">
+         <font>
+            <Font name="Arial Italic" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="grade" alignment="CENTER" layoutX="949.0" layoutY="58.0" style="-fx-background-radius: 15;" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="1070.0" layoutY="63.0" style="-fx-background-radius: 15;" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="822.0" layoutY="118.0" style="-fx-background-radius: 15;" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="17.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
