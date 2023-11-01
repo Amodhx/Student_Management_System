@@ -30,6 +30,23 @@ public class Attendencemodel {
         }
         return false;
     }
+    public static ArrayList<String> getallDates(){
+        ArrayList<String> arrayList = new ArrayList<>();
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("select date from attendence");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                String x = resultSet.getString(1);
+                arrayList.add(x);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return arrayList;
+    }
 
     public static ArrayList<AttendenceDTO> getallattendence(){
         ArrayList<AttendenceDTO> attendenceDTOS = new ArrayList<>();

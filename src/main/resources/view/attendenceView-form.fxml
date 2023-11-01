@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="806.0" prefWidth="1327.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.finalproject02.controller.attendenceViewformController">
+   <children>
+      <Label layoutX="118.0" layoutY="104.0" style="-fx-background-radius: 15;" text="View Attendence">
+         <font>
+            <Font name="Arial Bold" size="23.0" />
+         </font>
+      </Label>
+      <TableView fx:id="table" layoutX="92.0" layoutY="197.0" prefHeight="568.0" prefWidth="1134.0">
+        <columns>
+          <TableColumn fx:id="namecolumn" prefWidth="331.20001220703125" text="Name" />
+          <TableColumn fx:id="NICcolumn" prefWidth="272.800048828125" text="NIC" />
+            <TableColumn fx:id="dateColumn" prefWidth="201.5999755859375" text="Date" />
+            <TableColumn fx:id="attendColumn" prefWidth="327.20001220703125" text="Attendence" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

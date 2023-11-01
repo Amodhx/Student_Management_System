@@ -15,6 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import lk.ijse.finalproject02.DTO.ClassDTO;
+import lk.ijse.finalproject02.Model.Attendencemodel;
 import lk.ijse.finalproject02.Model.Classmodel;
 import lk.ijse.finalproject02.Model.Teachermodel;
 
@@ -43,7 +44,9 @@ public class attendenceformController implements Initializable {
     private AnchorPane pane;
 
     @FXML
-    private JFXComboBox<?> sekectthedatecombo;
+    private JFXComboBox selecttheDateCOmbo;
+
+
 
     @FXML
     private JFXButton viewbutton;
@@ -82,7 +85,12 @@ public class attendenceformController implements Initializable {
     }
 
     @FXML
-    void onviewCLikc(ActionEvent event) {
+    void onviewCLikc(ActionEvent event) throws IOException {
+        attendenceViewformController.dat = (String) selecttheDateCOmbo.getValue();
+        attendenceViewformController.classID = (String) viewclassIdcombo.getValue();
+        Parent parent = FXMLLoader.load(getClass().getResource("/view/attendenceView-form.fxml"));
+        pane.getChildren().clear();
+        pane.getChildren().add(parent);
 
     }
 
@@ -97,5 +105,12 @@ public class attendenceformController implements Initializable {
         }
         createclassIdcombo.setItems(observableList);
         viewclassIdcombo.setItems(observableList);
+
+        ArrayList<String> arrayList = Attendencemodel.getallDates();
+        ObservableList<String> observableList1 = FXCollections.observableArrayList();
+        observableList1.addAll(arrayList);
+
+        selecttheDateCOmbo.setItems(observableList1);
+
     }
 }

@@ -49,6 +49,40 @@ public class Studentmodel {
         }
         return x;
     }
+    public static String getStudentNIC(int studentID){
+        String NIC = null;
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(" select NIC from student where studentId  = ?");
+            preparedStatement.setInt(1,studentID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                NIC = resultSet.getString(1);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return NIC;
+    }
+    public static String getStudentName(int studentID){
+        String x = null;
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(" select firstName,lastName from student where studentId = ?");
+            preparedStatement.setInt(1,studentID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                x = resultSet.getString(1)+" "+resultSet.getString(2);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return x;
+    }
     public static  ArrayList<StudentDTO> getStudentClassVise(String classID){
         ArrayList<StudentDTO> arrayList = new ArrayList<>();
         try {
