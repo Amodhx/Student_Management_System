@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.text.Font?>
-
 
 <AnchorPane prefHeight="806.0" prefWidth="1327.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.finalproject02.controller.attendenceAddformController">
    <children>
@@ -44,5 +44,10 @@
             </GridPane>
          </content>
       </ScrollPane>
+      <JFXButton fx:id="scanbutton" layoutX="1055.0" layoutY="105.0" onAction="#onScanButtonCllick" prefHeight="62.0" prefWidth="98.0" style="-fx-background-color: rgba(5, 75, 180, 1);" text="Scan" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>

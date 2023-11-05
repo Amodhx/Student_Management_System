@@ -27,6 +27,7 @@ public class loginController implements Initializable {
 
     @FXML
     private JFXButton loginbutton;
+
     @FXML
     private Label passwordwronglable;
 
@@ -38,6 +39,18 @@ public class loginController implements Initializable {
 
     @FXML
     private TextField username;
+    @FXML
+    void onchangepasswordclikc(MouseEvent event) throws IOException {
+        Parent parent = FXMLLoader.load(getClass().getResource("/view/passwordChange-form.fxml"));
+        Scene scene = new Scene(parent);
+        Stage stage = new Stage();
+        stage .setScene(scene);
+        stage.setY(360);
+        stage.setX(20);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.show();
+
+    }
 
     @FXML
     void onbackusername(KeyEvent event) {

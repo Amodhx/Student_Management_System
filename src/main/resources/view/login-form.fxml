@@ -56,15 +56,18 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <Label layoutX="77.0" layoutY="707.0" text="Already haven`t an account ?" textFill="#8a8a8a">
+      <Label layoutX="77.0" layoutY="707.0" text="If you forgot  password?" textFill="#8a8a8a">
          <font>
             <Font name="Arial Bold" size="13.0" />
          </font>
       </Label>
-      <Label fx:id="signup" layoutX="265.0" layoutY="707.0" onMouseClicked="#onsignupclick" text="Sign up" textFill="#e40000">
+      <Label fx:id="signup" layoutX="240.0" layoutY="707.0" onMouseClicked="#onchangepasswordclikc" text="Forgot password" textFill="#e40000">
          <font>
             <Font name="Arial Bold" size="13.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Label>
       <Label layoutX="116.0" layoutY="592.0" textFill="WHITE">
          <font>

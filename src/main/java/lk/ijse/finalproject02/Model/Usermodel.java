@@ -28,6 +28,22 @@ public class Usermodel {
         }
         return false;
     }
+    public static boolean changePassword(String username,String password){
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("update user set password = ? where userName = ?");
+            preparedStatement.setString(1,password);
+            preparedStatement.setString(2,username);
+            int executed = preparedStatement.executeUpdate();
+            return executed>0;
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
     public static ArrayList<UserDTO> getAllUsers(){
         ArrayList<UserDTO> ar=new ArrayList<>();
 

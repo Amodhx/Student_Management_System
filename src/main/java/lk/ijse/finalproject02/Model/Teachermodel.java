@@ -37,6 +37,24 @@ public class Teachermodel {
         }
         return false;
     }
+    public static int getTeacherId(String name){
+        int id = 0 ;
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(" select teacherID from teacher where firstName = ?");
+            preparedStatement.setString(1,name);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                id = resultSet.getInt(1);
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return id;
+    }
     public static String  getTeacherName(int id){
         String  fname = null ;
         String lname = null;
@@ -61,7 +79,7 @@ public class Teachermodel {
         int x = 0 ;
         try {
             Connection connection =DBConnection.getInstance().getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("select count(teacherID) from teacher;");
+            PreparedStatement preparedStatement = connection.prepareStatement("select count(teacherID) from teacher");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 x = resultSet.getInt(1);

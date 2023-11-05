@@ -37,7 +37,7 @@ public class Studentmodel {
         int x  = 0;
         try {
             Connection connection = DBConnection.getInstance().getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("select count(NIC) from student group by NIC;");
+            PreparedStatement preparedStatement = connection.prepareStatement("select count(studentId) from student");
             ResultSet rs =preparedStatement.executeQuery();
             while (rs.next()){
                  x = rs.getInt(1);

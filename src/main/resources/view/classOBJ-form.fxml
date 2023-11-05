@@ -4,10 +4,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="148.0" prefWidth="1100.0" style="-fx-background-color: rgba(64, 101, 157, 1); -fx-background-radius: 15;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.finalproject02.controller.classOBJController">
    <children>
-      <Label fx:id="classname" alignment="CENTER" layoutX="46.0" layoutY="54.0" style="-fx-background-radius: 15;" textFill="WHITE">
+      <Label fx:id="classname" alignment="CENTER" layoutX="37.0" layoutY="47.0" style="-fx-background-radius: 15;" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="31.0" />
          </font>

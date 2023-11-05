@@ -18,7 +18,7 @@
             <Font name="Bell MT Bold" size="15.0" />
          </font>
       </Label>
-      <JFXRadioButton fx:id="precent" layoutX="756.0" layoutY="7.0" onMouseClicked="#onprecentRadioclick" text="Precent" />
+      <JFXRadioButton fx:id="precentradio" layoutX="756.0" layoutY="7.0" onAction="#onprecentRadioclick" text="Precent" />
       <JFXRadioButton fx:id="absent" layoutX="853.0" layoutY="7.0" onAction="#onselectedAbsent" text="Absent">
          <selectedColor>
             <Color red="1.0" blue="0.15000000596046448" />

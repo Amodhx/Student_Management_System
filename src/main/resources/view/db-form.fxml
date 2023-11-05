@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
@@ -95,7 +96,7 @@
                   <Font name="Arial Bold" size="38.0" />
                </font>
             </Label>
-            <Label layoutX="116.0" layoutY="58.0" style="-fx-background-radius: 15;" text="Upcoming Semina" textFill="#9b9898">
+            <Label layoutX="116.0" layoutY="58.0" style="-fx-background-radius: 15;" text="Total Seminar" textFill="#9b9898">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
@@ -114,11 +115,66 @@
             </LineChart>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="892.0" layoutY="377.0" prefHeight="358.0" prefWidth="322.0" style="-fx-background-color: rgba(255, 255, 255, 1); -fx-background-radius: 10;" />
+      <AnchorPane layoutX="892.0" layoutY="377.0" prefHeight="112.0" prefWidth="322.0" style="-fx-background-color: rgba(255, 255, 255, 1); -fx-background-radius: 10;">
+         <children>
+            <Label layoutX="12.0" layoutY="12.0" style="-fx-background-radius: 15;" text="Student Report" textFill="#9b9898">
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font>
+            </Label>
+            <ImageView layoutX="238.0" layoutY="14.0">
+               <image>
+                  <Image url="@../assets/toclass.png" />
+               </image>
+            </ImageView>
+            <JFXButton buttonType="RAISED" layoutX="66.0" layoutY="62.0" prefHeight="32.0" prefWidth="85.0" style="-fx-background-color: rgba(5, 75, 180, 1); -fx-background-radius: 10;" text="Genarate" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXButton>
+         </children></AnchorPane>
       <Label fx:id="timeadd" layoutX="240.0" layoutY="117.0" style="-fx-background-radius: 15;" textFill="#4f4f4f">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
+      <AnchorPane layoutX="892.0" layoutY="499.0" prefHeight="112.0" prefWidth="322.0" style="-fx-background-color: rgba(255, 255, 255, 1); -fx-background-radius: 10;">
+         <children>
+            <Label layoutX="16.0" layoutY="11.0" style="-fx-background-radius: 15;" text="Make a Payment" textFill="#9b9898">
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="238.0" layoutY="21.0">
+               <image>
+                  <Image url="@../assets/10170004.png" />
+               </image>
+            </ImageView>
+            <JFXButton buttonType="RAISED" layoutX="67.0" layoutY="64.0" prefHeight="32.0" prefWidth="85.0" style="-fx-background-color: rgba(5, 75, 180, 1); -fx-background-radius: 10;" text="Billing" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="892.0" layoutY="623.0" prefHeight="112.0" prefWidth="322.0" style="-fx-background-color: rgba(255, 255, 255, 1); -fx-background-radius: 10;">
+         <children>
+            <Label layoutX="16.0" layoutY="10.0" style="-fx-background-radius: 15;" text="Payment History" textFill="#9b9898">
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="238.0" layoutY="21.0">
+               <image>
+                  <Image url="@../assets/10186606.png" />
+               </image>
+            </ImageView>
+            <JFXButton buttonType="RAISED" layoutX="66.0" layoutY="58.0" prefHeight="32.0" prefWidth="85.0" style="-fx-background-color: rgba(5, 75, 180, 1); -fx-background-radius: 10;" text="View" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

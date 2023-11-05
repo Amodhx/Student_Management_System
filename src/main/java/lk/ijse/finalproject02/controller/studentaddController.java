@@ -1,5 +1,10 @@
 package lk.ijse.finalproject02.controller;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.collections.FXCollections;
@@ -18,14 +23,24 @@ import lk.ijse.finalproject02.DTO.ClassDTO;
 import lk.ijse.finalproject02.DTO.ClassDetailDTO;
 import lk.ijse.finalproject02.DTO.ParentDTO;
 import lk.ijse.finalproject02.DTO.StudentDTO;
+import lk.ijse.finalproject02.MailSender.Mailsend;
 import lk.ijse.finalproject02.Model.*;
 
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Properties;
+import java.util.Random;
 import java.util.ResourceBundle;
 
-public class studentaddController implements Initializable {
+public class studentaddController extends Thread implements Initializable {
 
     @FXML
     private AnchorPane anchorpane;
@@ -69,6 +84,15 @@ public class studentaddController implements Initializable {
     @FXML
     private TextField teachername;
 
+    private String sendEmailAddress;
+
+    public studentaddController(){}
+
+    public studentaddController(String mmail) {
+        this.sendEmailAddress = mmail;
+    }
+
+
     @FXML
     void onselectedclassId(ActionEvent event) {
         String classID = (String) classIdcombo.getValue();
@@ -105,6 +129,20 @@ public class studentaddController implements Initializable {
         String classIDd = (String) classIdcombo.getValue();
         ClassDetailDTO classDetailDTO = new ClassDetailDTO(studentid,classIDd,"" );
         Boolean aBoolean = ClassDetailmodel.saveClassDetail(classDetailDTO);
+
+
+        String data = nic.getText();
+        String path = "C:\\Users\\User\\IdeaProjects\\final-project-02\\QR.jpg";
+        try {
+            BitMatrix matrix = new MultiFormatWriter().encode(data, BarcodeFormat.QR_CODE,500,500);
+            MatrixToImageWriter.writeToPath(matrix,"jpg", Paths.get(path));
+        } catch (WriterException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        studentaddController thread = new studentaddController(email.getText());
+        thread.start();
         Parent parent = null;
         try {
             parent = FXMLLoader.load(getClass().getResource("/view/student-form.fxml"));
@@ -114,6 +152,44 @@ public class studentaddController implements Initializable {
         anchorpane.getChildren().clear();
         anchorpane.getChildren().add(parent);
 
+    }
+    public void run(){
+        String to = sendEmailAddress;
+        String from = "amxdhnanditha@gmail.com";
+        String host = "smtp.gmail.com";
+        String username = "amxdhnanditha@gmail.com";
+        String password = "gnhv lcmt oogq nppk";
+
+        Properties properties = System.getProperties();
+        properties.setProperty("mail.smtp.host", host);
+        properties.setProperty("mail.smtp.port", "587");
+        properties.setProperty("mail.smtp.starttls.enable", "true");
+        properties.setProperty("mail.smtp.auth", "true");
+
+        Session session = Session.getInstance(properties, new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
+
+        try {
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(from));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+            message.setSubject("Welcome to Excel.!");
+            MimeBodyPart attach = new MimeBodyPart();
+            attach.attachFile(new File("C:\\Users\\User\\IdeaProjects\\final-project-02\\QR.jpg"));
+            Multipart multipart = new MimeMultipart();
+            multipart.addBodyPart(attach);
+            message.setContent(multipart);
+
+            Transport.send(message);
+            System.out.println("Email sent successfully.");
+        } catch (MessagingException mex) {
+            mex.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

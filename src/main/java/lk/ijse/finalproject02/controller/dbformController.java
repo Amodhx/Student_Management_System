@@ -1,9 +1,12 @@
 package lk.ijse.finalproject02.controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import lk.ijse.finalproject02.DTO.StudentDTO;
+import lk.ijse.finalproject02.DTO.TeacherDTO;
 import lk.ijse.finalproject02.Model.Classmodel;
 import lk.ijse.finalproject02.Model.Studentmodel;
 import lk.ijse.finalproject02.Model.Teachermodel;
