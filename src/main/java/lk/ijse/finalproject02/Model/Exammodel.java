@@ -15,11 +15,10 @@ public class Exammodel {
         Connection connection;
         try {
             connection = DBConnection.getInstance().getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT into exam values (?,?,?,?)");
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT into exam values (?,?,?)");
             preparedStatement.setInt(1,examDTO.getExamId());
-            preparedStatement.setInt(2,examDTO.getStudentId());
+            preparedStatement.setString(2,examDTO.getClassId());
             preparedStatement.setString(3,examDTO.getDate());
-            preparedStatement.setInt(4,examDTO.getMarks());
 
             int is = preparedStatement.executeUpdate();
 
@@ -31,6 +30,23 @@ public class Exammodel {
         }
         return false;
     }
+    public static String getclassID(int examid){
+      String classid = null;
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("select classId from exam where examId = ?");
+            preparedStatement.setInt(1,examid);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                classid = resultSet.getString(1);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return classid;
+    }
     public static ArrayList<ExamDTO> getallexam(){
         ArrayList<ExamDTO> examDTOS = new ArrayList<>();
 
@@ -39,7 +55,7 @@ public class Exammodel {
             PreparedStatement preparedStatement = connection.prepareStatement("select  * from  exam");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
-                ExamDTO examDTO = new ExamDTO(resultSet.getInt(1),resultSet.getInt(2),resultSet.getString(3),resultSet.getInt(4));
+                ExamDTO examDTO = new ExamDTO(resultSet.getInt(1),resultSet.getString(2),resultSet.getString(3));
                 examDTOS.add(examDTO);
             }
         }catch (SQLException e){

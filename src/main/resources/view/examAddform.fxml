@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="806.0" prefWidth="1327.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.finalproject02.controller.examAddformController">
+   <children>
+      <Label layoutX="138.0" layoutY="124.0" style="-fx-background-radius: 15;" text="Add Exam Marks">
+         <font>
+            <Font name="Arial Bold" size="23.0" />
+         </font>
+      </Label>
+      <Label layoutX="1111.0" layoutY="54.0" style="-fx-background-radius: 15;" text="Date - " textFill="#6e6666">
+         <font>
+            <Font name="Arial Bold" size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="date" layoutX="1197.0" layoutY="54.0" style="-fx-background-radius: 15;" text="2000-00-00" textFill="#6e6666">
+         <font>
+            <Font name="Arial Bold" size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="1110.0" layoutY="30.0" style="-fx-background-radius: 15;" text="ClassID -" textFill="#6e6666">
+         <font>
+            <Font name="Arial Bold" size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="classIDD" layoutX="1196.0" layoutY="30.0" style="-fx-background-radius: 15;" text="2000-00-00" textFill="#6e6666">
+         <font>
+            <Font name="Arial Bold" size="17.0" />
+         </font>
+      </Label>
+      <ScrollPane layoutX="138.0" layoutY="203.0" prefHeight="578.0" prefWidth="1107.0">
+         <content>
+            <GridPane fx:id="gridpane">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+            </GridPane>
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

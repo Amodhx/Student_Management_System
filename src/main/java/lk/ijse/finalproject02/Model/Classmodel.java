@@ -30,6 +30,7 @@ public class Classmodel {
         }
         return false;
     }
+
     public static int getTeacherid(String id){
         int teacherid = 0;
         try {

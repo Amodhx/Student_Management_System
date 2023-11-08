@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -13,6 +14,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
@@ -39,6 +42,8 @@ public class dashboardController implements Initializable {
     @FXML
     private JFXButton mailbutton;
 
+    public static JFXButton button;
+
 
 
     @FXML
@@ -58,6 +63,25 @@ public class dashboardController implements Initializable {
     @FXML
     private AnchorPane pane;
 
+
+
+    @FXML
+    void onadminiconClikc(MouseEvent event) {
+        Stage stage = new Stage();
+            Parent parent = null;
+            try {
+                parent = FXMLLoader.load(getClass().getResource("/view/addadmin-form.fxml"));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            Scene scene = new Scene(parent);
+            stage.setScene(scene);
+            stage.setX(1060);
+            stage.setY(50);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.show();
+
+    }
     @FXML
     void onattendenceclick(ActionEvent event) {
         colourRemove();

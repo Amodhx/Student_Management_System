@@ -1,33 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="806.0" prefWidth="1327.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.finalproject02.controller.examformController">
+<AnchorPane fx:id="pane" prefHeight="806.0" prefWidth="1327.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.finalproject02.controller.examfilterformController">
    <children>
-      <Label layoutX="108.0" layoutY="94.0" style="-fx-background-radius: 15;" text="Evaluation Test">
+      <Label layoutX="122.0" layoutY="94.0" style="-fx-background-radius: 15;" text="Evaluation Test">
          <font>
             <Font name="Arial Bold" size="23.0" />
          </font>
       </Label>
-      <TableView fx:id="table" layoutX="108.0" layoutY="213.0" prefHeight="571.0" prefWidth="1136.0" stylesheets="@../css/onclick.css">
-         <columns>
-            <TableColumn fx:id="tablename" prefWidth="196.7999725341797" style="-fx-alignment: center;" text="Name" />
-            <TableColumn fx:id="tablesubject" prefWidth="263.199951171875" text="Subject" />
-            <TableColumn fx:id="tablegrade" prefWidth="246.39996337890625" text="Grade" />
-            <TableColumn fx:id="tablemarks" prefWidth="186.40008544921875" text="Exam mark" />
-            <TableColumn fx:id="tableavarage" prefWidth="247.19989013671875" text="Average" />
-         </columns>
-      </TableView>
-      <JFXButton fx:id="addevebutton" buttonType="RAISED" layoutX="1123.0" layoutY="105.0" onAction="#onaddevaluationclikc" style="-fx-background-color: rgba(5, 75, 180, 1); -fx-background-radius: 10;" text="+Add Evaluation" textFill="WHITE">
-         <font>
-            <Font name="Arial Bold" size="16.0" />
-         </font>
-      </JFXButton>
+      <AnchorPane layoutX="246.0" layoutY="201.0" prefHeight="200.0" prefWidth="856.0" style="-fx-background-color: rgba(255, 255, 255, 1); -fx-background-radius: 10;">
+         <children>
+            <Label layoutX="37.0" layoutY="18.0" style="-fx-background-radius: 15;" text="Add Exam Marks">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Label>
+            <JFXComboBox fx:id="createclassIdcombo" layoutX="37.0" layoutY="111.0" onAction="#oncreateclassIDcombo" prefHeight="26.0" prefWidth="304.0" />
+            <Label layoutX="37.0" layoutY="80.0" style="-fx-background-radius: 15;" text="ClassID">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="361.0" layoutY="80.0" style="-fx-background-radius: 15;" text="Enter the date">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="enterthedate" layoutX="361.0" layoutY="112.0" prefHeight="30.0" prefWidth="304.0" />
+            <JFXButton fx:id="createbutton" buttonType="RAISED" layoutX="684.0" layoutY="153.0" onAction="#oncreateclikc" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: rgba(5, 75, 180, 1); -fx-background-radius: 12;" text="Create" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXButton>
+            <TextField fx:id="createteacherName" layoutX="37.0" layoutY="153.0" prefHeight="30.0" prefWidth="304.0" promptText="Teacher Name" />
+            <ImageView fitHeight="96.0" fitWidth="89.0" layoutX="734.0" layoutY="21.0">
+               <image>
+                  <Image url="@../assets/nonmark.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="243.0" layoutY="467.0" prefHeight="200.0" prefWidth="856.0" style="-fx-background-color: rgba(255, 255, 255, 1); -fx-background-radius: 10;">
+         <children>
+            <Label layoutX="37.0" layoutY="18.0" style="-fx-background-radius: 15;" text="View Exam Marks">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Label>
+            <JFXComboBox fx:id="viewclassIDClombo" layoutX="37.0" layoutY="111.0" onAction="#onviewClassIdClombo" prefHeight="26.0" prefWidth="304.0" />
+            <Label layoutX="37.0" layoutY="80.0" style="-fx-background-radius: 15;" text="ClassID">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="viewbutton" buttonType="RAISED" layoutX="684.0" layoutY="153.0" onAction="#onviewclick" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: rgba(5, 75, 180, 1); -fx-background-radius: 12;" text="View" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXButton>
+            <TextField fx:id="viewTeacherName" layoutX="37.0" layoutY="153.0" prefHeight="30.0" prefWidth="304.0" promptText="Teacher Name" />
+            <ImageView fitHeight="89.0" fitWidth="89.0" layoutX="737.0" layoutY="24.0">
+               <image>
+                  <Image url="@../assets/marke.png" />
+               </image>
+            </ImageView>
+            <JFXComboBox fx:id="examIdcombo" layoutX="364.0" layoutY="111.0" prefHeight="26.0" prefWidth="304.0" />
+            <Label layoutX="364.0" layoutY="80.0" style="-fx-background-radius: 15;" text="ExamID">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

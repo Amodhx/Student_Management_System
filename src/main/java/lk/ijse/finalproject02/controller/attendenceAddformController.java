@@ -87,10 +87,6 @@ public class attendenceAddformController implements Initializable {
                 System.err.println("No webcam detected.");
             }
         }
-/*
-        System.out.println("Webcam sanneda wutor");
-       attendenceOBJformController.markNIC = nic ;
-       loadstudentsOBJ();*/
         }
 
     static String dat;

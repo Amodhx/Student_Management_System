@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="48.0" prefWidth="1090.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.finalproject02.controller.examOBJfromController">
+   <children>
+      <Label fx:id="name" layoutX="15.0" layoutY="11.0" text="Amodh Nanditha">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font></Label>
+      <Label fx:id="nic" layoutX="267.0" layoutY="15.0" text="200227000940">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <Label fx:id="mail" layoutX="478.0" layoutY="14.0" text="amxdhnanditha@gmail.com">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <TextField fx:id="mark" layoutX="823.0" layoutY="11.0" onKeyPressed="#onmarkadded" />
+      <Label layoutX="1086.0" layoutY="16.0" />
+   </children>
+</AnchorPane>

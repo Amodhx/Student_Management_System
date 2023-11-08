@@ -33,6 +33,24 @@ public class Studentmodel {
         }
         return false;
     }
+    public static int getStudentId(String email){
+        int id = 0;
+
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("select studentId from student where email=?");
+            preparedStatement.setString(1,email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                id = resultSet.getInt(1);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return id;
+    }
     public static int getStudentCount(){
         int x  = 0;
         try {

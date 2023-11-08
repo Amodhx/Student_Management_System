@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="pane" prefHeight="806.0" prefWidth="1327.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.finalproject02.controller.examviewFormController">
+   <children>
+      <Label layoutX="132.0" layoutY="104.0" style="-fx-background-radius: 15;" text="Exam Marks">
+         <font>
+            <Font name="Arial Bold" size="23.0" />
+         </font>
+      </Label>
+      <TableView fx:id="table" layoutX="274.0" layoutY="194.0" prefHeight="590.0" prefWidth="882.0">
+        <columns>
+          <TableColumn fx:id="namecolumn" prefWidth="209.59996032714844" text="Name" />
+          <TableColumn fx:id="classIdcolumn" minWidth="0.0" prefWidth="139.99993896484375" text="ClassID" />
+            <TableColumn fx:id="NICcolumn" minWidth="0.0" prefWidth="324.0000305175781" text="NIC" />
+            <TableColumn fx:id="markscolumn" prefWidth="205.5999755859375" text="Marks" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
