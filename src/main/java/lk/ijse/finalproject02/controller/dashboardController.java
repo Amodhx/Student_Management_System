@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -22,6 +23,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class dashboardController implements Initializable {
+    public static String ty;
+    public static String fullname;
 
 
 
@@ -62,24 +65,36 @@ public class dashboardController implements Initializable {
 
     @FXML
     private AnchorPane pane;
+    @FXML
+    private Label typeLable;
+    @FXML
+    private Label fulNameLable;
+
+    @FXML
+    private Button iconButton;
+    @FXML
+    void oniconCLick(ActionEvent event) {
+        Stage stage = new Stage();
+        addadminController.button = teacherbutton;
+        Parent parent = null;
+        try {
+            parent = FXMLLoader.load(getClass().getResource("/view/addadmin-form.fxml"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Scene scene = new Scene(parent);
+        stage.setScene(scene);
+        stage.setX(1060);
+        stage.setY(50);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.show();
+    }
 
 
 
     @FXML
     void onadminiconClikc(MouseEvent event) {
-        Stage stage = new Stage();
-            Parent parent = null;
-            try {
-                parent = FXMLLoader.load(getClass().getResource("/view/addadmin-form.fxml"));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            Scene scene = new Scene(parent);
-            stage.setScene(scene);
-            stage.setX(1060);
-            stage.setY(50);
-            stage.initStyle(StageStyle.UNDECORATED);
-            stage.show();
+
 
     }
     @FXML
@@ -136,10 +151,11 @@ public class dashboardController implements Initializable {
     }
 
     @FXML
-    void onsettingclick(ActionEvent event) {
+    void onsettingclick(ActionEvent event) throws IOException {
         colourRemove();
         settingbutton.setStyle("-fx-background-color:rgba(203, 231, 235, 1) ");
         settingbutton.setTextFill(Color.rgb(5, 75, 180, 1));
+        changePage("/view/examVerify-form.fxml");
 
     }
 
@@ -163,10 +179,30 @@ public class dashboardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        fulNameLable.setText(fullname);
+        typeLable.setText(ty);
+            if (ty.equals("Admin")){
+
+        }else if(ty.equals("Cashier")){
+                iconButton.setDisable(true);
+
+
+        }else if(ty.equals("Security")){
+            studentbutton1.setDisable(true);
+            mailbutton.setDisable(true);
+            teacherbutton.setDisable(true);
+            classbutton.setDisable(true);
+            settingbutton.setDisable(true);
+            exambutton.setDisable(true);
+            studentbutton.setDisable(true);
+            iconButton.setDisable(true);
+
+        }
         colourRemove();
         changePage("/view/db-form.fxml");
         studentbutton1.setStyle("-fx-background-color:rgba(203, 231, 235, 1) ");
         studentbutton1.setTextFill(Color.rgb(5, 75, 180, 1));
+        dbformController.pane = pane;
     }
     public void changePage(String uiName){
         try {

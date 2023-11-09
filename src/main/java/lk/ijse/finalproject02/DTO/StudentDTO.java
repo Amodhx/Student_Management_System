@@ -17,4 +17,5 @@ public class StudentDTO {
     private String contactnumber;
     private String email;
     private int parentId;
+    private String batch;
 }

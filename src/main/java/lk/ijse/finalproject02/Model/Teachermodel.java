@@ -75,6 +75,24 @@ public class Teachermodel {
         }
         return fname + " " + lname ;
     }
+    public static ArrayList<TeacherDTO> getteachersSubjectVise(String subject){
+        ArrayList<TeacherDTO> arrayList = new ArrayList<>();
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from teacher where subject = ?");
+            preparedStatement.setString(1,subject);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                TeacherDTO teacherDTO = new TeacherDTO(resultSet.getInt(1),resultSet.getString(2),resultSet.getString(3),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7),resultSet.getString(8),resultSet.getString(9),resultSet.getString(10),resultSet.getString(11));
+                arrayList.add(teacherDTO);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return arrayList;
+    }
     public static int getteachersCount(){
         int x = 0 ;
         try {

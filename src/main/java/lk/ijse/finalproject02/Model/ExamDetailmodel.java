@@ -1,8 +1,10 @@
 package lk.ijse.finalproject02.Model;
 
+import javafx.fxml.FXMLLoader;
 import lk.ijse.finalproject02.DB.DBConnection;
 import lk.ijse.finalproject02.DTO.ExamDetailDTO;
 
+import java.net.ConnectException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -43,5 +45,23 @@ public class ExamDetailmodel {
             e.printStackTrace();
         }
         return examDetailDTOS;
+    }
+    public static ArrayList<ExamDetailDTO> getExamMarksexamVise(int examId){
+        ArrayList<ExamDetailDTO> arrayList = new ArrayList<>();
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from exam_detail where examId =  ?");
+            preparedStatement.setInt(1,examId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                ExamDetailDTO examDetailDTO = new ExamDetailDTO(resultSet.getInt(1),resultSet.getInt(2),resultSet.getString(3));
+                arrayList.add(examDetailDTO);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return arrayList;
     }
 }

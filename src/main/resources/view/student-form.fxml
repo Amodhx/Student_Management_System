@@ -14,7 +14,7 @@
             <Font name="Arial Bold" size="23.0" />
          </font>
       </Label>
-      <JFXButton fx:id="addstudentButton" buttonType="RAISED" layoutX="1113.0" layoutY="95.0" onAction="#onaddStudentClick" style="-fx-background-color: rgba(5, 75, 180, 1); -fx-background-radius: 10;" text="+Add Student" textFill="WHITE">
+      <JFXButton fx:id="addstudentButton" buttonType="RAISED" layoutX="1086.0" layoutY="95.0" onAction="#onaddStudentClick" style="-fx-background-color: rgba(5, 75, 180, 1); -fx-background-radius: 10;" text="Student Onboard" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>

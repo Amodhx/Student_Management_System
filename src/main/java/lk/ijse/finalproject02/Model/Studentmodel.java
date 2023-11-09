@@ -15,7 +15,7 @@ public class Studentmodel {
         Connection con;
         try {
             con= DBConnection.getInstance().getConnection();
-            PreparedStatement ps=con.prepareStatement("insert into student values (0,?,?,?,?,?,?,?)");
+            PreparedStatement ps=con.prepareStatement("insert into student values (0,?,?,?,?,?,?,?,?)");
             ps.setString(1,student.getFirstName());
             ps.setString(2,student.getLastName());
             ps.setString(3,student.getGender());
@@ -23,6 +23,7 @@ public class Studentmodel {
             ps.setString(5,student.getContactnumber());
             ps.setString(6,student.getEmail());
             ps.setInt(7,student.getParentId());
+            ps.setString(8,student.getBatch());
 
             int aff=ps.executeUpdate();
             return aff>0;
@@ -33,13 +34,32 @@ public class Studentmodel {
         }
         return false;
     }
-    public static int getStudentId(String email){
+    public static int getStudentID(String nic){
+        int id = 0;
+
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("select studentId from student where NIC=?");
+            preparedStatement.setString(1, nic);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                id = resultSet.getInt(1);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return id;
+    }
+
+    public static int getStudentId(String mail){
         int id = 0;
 
         try {
             Connection connection = DBConnection.getInstance().getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("select studentId from student where email=?");
-            preparedStatement.setString(1,email);
+            preparedStatement.setString(1,mail);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 id = resultSet.getInt(1);
@@ -109,7 +129,7 @@ public class Studentmodel {
             preparedStatement.setString(1,classID);
             ResultSet rs =preparedStatement.executeQuery();
             while (rs.next()){
-                StudentDTO st = new StudentDTO(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getInt(8));
+                StudentDTO st = new StudentDTO(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getInt(8),rs.getString(9));
                 arrayList.add(st);
             }
         }catch (SQLException e){
@@ -128,7 +148,7 @@ public class Studentmodel {
             ResultSet rs=ps.executeQuery();
 
             while (rs.next()){
-                StudentDTO st = new StudentDTO(rs.getInt(1), rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getInt(8));
+                StudentDTO st = new StudentDTO(rs.getInt(1), rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getInt(8),rs.getString(9));
                 ar.add(st);
             }
         }catch (SQLException e){

@@ -34,10 +34,11 @@ public class examviewFormController implements Initializable {
 
     @FXML
     private TableView table;
+    public static int examId = 1 ; 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ArrayList<ExamDetailDTO> examDetailDTOS = ExamDetailmodel.getallExamDetail();
+        ArrayList<ExamDetailDTO> examDetailDTOS = ExamDetailmodel.getExamMarksexamVise(examId);
         namecolumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         classIdcolumn.setCellValueFactory(new PropertyValueFactory<>("classID"));
         NICcolumn.setCellValueFactory(new PropertyValueFactory<>("NIC"));

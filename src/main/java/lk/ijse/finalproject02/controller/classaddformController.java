@@ -54,7 +54,7 @@ public class classaddformController implements Initializable {
         String gradeText = grade.getText();
         int teacherId = Teachermodel.getTeacherId(teacherName);
 
-        ClassDTO classDTO = new ClassDTO(classIDText,subjectText,teacherId,gradeText);
+        ClassDTO classDTO = new ClassDTO(classIDText,subjectText,teacherId,gradeText,"");
         Classmodel.saveclass(classDTO);
 
         try {

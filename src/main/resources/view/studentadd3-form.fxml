@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="452.0" prefWidth="662.0" style="-fx-background-color: rgba(93, 123, 168, 1);" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.finalproject02.controller.studentadd3formController">
+   <children>
+      <Label layoutX="47.0" layoutY="37.0" style="-fx-background-radius: 15;" text="Class addon" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="48.0" layoutY="119.0" style="-fx-background-radius: 15;" text="Stream" textFill="#c1c1c1">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <JFXComboBox fx:id="streamcombo" layoutX="47.0" layoutY="153.0" onAction="#onselectStream" prefHeight="26.0" prefWidth="249.0" style="-fx-background-radius: 8;" unFocusColor="WHITE" />
+      <Label layoutX="344.0" layoutY="119.0" style="-fx-background-radius: 15;" text="Subject" textFill="#c1c1c1">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <JFXComboBox fx:id="subjectComco" layoutX="344.0" layoutY="153.0" onAction="#onsubjectselected" prefHeight="26.0" prefWidth="249.0" style="-fx-background-radius: 8;" unFocusColor="WHITE" />
+      <Label layoutX="47.0" layoutY="235.0" style="-fx-background-radius: 15;" text="Teacher" textFill="#c1c1c1">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <JFXComboBox fx:id="teacherCombo" layoutX="48.0" layoutY="263.0" prefHeight="26.0" prefWidth="249.0" style="-fx-background-radius: 8;" unFocusColor="WHITE" />
+      <JFXButton fx:id="backButton" buttonType="RAISED" layoutX="459.0" layoutY="381.0" onAction="#onBackClick" prefHeight="30.0" prefWidth="66.0" style="-fx-background-color: rgba(175, 108, 108, 1); -fx-background-radius: 10;" text="Back" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="finishButton" buttonType="RAISED" layoutX="545.0" layoutY="381.0" onAction="#onFinishClick" prefHeight="30.0" prefWidth="66.0" style="-fx-background-color: rgba(5, 75, 180, 1); -fx-background-radius: 10;" text="Finish" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

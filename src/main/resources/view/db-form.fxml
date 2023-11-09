@@ -127,7 +127,7 @@
                   <Image url="@../assets/toclass.png" />
                </image>
             </ImageView>
-            <JFXButton buttonType="RAISED" layoutX="66.0" layoutY="62.0" prefHeight="32.0" prefWidth="85.0" style="-fx-background-color: rgba(5, 75, 180, 1); -fx-background-radius: 10;" text="Genarate" textFill="WHITE">
+            <JFXButton fx:id="studentreportButton" buttonType="RAISED" layoutX="66.0" layoutY="62.0" onAction="#onstudentrepotClick" prefHeight="32.0" prefWidth="85.0" style="-fx-background-color: rgba(5, 75, 180, 1); -fx-background-radius: 10;" text="Genarate" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -138,26 +138,7 @@
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <AnchorPane layoutX="892.0" layoutY="499.0" prefHeight="112.0" prefWidth="322.0" style="-fx-background-color: rgba(255, 255, 255, 1); -fx-background-radius: 10;">
-         <children>
-            <Label layoutX="16.0" layoutY="11.0" style="-fx-background-radius: 15;" text="Make a Payment" textFill="#9b9898">
-               <font>
-                  <Font name="Arial Bold" size="16.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="238.0" layoutY="21.0">
-               <image>
-                  <Image url="@../assets/10170004.png" />
-               </image>
-            </ImageView>
-            <JFXButton buttonType="RAISED" layoutX="67.0" layoutY="64.0" prefHeight="32.0" prefWidth="85.0" style="-fx-background-color: rgba(5, 75, 180, 1); -fx-background-radius: 10;" text="Billing" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </JFXButton>
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="892.0" layoutY="623.0" prefHeight="112.0" prefWidth="322.0" style="-fx-background-color: rgba(255, 255, 255, 1); -fx-background-radius: 10;">
+      <AnchorPane layoutX="892.0" layoutY="501.0" prefHeight="112.0" prefWidth="322.0" style="-fx-background-color: rgba(255, 255, 255, 1); -fx-background-radius: 10;">
          <children>
             <Label layoutX="16.0" layoutY="10.0" style="-fx-background-radius: 15;" text="Payment History" textFill="#9b9898">
                <font>
@@ -169,7 +150,26 @@
                   <Image url="@../assets/10186606.png" />
                </image>
             </ImageView>
-            <JFXButton buttonType="RAISED" layoutX="66.0" layoutY="58.0" prefHeight="32.0" prefWidth="85.0" style="-fx-background-color: rgba(5, 75, 180, 1); -fx-background-radius: 10;" text="View" textFill="WHITE">
+            <JFXButton buttonType="RAISED" layoutX="66.0" layoutY="58.0" onAction="#onPaymentHistoryclick" prefHeight="32.0" prefWidth="85.0" style="-fx-background-color: rgba(5, 75, 180, 1); -fx-background-radius: 10;" text="View" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="892.0" layoutY="624.0" prefHeight="112.0" prefWidth="322.0" style="-fx-background-color: rgba(255, 255, 255, 1); -fx-background-radius: 10;">
+         <children>
+            <Label layoutX="16.0" layoutY="11.0" style="-fx-background-radius: 15;" text="Make a Payment" textFill="#9b9898">
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="238.0" layoutY="21.0">
+               <image>
+                  <Image url="@../assets/10170004.png" />
+               </image>
+            </ImageView>
+            <JFXButton buttonType="RAISED" layoutX="67.0" layoutY="64.0" onAction="#onMakeaPamentClick" prefHeight="32.0" prefWidth="85.0" style="-fx-background-color: rgba(5, 75, 180, 1); -fx-background-radius: 10;" text="Billing" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

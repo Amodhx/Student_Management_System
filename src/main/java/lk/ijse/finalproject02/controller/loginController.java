@@ -78,6 +78,8 @@ public class loginController implements Initializable {
 
         ArrayList<UserDTO> allUsers = Usermodel.getAllUsers();
         for (UserDTO user : allUsers) {
+            dashboardController.ty = user.getType();
+            dashboardController.fullname = user.getFullname();
             if (user.getUserName().equals(usernameText) && user.getPassword().equals(passwordText)){
                 openUI("/view/dashboard-form.fxml");
                 Stage stage = (Stage) loginbutton.getScene().getWindow();

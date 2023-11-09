@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="136.0" prefWidth="281.0" style="-fx-background-radius: 10; -fx-background-color: rgba(5, 75, 180, 1);" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.finalproject02.controller.paymentFilterformController">
+   <children>
+      <ImageView fitHeight="19.0" fitWidth="19.0" layoutX="251.0" layoutY="8.0" onMouseClicked="#onCanselIconCLick">
+         <image>
+            <Image url="@../assets/close.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <TextField fx:id="nictext" layoutX="14.0" layoutY="56.0" prefHeight="26.0" prefWidth="201.0" promptText="Entre the studentNIC" />
+      <JFXButton fx:id="viewButton" layoutX="190.0" layoutY="97.0" onAction="#onviweClick" prefHeight="26.0" prefWidth="61.0" style="-fx-background-color: rgba(112, 143, 189, 1);" text="View" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <Label layoutX="14.0" layoutY="27.0" style="-fx-background-radius: 15;" text="Enter Student NIC" textFill="WHITE">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

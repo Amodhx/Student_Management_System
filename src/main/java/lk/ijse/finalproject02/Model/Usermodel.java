@@ -14,10 +14,12 @@ public class Usermodel {
         Connection con;
         try {
             con= DBConnection.getInstance().getConnection();
-            PreparedStatement ps=con.prepareStatement("insert into User values (0,?,?,?)");
+            PreparedStatement ps=con.prepareStatement("insert into User values (0,?,?,?,?,?)");
             ps.setString(1,user.getUserName());
             ps.setString(2,user.getPassword());
-            ps.setString(3,user.getMail());
+            ps.setString(3,user.getType());
+            ps.setString(4,user.getMail());
+            ps.setString(5,user.getFullname());
 
             int aff=ps.executeUpdate();
             return aff>0;
@@ -53,7 +55,7 @@ public class Usermodel {
             ResultSet rs=ps.executeQuery();
 
             while (rs.next()){
-                UserDTO ut=new UserDTO(rs.getInt(1), rs.getString(2), rs.getString(3),rs.getString(4) );
+                UserDTO ut=new UserDTO(rs.getInt(1), rs.getString(2), rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6) );
                 ar.add(ut);
             }
         }catch (SQLException e){

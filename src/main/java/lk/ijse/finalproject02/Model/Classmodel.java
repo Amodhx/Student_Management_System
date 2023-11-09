@@ -14,11 +14,12 @@ public class Classmodel {
         Connection connection;
         try {
             connection = DBConnection.getInstance().getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT into class values (?,?,?,?)");
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT into class values (?,?,?,?,?)");
             preparedStatement.setString(1,classDTO.getClassId());
             preparedStatement.setString(2,classDTO.getSubject());
             preparedStatement.setInt(3,classDTO.getTeacherId());
             preparedStatement.setString(4,classDTO.getGrade());
+            preparedStatement.setString(5,classDTO.getStream());
 
             int is = preparedStatement.executeUpdate();
 
@@ -48,6 +49,25 @@ public class Classmodel {
         }
         return teacherid;
     }
+    public static ArrayList<String> getsubjects(String stream){
+        ArrayList<String> arrayList = new ArrayList<>();
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("select subject from class where stream = ?");
+            preparedStatement.setString(1,stream);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                arrayList.add(id);
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return arrayList;
+    }
 
     public static int getClassCount(){
         int x = 0;
@@ -65,6 +85,25 @@ public class Classmodel {
         }
         return x;
     }
+    public static String getclassID(int teacherID , String batch){
+        String clsid = null;
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("select classId from class where teacherID = ? & batch = ?");
+            preparedStatement.setInt(1,teacherID);
+            preparedStatement.setString(2,batch);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                clsid = resultSet.getString(1);
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return clsid;
+    }
     public static ArrayList<ClassDTO> getallClasses(){
         ArrayList<ClassDTO> classDTOS = new ArrayList<>();
 
@@ -73,7 +112,7 @@ public class Classmodel {
             PreparedStatement preparedStatement = connection.prepareStatement("select  * from  class");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
-                ClassDTO classDTO = new ClassDTO(resultSet.getString(1),resultSet.getString(2),resultSet.getInt(3),resultSet.getString(4));
+                ClassDTO classDTO = new ClassDTO(resultSet.getString(1),resultSet.getString(2),resultSet.getInt(3),resultSet.getString(4),resultSet.getString(5));
                 classDTOS.add(classDTO);
             }
         }catch (SQLException e){

@@ -12,4 +12,5 @@ public class ClassDTO {
     private String subject;
     private int teacherId;
     private String grade;
+    private String stream;
 }

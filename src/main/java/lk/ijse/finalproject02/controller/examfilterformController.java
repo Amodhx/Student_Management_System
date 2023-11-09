@@ -83,6 +83,9 @@ public class examfilterformController implements Initializable {
 
     @FXML
     void onviewclick(ActionEvent event) {
+        String x = (String) examIdcombo.getValue();
+        int exami = Integer.parseInt(x);
+        examviewFormController.examId = exami;
         Parent parent = null;
         try {
             parent = FXMLLoader.load(getClass().getResource("/view/examViewform.fxml"));
