@@ -8,37 +8,25 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import lk.ijse.finalproject02.DTO.ClassDetailDTO;
-import lk.ijse.finalproject02.DTO.ParentDTO;
-import lk.ijse.finalproject02.DTO.StudentDTO;
 import lk.ijse.finalproject02.DTO.TeacherDTO;
+import lk.ijse.finalproject02.Model.ClassDetailmodel;
 import lk.ijse.finalproject02.Model.Classmodel;
-import lk.ijse.finalproject02.Model.Parentmodel;
 import lk.ijse.finalproject02.Model.Studentmodel;
 import lk.ijse.finalproject02.Model.Teachermodel;
 
 import java.net.URL;
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class studentadd3formController implements Initializable {
-    public static Stage stage;
+public class alreadyregisteredStudentController implements Initializable {
 
     @FXML
     private JFXButton backButton;
-    public static String sfnamee;
-    public static String batc;
-    public static String slnamee;
-    public static String nicc;
-    public static String genderr;
-    public static String contctnum;
-    public static String maill;
-    public static String parentName;
-    public static String pjob;
-    public static String pmail;
-    public static String parenContct;
-
 
     @FXML
     private JFXButton finishButton;
@@ -47,14 +35,52 @@ public class studentadd3formController implements Initializable {
     private JFXComboBox streamcombo;
 
     @FXML
+    private TextField studentNIC;
+
+    @FXML
+    private TextField studentName;
+
+    @FXML
     private JFXComboBox subjectComco;
 
     @FXML
     private JFXComboBox teacherCombo;
-    ArrayList<TeacherDTO> teacherDTOS;
     @FXML
     void onselectedTeacher(ActionEvent event) {
         finishButton.requestFocus();
+    }
+
+    @FXML
+    void onBackClick(ActionEvent event) {
+        Stage stage  = (Stage) finishButton.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    void onFinishClick(ActionEvent event) {
+        String text = studentNIC.getText();
+        int studentID = Studentmodel.getStudentID(text);
+        String sub = (String) subjectComco.getValue();
+        String tea = (String) teacherCombo.getValue();
+        int teacher = Integer.parseInt(tea);
+        String s = Classmodel.getclassID(teacher, sub);
+        ClassDetailDTO classDetailDTO = new ClassDetailDTO(studentID,s,"asdas");
+        Boolean aBoolean = ClassDetailmodel.saveClassDetail(classDetailDTO);
+
+        Stage stage = (Stage) finishButton.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    void onNIcadd(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.ENTER)){
+            String text = studentNIC.getText();
+            int studentID = Studentmodel.getStudentID(text);
+            String studentName1 = Studentmodel.getStudentName(studentID);
+            studentName.setText(studentName1);
+            streamcombo.requestFocus();
+        }
+
     }
 
     @FXML
@@ -66,48 +92,17 @@ public class studentadd3formController implements Initializable {
         subjectComco.setItems(observableList);
         subjectComco.requestFocus();
     }
+
     @FXML
     void onsubjectselected(ActionEvent event) {
         String sub = (String) subjectComco.getValue();
-        teacherDTOS = Teachermodel.getteachersSubjectVise(sub);
+        ArrayList<TeacherDTO> teacherDTOS = Teachermodel.getteachersSubjectVise(sub);
         ObservableList<String> observableList = FXCollections.observableArrayList();
         for (int i = 0; i < teacherDTOS.size(); i++) {
             observableList.add(teacherDTOS.get(i).getFirstName());
         }
         teacherCombo.setItems(observableList);
         teacherCombo.requestFocus();
-    }
-
-    @FXML
-    void onBackClick(ActionEvent event) {
-        Stage stage1 = (Stage) finishButton.getScene().getWindow();
-        stage1.close();
-        stage.show();
-
-    }
-
-    @FXML
-    void onFinishClick(ActionEvent event) {
-        ParentDTO parentDTO = new ParentDTO(0,parentName,parenContct,pjob,pmail);
-        Parentmodel.saveParent(parentDTO);
-        ArrayList<ParentDTO> parentDTOS = Parentmodel.getallParent();
-        int parentId  = parentDTOS.get(parentDTOS.size()-1).getParentId();
-        StudentDTO studentDTO = new StudentDTO(0,sfnamee,slnamee,genderr,nicc,contctnum,maill,parentId,batc);
-        Studentmodel.savStudent(studentDTO);
-
-        ArrayList<StudentDTO> allStudents = Studentmodel.getAllStudents();
-        int studentID = allStudents.get(allStudents.size()-1).getStudentid();
-
-        String tname = (String) teacherCombo.getValue();
-        int teacherId = Teachermodel.getTeacherId(tname);
-
-        String s = Classmodel.getclassID(teacherId, batc);
-
-        ClassDetailDTO classDetailDTO = new ClassDetailDTO(studentID,"s","das");
-
-
-        Stage stage1 = (Stage) finishButton.getScene().getWindow();
-        stage1.close();
     }
 
     @Override

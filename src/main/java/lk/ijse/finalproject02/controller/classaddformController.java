@@ -45,6 +45,11 @@ public class classaddformController implements Initializable {
     @FXML
     private TextField subject;
     ArrayList<TeacherDTO> teacherDTOS;
+    @FXML
+    private JFXComboBox Streamcombo;
+
+    @FXML
+    private TextField monthlyfee;
 
     @FXML
     void onsavaeclick(ActionEvent event) {
@@ -53,8 +58,10 @@ public class classaddformController implements Initializable {
         String teacherName = (String) gendercombo.getValue();
         String gradeText = grade.getText();
         int teacherId = Teachermodel.getTeacherId(teacherName);
+        String strem = (String) Streamcombo.getValue();
+        String fee= monthlyfee.getText();
 
-        ClassDTO classDTO = new ClassDTO(classIDText,subjectText,teacherId,gradeText,"");
+        ClassDTO classDTO = new ClassDTO(classIDText,subjectText,teacherId,gradeText,strem,fee);
         Classmodel.saveclass(classDTO);
 
         try {
@@ -76,5 +83,8 @@ public class classaddformController implements Initializable {
             observableList.add(teacherDTOS.get(i).getFirstName());
         }
         gendercombo.setItems(observableList);
+
+        ObservableList<String> observableList1 = FXCollections.observableArrayList("Physical Science","Bio Science","Commerce","Arts");
+        Streamcombo.setItems(observableList1);
     }
 }

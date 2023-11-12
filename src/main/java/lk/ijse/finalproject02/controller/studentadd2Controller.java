@@ -1,19 +1,94 @@
 package lk.ijse.finalproject02.controller;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import lk.ijse.finalproject02.DTO.ParentDTO;
 
+import javax.activation.DataHandler;
+import javax.activation.FileDataSource;
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Paths;
+import java.util.Properties;
+import java.util.ResourceBundle;
 
-public class studentadd2Controller {
+public class studentadd2Controller extends Thread implements Initializable {
+
+
+
+    @Override
+    public void run(){
+        String nic = nicc;
+        String to = maill;
+        String from = "amxdhnanditha@gmail.com";
+        String host = "smtp.gmail.com";
+        String username = "amxdhnanditha@gmail.com";
+        String password = "gnhv lcmt oogq nppk";
+
+        Properties properties = System.getProperties();
+        properties.setProperty("mail.smtp.host", host);
+        properties.setProperty("mail.smtp.port", "587");
+        properties.setProperty("mail.smtp.starttls.enable", "true");
+        properties.setProperty("mail.smtp.auth", "true");
+
+        Session session = Session.getInstance(properties, new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
+
+        try {
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(from));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+            message.setSubject("Welcome to Excel-Education Center");
+            String data = nic;
+            String path = "C:\\Users\\User\\IdeaProjects\\final-project-02\\QR.jpg";
+            try {
+                BitMatrix matrix = new MultiFormatWriter().encode(data, BarcodeFormat.QR_CODE,500,500);
+                MatrixToImageWriter.writeToPath(matrix,"jpg", Paths.get(path));
+            } catch (WriterException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Multipart multipart = new MimeMultipart();
+            String imagePath = "C:\\Users\\User\\IdeaProjects\\final-project-02\\QR.jpg";
+            BodyPart imagePart = new MimeBodyPart();
+            imagePart.setDataHandler(new DataHandler(new FileDataSource(imagePath)));
+            imagePart.setFileName("image.jpg");
+            multipart.addBodyPart(imagePart);
+            message.setContent(multipart);
+
+
+            Transport.send(message);
+            System.out.println("Email sent successfully.");
+        } catch (MessagingException mex) {
+            mex.printStackTrace();
+        }
+
+
+    }
 
     @FXML
     private JFXButton backButton;
@@ -43,6 +118,37 @@ public class studentadd2Controller {
 
     @FXML
     private TextField parentname;
+    @FXML
+    void onContactNub(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.ENTER)){
+            nextButton.requestFocus();
+        }
+
+    }
+
+    @FXML
+    void onEmail(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.ENTER)){
+            parentcontact.requestFocus();
+        }
+
+    }
+
+    @FXML
+    void onJob(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.ENTER)){
+            parentemail.requestFocus();
+        }
+
+    }
+
+    @FXML
+    void onName(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.ENTER)){
+            parentjob.requestFocus();
+        }
+
+    }
 
     @FXML
     void onBackClick(ActionEvent event) {
@@ -65,6 +171,9 @@ public class studentadd2Controller {
         studentadd3formController.pjob = parentjob.getText();
         studentadd3formController.parenContct = parentcontact.getText();
 
+        studentadd2Controller thred= new studentadd2Controller();
+        thred.start();
+
 
         Stage stage1 = (Stage) nextButton.getScene().getWindow();
         stage1.hide();
@@ -82,6 +191,10 @@ public class studentadd2Controller {
         stage2.show();
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        parentname.requestFocus();
     }
+}
 
 

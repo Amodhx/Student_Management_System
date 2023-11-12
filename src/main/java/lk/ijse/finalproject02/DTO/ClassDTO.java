@@ -13,4 +13,5 @@ public class ClassDTO {
     private int teacherId;
     private String grade;
     private String stream;
+    private String fee;
 }

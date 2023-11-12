@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="133.0" prefWidth="271.0" style="-fx-background-radius: 15; -fx-background-color: rgba(5, 75, 180, 1);" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.finalproject02.controller.addadminController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="133.0" prefWidth="271.0" style="-fx-background-radius: 15;" stylesheets="@../css/gradiant.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.finalproject02.controller.addadminController">
    <children>
       <JFXButton fx:id="addaccountButton" layoutX="31.0" layoutY="51.0" onAction="#onaddAccountButton" prefHeight="31.0" prefWidth="226.0" style="-fx-background-color: rgba(255, 255, 255, 1);" text="       Add account">
          <font>

@@ -1,5 +1,6 @@
 package lk.ijse.finalproject02.DTO.tm;
 
+import com.jfoenix.controls.JFXButton;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,4 +15,5 @@ public class Studenttm {
     private String mail;
     private String contact;
     private String gender;
+    private JFXButton button;
         }

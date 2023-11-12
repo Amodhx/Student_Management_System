@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -51,10 +52,19 @@ public class loginController implements Initializable {
         stage.show();
 
     }
+    @FXML
+    void onpassword(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.ENTER)){
+            loginbutton.requestFocus();
+        }
+    }
 
     @FXML
     void onbackusername(KeyEvent event) {
         passwordwronglable.setText("");
+        if (event.getCode().equals(KeyCode.ENTER)){
+            password.requestFocus();
+        }
 
     }
     private  void openUI(String uiName){

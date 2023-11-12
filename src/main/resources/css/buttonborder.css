@@ -3,6 +3,14 @@
 }
 .textfield{
     -fx-background-radius: 10px;
+    -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.1),10.0,0.0,0.0,10.0);
 }
 
-/* You can style the button further as needed */
+.shadow{
+    -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.1),10.0,0.0,0.0,10.0);
+}
+.shadownew{
+    -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.1),0,10.0,10.0,0.0);
+}
+
+

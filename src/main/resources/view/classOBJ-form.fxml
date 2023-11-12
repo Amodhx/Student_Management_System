@@ -4,9 +4,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="148.0" prefWidth="1100.0" style="-fx-background-color: rgba(64, 101, 157, 1); -fx-background-radius: 15;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.finalproject02.controller.classOBJController">
+<AnchorPane prefHeight="107.0" prefWidth="1100.0" style="-fx-background-radius: 15; -fx-background-color: rgba(79, 121, 185, 1);" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.finalproject02.controller.classOBJController">
    <children>
-      <Label fx:id="classname" alignment="CENTER" layoutX="37.0" layoutY="47.0" style="-fx-background-radius: 15;" textFill="WHITE">
+      <Label fx:id="classname" alignment="CENTER" layoutX="37.0" layoutY="33.0" style="-fx-background-radius: 15;" text="Class Name" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="31.0" />
          </font>
@@ -16,12 +16,12 @@
             <Font name="Arial Italic" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="teachername" alignment="CENTER" layoutX="452.0" layoutY="58.0" style="-fx-background-radius: 15;" textFill="WHITE">
+      <Label fx:id="teachername" alignment="CENTER" layoutX="452.0" layoutY="44.0" style="-fx-background-radius: 15;" text="Teacher Name" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="17.0" />
          </font>
       </Label>
-      <Label fx:id="teacherID" alignment="CENTER" layoutX="514.0" layoutY="85.0" style="-fx-background-radius: 15;" textFill="WHITE">
+      <Label fx:id="teacherID" alignment="CENTER" layoutX="514.0" layoutY="70.0" style="-fx-background-radius: 15;" text="TeacherId" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="17.0" />
          </font>
@@ -31,7 +31,7 @@
             <Font name="Arial Italic" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="studentcount" alignment="CENTER" layoutX="792.0" layoutY="58.0" style="-fx-background-radius: 15;" textFill="WHITE">
+      <Label fx:id="studentcount" alignment="CENTER" layoutX="788.0" layoutY="48.0" style="-fx-background-radius: 15;" text="C Stu" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="17.0" />
          </font>
@@ -41,20 +41,12 @@
             <Font name="Arial Italic" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="grade" alignment="CENTER" layoutX="949.0" layoutY="58.0" style="-fx-background-radius: 15;" textFill="WHITE">
+      <Label fx:id="grade" alignment="CENTER" layoutX="949.0" layoutY="47.0" style="-fx-background-radius: 15;" text="batch" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="17.0" />
          </font>
       </Label>
-      <Label layoutX="1070.0" layoutY="63.0" style="-fx-background-radius: 15;" textFill="WHITE">
-         <font>
-            <Font name="Arial Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="822.0" layoutY="118.0" style="-fx-background-radius: 15;" textFill="WHITE">
-         <font>
-            <Font name="Arial Bold" size="17.0" />
-         </font>
-      </Label>
+      <Label layoutX="1069.0" layoutY="28.0" prefHeight="18.0" prefWidth="30.0" />
+      <Label layoutX="905.0" layoutY="88.0" prefHeight="18.0" prefWidth="30.0" />
    </children>
 </AnchorPane>

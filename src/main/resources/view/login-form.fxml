@@ -44,7 +44,7 @@
          <font>
             <Font size="15.0" />
          </font></TextField>
-      <TextField fx:id="password" layoutX="74.0" layoutY="585.0" prefHeight="34.0" prefWidth="274.0" promptText="    Password" style="-fx-background-color: rgba(74, 111, 167, 1); -fx-background-radius: 8;">
+      <TextField fx:id="password" layoutX="74.0" layoutY="585.0" onKeyPressed="#onpassword" prefHeight="34.0" prefWidth="274.0" promptText="    Password" style="-fx-background-color: rgba(74, 111, 167, 1); -fx-background-radius: 8;">
          <font>
             <Font size="15.0" />
          </font></TextField>

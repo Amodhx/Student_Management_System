@@ -11,6 +11,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -49,6 +51,59 @@ public class studentaddController implements Initializable {
     private TextField nic;
     @FXML
     private TextField batch;
+    @FXML
+    void onBatch(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.ENTER)){
+            nextButton.requestFocus();
+        }
+
+    }
+
+    @FXML
+    void onContactNumber(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.ENTER)){
+            gendercombo.requestFocus();
+        }
+
+    }
+
+    @FXML
+    void onEmail(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.ENTER)){
+            contactNum.requestFocus();
+        }
+
+    }
+
+    @FXML
+    void onLastname(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.ENTER)){
+            nic.requestFocus();
+        }
+
+    }
+
+    @FXML
+    void onNIC(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.ENTER)){
+            email.requestFocus();
+        }
+
+    }
+
+
+    @FXML
+    void onfirstname(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.ENTER)){
+            lastname.requestFocus();
+        }
+
+    }
+
+    @FXML
+    void ongenderselected(ActionEvent event) {
+        batch.requestFocus();
+    }
 
     @FXML
     void oncanselCLick(ActionEvent event) {
@@ -86,5 +141,7 @@ public class studentaddController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ObservableList<String> observableList = FXCollections.observableArrayList("Male","Female");
         gendercombo.setItems(observableList);
+
+        firstName.requestFocus();
     }
 }

@@ -81,6 +81,15 @@ public class dbformController implements Initializable {
 
     @FXML
     void onstudentrepotClick(ActionEvent event) {
+        Parent parent = null;
+        try {
+            parent = FXMLLoader.load(getClass().getResource("/view/studentreport-form.fxml"));
+        } catch (IOException e) {
+
+            
+        }
+        pane.getChildren().clear();
+        pane.getChildren().add(parent);
 
     }
 

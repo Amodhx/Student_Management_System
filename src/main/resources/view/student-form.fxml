@@ -19,14 +19,20 @@
             <Font name="Arial Bold" size="16.0" />
          </font>
       </JFXButton>
-      <TableView fx:id="table" layoutX="98.0" layoutY="203.0" prefHeight="571.0" prefWidth="1136.0" stylesheets="@../css/onclick.css">
+      <TableView fx:id="table" layoutX="98.0" layoutY="203.0" prefHeight="571.0" prefWidth="1136.0">
         <columns>
           <TableColumn fx:id="tablename" prefWidth="196.7999725341797" style="-fx-alignment: center;" text="Name" />
           <TableColumn fx:id="tableclass" prefWidth="263.199951171875" text="Class" />
             <TableColumn fx:id="tablemail" prefWidth="246.39996337890625" text="E-mail" />
             <TableColumn fx:id="tablecontact" prefWidth="186.40008544921875" text="Contact number" />
-            <TableColumn fx:id="tablegender" prefWidth="247.19989013671875" text="Gender" />
+            <TableColumn fx:id="tablegender" prefWidth="151.20001220703125" text="Gender" />
+            <TableColumn fx:id="actioncolumn" prefWidth="91.199951171875" />
         </columns>
       </TableView>
+      <JFXButton fx:id="alreadyhaveaccButton" buttonType="RAISED" layoutX="916.0" layoutY="95.0" onAction="#alreadyhaveaccOnClick" style="-fx-background-color: rgba(5, 75, 180, 1); -fx-background-radius: 10;" text="Already Registerd" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>

@@ -9,14 +9,14 @@
 
 <AnchorPane fx:id="anchorpane" prefHeight="806.0" prefWidth="1327.0" style="-fx-background-color: rgba(241, 241, 241, 1);" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.finalproject02.controller.classaddformController">
    <children>
-      <AnchorPane layoutX="109.0" layoutY="195.0" prefHeight="419.0" prefWidth="1102.0" style="-fx-background-color: rgba(255, 255, 255, 1); -fx-background-radius: 10;">
+      <AnchorPane layoutX="109.0" layoutY="195.0" prefHeight="460.0" prefWidth="1102.0" style="-fx-background-color: rgba(255, 255, 255, 1); -fx-background-radius: 10;">
          <children>
             <Label layoutX="24.0" layoutY="54.0" style="-fx-background-radius: 15;" text="Class Information">
                <font>
                   <Font name="Arial Bold" size="20.0" />
                </font>
             </Label>
-            <Label layoutX="43.0" layoutY="111.0" style="-fx-background-radius: 15;" text="ClassID">
+            <Label layoutX="43.0" layoutY="110.0" style="-fx-background-radius: 15;" text="ClassID">
                <font>
                   <Font name="Arial" size="16.0" />
                </font>
@@ -41,11 +41,23 @@
                   <Font name="Arial" size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="classID" layoutX="44.0" layoutY="138.0" prefHeight="30.0" prefWidth="304.0" />
+            <TextField fx:id="classID" layoutX="44.0" layoutY="137.0" prefHeight="30.0" prefWidth="304.0" />
             <TextField fx:id="subject" layoutX="407.0" layoutY="138.0" prefHeight="30.0" prefWidth="304.0" />
             <TextField fx:id="grade" layoutX="44.0" layoutY="247.0" prefHeight="30.0" prefWidth="304.0" />
             <TextField fx:id="day" layoutX="407.0" layoutY="247.0" prefHeight="30.0" prefWidth="304.0" />
             <JFXComboBox fx:id="gendercombo" layoutX="766.0" layoutY="135.0" prefHeight="26.0" prefWidth="304.0" />
+            <JFXComboBox fx:id="Streamcombo" layoutX="766.0" layoutY="245.0" prefHeight="26.0" prefWidth="304.0" />
+            <Label layoutX="766.0" layoutY="217.0" style="-fx-background-radius: 15;" text="Stream">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="monthlyfee" layoutX="44.0" layoutY="351.0" prefHeight="30.0" prefWidth="304.0" />
+            <Label layoutX="45.0" layoutY="324.0" style="-fx-background-radius: 15;" text="Monthly fee">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
       <Label layoutX="108.0" layoutY="94.0" style="-fx-background-radius: 15;" text="Add New Class">

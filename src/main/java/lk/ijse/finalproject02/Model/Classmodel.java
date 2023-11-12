@@ -14,12 +14,13 @@ public class Classmodel {
         Connection connection;
         try {
             connection = DBConnection.getInstance().getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT into class values (?,?,?,?,?)");
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT into class values (?,?,?,?,?,?)");
             preparedStatement.setString(1,classDTO.getClassId());
             preparedStatement.setString(2,classDTO.getSubject());
             preparedStatement.setInt(3,classDTO.getTeacherId());
             preparedStatement.setString(4,classDTO.getGrade());
             preparedStatement.setString(5,classDTO.getStream());
+            preparedStatement.setString(6,classDTO.getFee());
 
             int is = preparedStatement.executeUpdate();
 
@@ -112,7 +113,7 @@ public class Classmodel {
             PreparedStatement preparedStatement = connection.prepareStatement("select  * from  class");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
-                ClassDTO classDTO = new ClassDTO(resultSet.getString(1),resultSet.getString(2),resultSet.getInt(3),resultSet.getString(4),resultSet.getString(5));
+                ClassDTO classDTO = new ClassDTO(resultSet.getString(1),resultSet.getString(2),resultSet.getInt(3),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6));
                 classDTOS.add(classDTO);
             }
         }catch (SQLException e){

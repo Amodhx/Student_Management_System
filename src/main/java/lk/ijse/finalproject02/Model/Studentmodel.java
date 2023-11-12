@@ -139,6 +139,21 @@ public class Studentmodel {
         }
         return arrayList;
     }
+    public static boolean deleteStudent(int studentId) {
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("delete from student where studentId = ?");
+            preparedStatement.setInt(1,studentId);
+
+            int executed = preparedStatement.executeUpdate();
+            return executed > 0;
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
     public static ArrayList<StudentDTO> getAllStudents(){
         ArrayList<StudentDTO> ar=new ArrayList<>();
 

@@ -16,9 +16,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 public class classformController implements Initializable {
-
     @FXML
     private JFXButton addclassButton;
     @FXML
@@ -50,7 +50,7 @@ public class classformController implements Initializable {
             try {
                 Parent parent = FXMLLoader.load(getClass().getResource("/view/classOBJ-form.fxml"));
                 gridpane.add(parent, colomn, row++);
-                GridPane.setMargin(parent, new Insets(10,10,10,10));
+                GridPane.setMargin(parent, new Insets(5,5,5,5));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
