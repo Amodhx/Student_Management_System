@@ -11,4 +11,5 @@ public class ClassDetailDTO {
     private int studentId;
     private String classID;
     private String description;
+
 }

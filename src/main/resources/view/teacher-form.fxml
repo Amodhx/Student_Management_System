@@ -19,7 +19,7 @@
             <Font name="Arial Bold" size="16.0" />
          </font>
       </JFXButton>
-      <TableView fx:id="table" layoutX="98.0" layoutY="203.0" prefHeight="571.0" prefWidth="1136.0">
+      <TableView fx:id="table" layoutX="98.0" layoutY="203.0" prefHeight="571.0" prefWidth="1136.0" stylesheets="@../css/table.css">
          <columns>
             <TableColumn fx:id="tablename" prefWidth="196.7999725341797" text="Name" />
             <TableColumn fx:id="tablesubject" prefWidth="263.199951171875" text="Subject" />

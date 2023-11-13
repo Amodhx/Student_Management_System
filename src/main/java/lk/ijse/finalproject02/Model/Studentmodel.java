@@ -3,6 +3,7 @@ package lk.ijse.finalproject02.Model;
 import lk.ijse.finalproject02.DB.DBConnection;
 import lk.ijse.finalproject02.DTO.StudentDTO;
 
+import java.net.ConnectException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -153,6 +154,41 @@ public class Studentmodel {
             e.printStackTrace();
         }
         return false;
+    }
+    public static ArrayList<StudentDTO> getStudentBatchVise(String batch){
+        ArrayList<StudentDTO> arrayList = new ArrayList<>();
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from student where batch = ?");
+            preparedStatement.setString(1,batch);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                StudentDTO st = new StudentDTO(resultSet.getInt(1), resultSet.getString(2),resultSet.getString(3),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7),resultSet.getInt(8),resultSet.getString(9));
+                arrayList.add(st);
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return arrayList;
+    }
+    public static ArrayList<String> getBatches(){
+        ArrayList<String> arrayList = new ArrayList<>();
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("select distinct batch from student");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                arrayList.add(resultSet.getString(1));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return arrayList;
     }
     public static ArrayList<StudentDTO> getAllStudents(){
         ArrayList<StudentDTO> ar=new ArrayList<>();

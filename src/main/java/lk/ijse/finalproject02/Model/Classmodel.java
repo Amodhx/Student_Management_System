@@ -105,6 +105,26 @@ public class Classmodel {
         }
         return clsid;
     }
+    public static ArrayList<ClassDTO> getclassObjStudentVIse(int studentID){
+        ArrayList<ClassDTO> arrayList = new ArrayList<>();
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(" select subject,batch from class c join class_detail cd on c.classId = cd.classId where studentId = ?");
+            preparedStatement.setInt(1,studentID);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                ClassDTO classDTO = new ClassDTO(resultSet.getString(1),resultSet.getString(2));
+                arrayList.add(classDTO);
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return arrayList;
+    }
     public static ArrayList<ClassDTO> getallClasses(){
         ArrayList<ClassDTO> classDTOS = new ArrayList<>();
 

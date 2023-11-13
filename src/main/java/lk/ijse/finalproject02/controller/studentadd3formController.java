@@ -13,10 +13,7 @@ import lk.ijse.finalproject02.DTO.ClassDetailDTO;
 import lk.ijse.finalproject02.DTO.ParentDTO;
 import lk.ijse.finalproject02.DTO.StudentDTO;
 import lk.ijse.finalproject02.DTO.TeacherDTO;
-import lk.ijse.finalproject02.Model.Classmodel;
-import lk.ijse.finalproject02.Model.Parentmodel;
-import lk.ijse.finalproject02.Model.Studentmodel;
-import lk.ijse.finalproject02.Model.Teachermodel;
+import lk.ijse.finalproject02.Model.*;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -104,7 +101,7 @@ public class studentadd3formController implements Initializable {
         String s = Classmodel.getclassID(teacherId, batc);
 
         ClassDetailDTO classDetailDTO = new ClassDetailDTO(studentID,"s","das");
-
+        ClassDetailmodel.saveClassDetail(classDetailDTO);
 
         Stage stage1 = (Stage) finishButton.getScene().getWindow();
         stage1.close();

@@ -1,6 +1,7 @@
 package lk.ijse.finalproject02.controller;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -59,6 +60,10 @@ public class studentController implements Initializable {
     private TableColumn<Studenttm, JFXButton> actioncolumn;
 
     @FXML
+    private JFXComboBox<String> streamCombo;
+    ArrayList<String> batches;
+
+    @FXML
     void alreadyhaveaccOnClick(ActionEvent event) {
         Parent parent = null;
         try {
@@ -91,8 +96,8 @@ public class studentController implements Initializable {
 
 
     }
-    public void loadValues(){
-        ArrayList<StudentDTO> allStudents = Studentmodel.getAllStudents();
+    public void loadValues(String s){
+        ArrayList<StudentDTO> allStudents = Studentmodel.getStudentBatchVise(s);
         ArrayList<ClassDetailDTO> classDetailDTOS = ClassDetailmodel.getAllClassDetails();
         ObservableList<Studenttm> observableList = FXCollections.observableArrayList();
 
@@ -112,13 +117,13 @@ public class studentController implements Initializable {
             observableList.get(i).getButton().setOnAction(event -> {
                     boolean b = Studentmodel.deleteStudent(studentid);
                     if (b) {
-                        new Alert(Alert.AlertType.CONFIRMATION, "Customer deleted successfully").show();
+                        new Alert(Alert.AlertType.CONFIRMATION, "Student deleted successfully").show();
                     } else {
                         new Alert(Alert.AlertType.ERROR, "ERROR!!").show();
                     }
 
 
-                loadValues();
+                loadValues(s);
             });
         }
 
@@ -133,10 +138,25 @@ public class studentController implements Initializable {
         actioncolumn.setCellValueFactory(new PropertyValueFactory<Studenttm,JFXButton>("button"));
     }
 
+    @FXML
+    void onselected(ActionEvent event) {
+        String x = streamCombo.getValue();
+        loadValues(x);
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-      setValues();
-      loadValues();
+        setValues();
+        batches = Studentmodel.getBatches();
+        if (batches.size()>0) {
+            ObservableList<String> observableList = FXCollections.observableArrayList();
+            observableList.addAll(batches);
+            streamCombo.setItems(observableList);
+            streamCombo.setValue(batches.get(0));
+            String s = batches.get(0);
+            loadValues(s);
+        }
 
     }
 }

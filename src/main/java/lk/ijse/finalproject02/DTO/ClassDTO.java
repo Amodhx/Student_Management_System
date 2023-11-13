@@ -14,4 +14,9 @@ public class ClassDTO {
     private String grade;
     private String stream;
     private String fee;
+
+    public ClassDTO(String subject, String grade) {
+        this.subject = subject;
+        this.grade = grade;
+    }
 }
