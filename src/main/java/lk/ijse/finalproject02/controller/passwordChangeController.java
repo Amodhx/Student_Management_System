@@ -62,9 +62,11 @@ public class passwordChangeController implements Initializable {
             if (username.getText().equals(allUsers.get(i).getUserName())){
                 usernamevalid.setTextFill(Color.rgb(7,255,61,1));
                 usernamevalid.setText("Valid Username");
+                break;
             }else {
                 usernamevalid.setTextFill(Color.rgb(244,32,32,1));
                 usernamevalid.setText("Invalid Username");
+                break;
             }
         }
     }

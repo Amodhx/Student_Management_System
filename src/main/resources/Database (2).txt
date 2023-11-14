@@ -1,0 +1,151 @@
+create database final_project;
+
+use final_project;
+create  table user(
+    id int(30) not null auto_increment primary key,
+    userName varchar(50),
+    password varchar(60),
+    type varchar(30),
+    email varchar(70)
+);
+
+create table teacher(
+    teacherID int(30) not null auto_increment primary key ,
+    firstName varchar(20),
+    lastName varchar(20),
+    gender varchar(20),
+    DOB varchar(20),
+    subject varchar(20),
+    contactNum varchar(40),
+    email varchar(60),
+    nic varchar(50),
+    city varchar(20),
+    address varchar(50)
+);
+
+create table class(
+    classId varchar(20) primary key ,
+    subject varchar(20),
+    teacherID int(30),
+    foreign key (teacherID) references teacher(teacherID) on delete cascade on update cascade ,
+    grade varchar(20)
+);
+
+create table parent(
+    parentId int(20) not null auto_increment primary key ,
+    name varchar(30),
+    contactNum varchar(50),
+    job varchar(30),
+    mail varchar(70)
+
+);
+
+create  table student(
+    studentId int(20) not null auto_increment primary key ,
+    firstName varchar(30),
+    lastName varchar(30),
+    gender varchar(20),
+    NIC varchar(30),
+    contactNum varchar(50),
+    email varchar(70),
+    parentId int(20),
+    foreign key (parentId) references  parent(parentId) on delete cascade on UPDATE cascade
+
+);
+
+create table timeTable(
+    timetableId int(20) not null  auto_increment primary key ,
+    classId varchar(20),
+    foreign key (classId) references class(classId) on delete cascade on update cascade ,
+    teacherID int(30),
+    foreign key (teacherID) references teacher(teacherID) on delete cascade on update cascade ,
+    date varchar(30),
+    time varchar(20)
+);
+
+create table seminar(
+    seminarId int(20) not null  auto_increment primary key ,
+    classId varchar(20),
+    foreign key (classId) references class(classId) on delete cascade on update cascade ,
+    date varchar(30),
+    time varchar(20)
+);
+
+
+create table payment(
+    paymentId int(20) not null auto_increment primary key ,
+    studentId int(20),
+    foreign key (studentId) references student(studentId) on delete cascade on update cascade ,
+    amount varchar(30),
+    month varchar(20)
+);
+
+
+create table class_detail(
+    studentId int(20),
+    foreign key(studentId) references student(studentId) on delete cascade on UPDATE cascade ,
+    classId varchar(20),
+    foreign key (classId) references class(classId) on delete cascade on update cascade ,
+    description varchar(50)
+);
+
+create table attendence(
+    attendenceId int(20) not null auto_increment primary key ,
+    classId varchar(20),
+    foreign key (classId) references class(classId) on delete cascade on update cascade ,
+    date varchar(30)
+);
+
+create table attendenceDetail(
+    studentId int(20),
+    foreign key (studentId) references student(studentId) on  delete  cascade  on update  cascade ,
+    attendenceId int(20),
+    foreign key (attendenceId) references  attendence(attendenceId) on delete  cascade  on  update cascade ,
+    mark varchar(30)
+);
+
+
+create table exam(
+                     examId int(20) not null auto_increment primary key ,
+                     classId varchar(20),
+                     foreign key (classId) references class(classId) on delete cascade on update cascade ,
+                     date varchar(30)
+
+);
+
+create table exam_detail(
+    studentId int(20),
+    foreign key (studentId) references student(studentId) on delete cascade on update cascade ,
+    examId int(20),
+    foreign key (examId) references exam(examId) on delete cascade on update cascade ,
+    marks varchar(40)
+
+);
+
+alter table class add column stream varchar(30);
+
+alter table payment add column classId varchar(20);
+
+alter table student add column batch varchar(20);
+
+alter table class rename column grade to batch;
+
+alter table user add column fullname varchar(60);
+
+alter table class add column fee varchar(30);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
