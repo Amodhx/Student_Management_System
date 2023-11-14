@@ -29,7 +29,7 @@
             <Image url="@../assets/logout.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="closeicon" fitHeight="31.0" fitWidth="33.0" layoutX="228.0" layoutY="8.0" onMouseClicked="#oncloseClick">
+      <ImageView fx:id="closeicon" fitHeight="23.0" fitWidth="24.0" layoutX="236.0" layoutY="8.0" onMouseClicked="#oncloseClick">
          <image>
             <Image url="@../assets/close.png" />
          </image>

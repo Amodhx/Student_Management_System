@@ -15,6 +15,7 @@ import javafx.stage.StageStyle;
 import lk.ijse.finalproject02.DTO.StudentDTO;
 import lk.ijse.finalproject02.DTO.TeacherDTO;
 import lk.ijse.finalproject02.Model.Classmodel;
+import lk.ijse.finalproject02.Model.Paymentmodel;
 import lk.ijse.finalproject02.Model.Studentmodel;
 import lk.ijse.finalproject02.Model.Teachermodel;
 
@@ -22,6 +23,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -100,6 +102,14 @@ public class dbformController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Date time = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm a");
+        LocalDate localDate = LocalDate.now();
+        String month = String.valueOf(localDate.getMonth());
+        String toMonth = null;
+        if (month.equals("NOVEMBER")){
+            toMonth = "November";
+        }
+        String totale = Paymentmodel.totalAmountMonthVise(toMonth);
+        seminarcount.setText(totale);
         String timenow = simpleDateFormat.format(time);
         timeadd.setText(timenow);
         studentcount.setText(String.valueOf(Studentmodel.getStudentCount()));

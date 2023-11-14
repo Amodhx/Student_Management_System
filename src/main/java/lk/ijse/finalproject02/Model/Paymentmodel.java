@@ -32,6 +32,23 @@ public class Paymentmodel {
         }
         return false;
     }
+    public static String totalAmountMonthVise(String month){
+        String total = null;
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(" select sum(amount) from payment where month = ?");
+            preparedStatement.setString(1,month);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                total = resultSet.getString(1);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return total;
+    }
     public static ArrayList<PaymentDTO> getAllPaymentStudentVise(int stuid){
         ArrayList<PaymentDTO> paymentDTOS = new ArrayList<>();
         try {
