@@ -8,7 +8,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import lk.ijse.finalproject02.DTO.UserDTO;
 import lk.ijse.finalproject02.Model.Usermodel;
@@ -16,7 +17,7 @@ import lk.ijse.finalproject02.Model.Usermodel;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class examVerifyformController {
+public class adminVrifyformController {
 
     @FXML
     private TextField adminname;
@@ -25,19 +26,10 @@ public class examVerifyformController {
     private PasswordField adminpassword;
 
     @FXML
-    private JFXButton okButton;
-
-    @FXML
-    private AnchorPane pane;
-
-    @FXML
     private JFXButton canselButton;
-    @FXML
-    void oncanselClick(ActionEvent event) {
-        Stage stage = (Stage)canselButton.getScene().getWindow();
-        stage.close();
 
-    }
+    @FXML
+    private JFXButton okButton;
 
     @FXML
     void onOkClick(ActionEvent event) throws IOException {
@@ -52,19 +44,34 @@ public class examVerifyformController {
                 stage.setResizable(false);
                 stage.setScene(scene);
                 stage.show();
+            }
+            Stage stage = (Stage) okButton.getScene().getWindow();
+            stage.close();
+        }
+    }
 
-            }
+    @FXML
+    void onaddEnterPassword(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.ENTER)) {
+            okButton.requestFocus();
         }
-        if (allUsers.get(0).getUserName().equals(adminnameText) && allUsers.get(0).getPassword().equals(adminpasswordText)){
-            Parent parent = null;
-            try {
-                parent = FXMLLoader.load(getClass().getResource("/view/setting-form.fxml"));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            pane.getChildren().clear();
-            pane.getChildren().add(parent);
+
+    }
+
+    @FXML
+    void onaddEnterUserName(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.ENTER)) {
+            adminpassword.requestFocus();
         }
+
+
+    }
+
+    @FXML
+    void oncanselClick(ActionEvent event) {
+        Stage stage = (Stage) okButton.getScene().getWindow();
+        stage.close();
+
     }
 
 }

@@ -155,7 +155,6 @@ public class dashboardController implements Initializable {
         colourRemove();
         settingbutton.setStyle("-fx-background-color:rgba(203, 231, 235, 1) ");
         settingbutton.setTextFill(Color.rgb(5, 75, 180, 1));
-        changePage("/view/examVerify-form.fxml");
 
     }
 
