@@ -15,5 +15,7 @@ public class Studenttm {
     private String mail;
     private String contact;
     private String gender;
+    private JFXButton jfxButton;
     private JFXButton button;
+
         }

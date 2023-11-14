@@ -140,6 +140,26 @@ public class Studentmodel {
         }
         return arrayList;
     }
+    public static boolean updateStudentValues(int studentID,String name,String email,String contacnt,String batch){
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("update student set firstName = ?,contactNum = ?,email = ?,batch = ? where studentId = ?");
+            preparedStatement.setString(1,name);
+            preparedStatement.setString(2,contacnt);
+            preparedStatement.setString(3,email);
+            preparedStatement.setString(4,batch);
+            preparedStatement.setInt(5,studentID);
+            int executed = preparedStatement.executeUpdate();
+            return executed>0;
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return false;
+
+    }
     public static boolean deleteStudent(int studentId) {
         try {
             Connection connection = DBConnection.getInstance().getConnection();
@@ -166,6 +186,57 @@ public class Studentmodel {
                 StudentDTO st = new StudentDTO(resultSet.getInt(1), resultSet.getString(2),resultSet.getString(3),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7),resultSet.getInt(8),resultSet.getString(9));
                 arrayList.add(st);
             }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return arrayList;
+    }
+    public static ArrayList<StudentDTO> getStudentBatchAndStreamViseAndSubjectVise(String batch , String stream,String subject){
+        ArrayList<StudentDTO> arrayList = new ArrayList<>();
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("select " +
+                    "s.studentId,s.firstName,s.lastName,s.gender,s.NIC,s.contactNum,s.email,s.parentId,s.batch " +
+                    "from student s  join class_detail cd on s.studentId = cd.studentId" +
+                    " join class c on cd.classId = c.classId " +
+                    "where s.batch = ? && c.stream = ? && c.subject = ?" +
+                    "group by studentId;");
+            preparedStatement.setString(1,batch);
+            preparedStatement.setString(2,stream);
+            preparedStatement.setString(3,subject);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                StudentDTO studentDTO = new StudentDTO(resultSet.getInt(1),resultSet.getString(2),resultSet.getString(3),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7),resultSet.getInt(8),resultSet.getString(9));
+                arrayList.add(studentDTO);
+            }
+
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return arrayList;
+    }
+    public static ArrayList<StudentDTO> getStudentBatchAndStreamVise(String batch , String stream){
+        ArrayList<StudentDTO> arrayList = new ArrayList<>();
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("select" +
+                    " s.studentId,s.firstName,s.lastName,s.gender,s.NIC,s.contactNum,s.email,s.parentId,s.batch from " +
+                    "student s  join class_detail cd on s.studentId = cd.studentId join class c on cd.classId = c.classId" +
+                    " where s.batch = ? && c.stream = ? group by studentId;");
+            preparedStatement.setString(1,batch);
+            preparedStatement.setString(2,stream);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                StudentDTO studentDTO = new StudentDTO(resultSet.getInt(1),resultSet.getString(2),resultSet.getString(3),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7),resultSet.getInt(8),resultSet.getString(9));
+                arrayList.add(studentDTO);
+            }
+
 
         }catch (SQLException e){
             e.printStackTrace();

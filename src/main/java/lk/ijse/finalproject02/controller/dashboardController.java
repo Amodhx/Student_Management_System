@@ -189,6 +189,7 @@ public class dashboardController implements Initializable {
 
         }else if(ty.equals("Security")){
             studentbutton1.setDisable(true);
+
             mailbutton.setDisable(true);
             teacherbutton.setDisable(true);
             classbutton.setDisable(true);

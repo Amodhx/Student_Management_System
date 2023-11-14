@@ -54,6 +54,20 @@ public class addadminController implements Initializable {
 
     @FXML
     void onaddAccountButton(ActionEvent event) {
+        Parent parent = null;
+        try {
+            parent = FXMLLoader.load(getClass().getResource("/view/examVerify-form.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Scene scene = new Scene(parent);
+        Stage stage = new Stage();
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.show();
+        Stage stage1 = (Stage) addaccountButton.getScene().getWindow();
+        stage1.close();
 
     }
 

@@ -54,7 +54,7 @@ public class Classmodel {
         ArrayList<String> arrayList = new ArrayList<>();
         try {
             Connection connection = DBConnection.getInstance().getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("select subject from class where stream = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement("select distinct(subject) from class where stream = ? ");
             preparedStatement.setString(1,stream);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){

@@ -7,24 +7,29 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="806.0" prefWidth="1327.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.finalproject02.controller.examVerifyformController">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="305.0" prefWidth="528.0" stylesheets="@../css/gradiant.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.finalproject02.controller.examVerifyformController">
    <children>
-      <AnchorPane layoutX="278.0" layoutY="267.0" prefHeight="306.0" prefWidth="534.0" style="-fx-background-color: rgba(5, 75, 180, 1); -fx-background-radius: 15;">
-         <children>
-            <Label layoutX="28.0" layoutY="31.0" style="-fx-background-radius: 15;" text="Verificate to Continue:" textFill="WHITE">
-               <font>
-                  <Font name="Arial Bold" size="23.0" />
-               </font>
-            </Label>
-            <JFXButton fx:id="okButton" layoutX="369.0" layoutY="243.0" onAction="#onOkClick" prefHeight="30.0" prefWidth="83.0" style="-fx-background-color: rgba(135, 159, 245, 1)rgba(135, 159, 245, 1);" text="OK" />
-            <Label layoutX="367.0" layoutY="14.0" style="-fx-background-radius: 15;" text="Only admin can enter" textFill="WHITE">
-               <font>
-                  <Font name="Arial Bold" size="15.0" />
-               </font>
-            </Label>
-            <TextField fx:id="adminname" layoutX="28.0" layoutY="118.0" prefHeight="31.0" prefWidth="366.0" promptText="Enter admin username" />
-            <PasswordField fx:id="adminpassword" layoutX="28.0" layoutY="166.0" prefHeight="31.0" prefWidth="366.0" promptText="Enter admin password" />
-         </children>
-      </AnchorPane>
+      <Label layoutX="14.0" layoutY="27.0" style="-fx-background-radius: 15;" text="Verificate to Continue:" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="23.0" />
+         </font>
+      </Label>
+      <Label layoutX="374.0" layoutY="10.0" style="-fx-background-radius: 15;" text="Only admin can Add" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="adminname" layoutX="31.0" layoutY="100.0" prefHeight="31.0" prefWidth="366.0" promptText="Enter admin username" />
+      <PasswordField fx:id="adminpassword" layoutX="31.0" layoutY="159.0" prefHeight="31.0" prefWidth="366.0" promptText="Enter admin password" />
+      <JFXButton fx:id="okButton" layoutX="406.0" layoutY="260.0" onAction="#onOkClick" prefHeight="30.0" prefWidth="83.0" style="-fx-background-color: rgba(5, 75, 180, 1);" text="Add" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="canselButton" buttonType="RAISED" layoutX="313.0" layoutY="259.0" onAction="#oncanselClick" prefHeight="31.0" prefWidth="83.0" style="-fx-background-color: rgba(175, 108, 108, 1);" text="Cansel" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>
