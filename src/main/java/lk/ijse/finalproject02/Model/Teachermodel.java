@@ -10,6 +10,40 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Teachermodel {
+    public static boolean deleteTeacher(int teacherID) {
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("delete from teacher where teacherID = ?");
+            preparedStatement.setInt(1,teacherID);
+
+            int executed = preparedStatement.executeUpdate();
+            return executed > 0;
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+    public static boolean updateTeacher(int teacherID, String firstName, String lastName , String contact , String email,String nic){
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(" update  teacher set firstName = ?,lastName =?, contactNum = ?, email = ?, nic =? where teacherID = ?");
+            preparedStatement.setString(1,firstName);
+            preparedStatement.setString(2,lastName);
+            preparedStatement.setString(3,contact);
+            preparedStatement.setString(4,email);
+            preparedStatement.setString(5,nic);
+            preparedStatement.setInt(6,teacherID);
+            int executed = preparedStatement.executeUpdate();
+            return executed>0;
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
     public static Boolean saveTeacher(TeacherDTO teacherDTO){
         Connection connection;
         try {

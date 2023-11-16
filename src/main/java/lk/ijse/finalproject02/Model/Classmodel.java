@@ -3,6 +3,7 @@ package lk.ijse.finalproject02.Model;
 import lk.ijse.finalproject02.DB.DBConnection;
 import lk.ijse.finalproject02.DTO.ClassDTO;
 
+import java.net.ConnectException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -49,6 +50,40 @@ public class Classmodel {
             e.printStackTrace();
         }
         return teacherid;
+    }
+    public static boolean updateClass(String classID,String subject ,String batch , String fee ){
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("update class set subject = ? , batch = ? , fee= ? where classId= ?;");
+            preparedStatement.setString(1,subject);
+            preparedStatement.setString(2,batch);
+            preparedStatement.setString(3,fee);
+            preparedStatement.setString(4,classID);
+
+            int executed = preparedStatement.executeUpdate();
+            return executed>0;
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean deleteClass(String classID) {
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("delete from class where classId = ?");
+            preparedStatement.setString(1,classID);
+
+            int executed = preparedStatement.executeUpdate();
+            return executed > 0;
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return false;
     }
     public static ArrayList<String> getsubjects(String stream){
         ArrayList<String> arrayList = new ArrayList<>();

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="pane" prefHeight="806.0" prefWidth="1327.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.finalproject02.controller.deleteUpdateClassformController">
+   <children>
+      <Label layoutX="126.0" layoutY="43.0" style="-fx-background-radius: 15;" text="Delete/Update Class Details">
+         <font>
+            <Font name="Arial Bold" size="38.0" />
+         </font>
+      </Label>
+      <TableView fx:id="table" layoutX="126.0" layoutY="152.0" prefHeight="580.0" prefWidth="1084.0" stylesheets="@../css/table.css">
+        <columns>
+          <TableColumn fx:id="idcolumn" prefWidth="116.00003051757812" text="ID" />
+          <TableColumn fx:id="subjectcolumn" prefWidth="203.99998474121094" text="Subject" />
+            <TableColumn fx:id="teachercolumn" prefWidth="252.0" text="Teacher" />
+            <TableColumn fx:id="batchcolumn" prefWidth="207.199951171875" text="Batch" />
+            <TableColumn fx:id="feecolumn" prefWidth="170.4000244140625" text="Fee" />
+            <TableColumn fx:id="updatecolumn" prefWidth="68.00003051757812" text="Update" />
+            <TableColumn fx:id="deletecolumn" prefWidth="71.19989013671875" text="Delete" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

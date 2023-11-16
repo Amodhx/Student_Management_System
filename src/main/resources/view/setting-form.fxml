@@ -1,14 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="lk.ijse.finalproject02.controller.settingformController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane fx:id="ancpane" prefHeight="806.0" prefWidth="1327.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.finalproject02.controller.settingformController">
+   <children>
+      <Label layoutX="364.0" layoutY="229.0" text="Add  other Admin">
+         <font>
+            <Font name="Bell MT Bold" size="29.0" />
+         </font>
+      </Label>
+      <Label layoutX="358.0" layoutY="265.0" text="If you want add another admin ! you can use this and fill the form">
+         <font>
+            <Font name="Bell MT" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="358.0" layoutY="372.0" text="Delete/Update  Teachers">
+         <font>
+            <Font name="Bell MT Bold" size="29.0" />
+         </font>
+      </Label>
+      <Label layoutX="358.0" layoutY="501.0" text="Delete/Update  Classes">
+         <font>
+            <Font name="Bell MT Bold" size="29.0" />
+         </font>
+      </Label>
+      <Label layoutX="358.0" layoutY="407.0" text="If you want to delete or update tacher details you can use this function ">
+         <font>
+            <Font name="Bell MT" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="358.0" layoutY="537.0" text="If you want delete or update new student you can use this function . Fill the form and save it.">
+         <font>
+            <Font name="Bell MT" size="20.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="53.0" fitWidth="53.0" layoutX="269.0" layoutY="236.0">
+         <image>
+            <Image url="@../assets/admin2.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="53.0" layoutX="267.0" layoutY="378.0">
+         <image>
+            <Image url="@../assets/totea.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="53.0" layoutX="271.0" layoutY="508.0">
+         <image>
+            <Image url="@../assets/tostu.png" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="addadminButton" layoutX="262.0" layoutY="228.0" onAction="#onAddAdinCLick" prefHeight="70.0" prefWidth="66.0" text="." />
+      <JFXButton fx:id="teacherButon" layoutX="264.0" layoutY="368.0" onAction="#onteacherClick" prefHeight="70.0" prefWidth="66.0" text="." />
+      <JFXButton fx:id="classButton" layoutX="264.0" layoutY="501.0" onAction="#onclassClick" prefHeight="70.0" prefWidth="66.0" text="." />
+   </children>
 </AnchorPane>

@@ -31,7 +31,7 @@
                   <Font name="Arial" size="16.0" />
                </font>
             </Label>
-            <Label layoutX="44.0" layoutY="220.0" style="-fx-background-radius: 15;" text="Grade">
+            <Label layoutX="44.0" layoutY="220.0" style="-fx-background-radius: 15;" text="Batch">
                <font>
                   <Font name="Arial" size="16.0" />
                </font>
