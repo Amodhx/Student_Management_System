@@ -40,15 +40,15 @@
             <Font name="Arial Bold" size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="username" layoutX="74.0" layoutY="530.0" onKeyPressed="#onbackusername" prefHeight="34.0" prefWidth="274.0" promptText="   User name" style="-fx-background-color: rgba(74, 111, 167, 1); -fx-background-radius: 8;">
+      <TextField fx:id="username" layoutX="74.0" layoutY="530.0" onKeyPressed="#onbackusername" prefHeight="34.0" prefWidth="274.0" promptText="   User name" style="-fx-background-color: rgba(200, 209, 223, 1); -fx-background-radius: 8;">
          <font>
             <Font size="15.0" />
          </font></TextField>
-      <TextField fx:id="password" layoutX="74.0" layoutY="585.0" onKeyPressed="#onpassword" prefHeight="34.0" prefWidth="274.0" promptText="    Password" style="-fx-background-color: rgba(74, 111, 167, 1); -fx-background-radius: 8;">
+      <TextField fx:id="password" layoutX="74.0" layoutY="585.0" onKeyPressed="#onpassword" prefHeight="34.0" prefWidth="274.0" promptText="    Password" style="-fx-background-color: rgba(200, 209, 223, 1); -fx-background-radius: 8;">
          <font>
             <Font size="15.0" />
          </font></TextField>
-      <JFXButton fx:id="loginbutton" buttonType="RAISED" layoutX="74.0" layoutY="652.0" onAction="#onloggingclick" prefHeight="34.0" prefWidth="274.0" style="-fx-background-color: rgba(35, 67, 115, 1); -fx-background-radius: 8;" text="Login" textFill="#fcfcfc">
+      <JFXButton fx:id="loginbutton" buttonType="RAISED" layoutX="77.0" layoutY="643.0" onAction="#onloggingclick" prefHeight="34.0" prefWidth="274.0" style="-fx-background-color: rgba(5, 75, 180, 1); -fx-background-radius: 8;" text="Login" textFill="#fcfcfc">
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font>

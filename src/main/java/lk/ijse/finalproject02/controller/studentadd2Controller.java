@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -31,6 +32,7 @@ import java.net.URL;
 import java.nio.file.Paths;
 import java.util.Properties;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 public class studentadd2Controller extends Thread implements Initializable {
 
@@ -159,36 +161,42 @@ public class studentadd2Controller extends Thread implements Initializable {
 
     @FXML
     void onnextClick(ActionEvent event) {
-        studentadd3formController.sfnamee = sfnamee;
-        studentadd3formController.slnamee =slnamee;
-        studentadd3formController.maill = maill;
-        studentadd3formController.nicc = nicc;
-        studentadd3formController.contctnum = contctnum;
-        studentadd3formController.genderr = genderr;
-        studentadd3formController.batc =batch;
-        studentadd3formController.parentName = parentname.getText();
-        studentadd3formController.pmail = parentemail.getText();
-        studentadd3formController.pjob = parentjob.getText();
-        studentadd3formController.parenContct = parentcontact.getText();
+        boolean matches = Pattern.matches("^0\\d{2}\\d{7}$", parentcontact.getText());
+        if (matches){
+            studentadd3formController.sfnamee = sfnamee;
+            studentadd3formController.slnamee =slnamee;
+            studentadd3formController.maill = maill;
+            studentadd3formController.nicc = nicc;
+            studentadd3formController.contctnum = contctnum;
+            studentadd3formController.genderr = genderr;
+            studentadd3formController.batc =batch;
+            studentadd3formController.parentName = parentname.getText();
+            studentadd3formController.pmail = parentemail.getText();
+            studentadd3formController.pjob = parentjob.getText();
+            studentadd3formController.parenContct = parentcontact.getText();
 
-        studentadd2Controller thred= new studentadd2Controller();
-        thred.start();
+            studentadd2Controller thred= new studentadd2Controller();
+            thred.start();
 
 
-        Stage stage1 = (Stage) nextButton.getScene().getWindow();
-        stage1.hide();
-        Parent parent ;
-        studentadd3formController.stage = stage1;
-        try {
-            parent = FXMLLoader.load(getClass().getResource("/view/studentadd3-form.fxml"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            Stage stage1 = (Stage) nextButton.getScene().getWindow();
+            stage1.hide();
+            Parent parent ;
+            studentadd3formController.stage = stage1;
+            try {
+                parent = FXMLLoader.load(getClass().getResource("/view/studentadd3-form.fxml"));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            Stage stage2 = new Stage();
+            Scene scene = new Scene(parent);
+            stage2.setScene(scene);
+            stage2.setResizable(false);
+            stage2.show();
+        }else {
+            new Alert(Alert.AlertType.ERROR,"Invalid Contact Number").show();
         }
-        Stage stage2 = new Stage();
-        Scene scene = new Scene(parent);
-        stage2.setScene(scene);
-        stage2.setResizable(false);
-        stage2.show();
+
     }
 
     @Override

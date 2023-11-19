@@ -41,11 +41,11 @@
                   <Font name="Arial" size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="classID" layoutX="44.0" layoutY="137.0" prefHeight="30.0" prefWidth="304.0" />
+            <TextField fx:id="classID" layoutX="44.0" layoutY="137.0" prefHeight="30.0" prefWidth="304.0" promptText="Sub + TeaId + batch   Ex : Math0823" />
             <TextField fx:id="subject" layoutX="407.0" layoutY="138.0" prefHeight="30.0" prefWidth="304.0" />
             <TextField fx:id="grade" layoutX="44.0" layoutY="247.0" prefHeight="30.0" prefWidth="304.0" />
             <TextField fx:id="day" layoutX="407.0" layoutY="247.0" prefHeight="30.0" prefWidth="304.0" />
-            <JFXComboBox fx:id="gendercombo" layoutX="766.0" layoutY="135.0" prefHeight="26.0" prefWidth="304.0" />
+            <JFXComboBox fx:id="gendercombo" layoutX="766.0" layoutY="135.0" onAction="#onteacherSelected" prefHeight="26.0" prefWidth="304.0" />
             <JFXComboBox fx:id="Streamcombo" layoutX="766.0" layoutY="245.0" prefHeight="26.0" prefWidth="304.0" />
             <Label layoutX="766.0" layoutY="217.0" style="-fx-background-radius: 15;" text="Stream">
                <font>
@@ -58,6 +58,11 @@
                   <Font name="Arial" size="16.0" />
                </font>
             </Label>
+            <Label fx:id="teacherID" layoutX="861.0" layoutY="111.0" style="-fx-background-radius: 15;">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
       <Label layoutX="108.0" layoutY="94.0" style="-fx-background-radius: 15;" text="Add New Class">
@@ -66,6 +71,11 @@
          </font>
       </Label>
       <JFXButton fx:id="saveButton" buttonType="RAISED" layoutX="1111.0" layoutY="756.0" onAction="#onsavaeclick" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: rgba(5, 75, 180, 1); -fx-background-radius: 12;" text="Save" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="canselButton" buttonType="RAISED" layoutX="952.0" layoutY="756.0" onAction="#onCanselClick" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: rgba(175, 108, 108, 1); -fx-background-radius: 12;" text="Cansel" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

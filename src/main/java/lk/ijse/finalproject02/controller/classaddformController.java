@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -50,6 +51,25 @@ public class classaddformController implements Initializable {
 
     @FXML
     private TextField monthlyfee;
+    @FXML
+    private Label teacherID;
+
+    @FXML
+    void onteacherSelected(ActionEvent event) {
+        String teacherName = (String) gendercombo.getValue();
+        int teacherId = Teachermodel.getTeacherId(teacherName);
+        teacherID.setText("Teacher id :"+ teacherId);
+    }
+    @FXML
+    void onCanselClick(ActionEvent event) {
+        try {
+            Parent parent = FXMLLoader.load(getClass().getResource("/view/class-form.fxml"));
+            anchorpane.getChildren().clear();
+            anchorpane.getChildren().add(parent);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @FXML
     void onsavaeclick(ActionEvent event) {
@@ -77,6 +97,7 @@ public class classaddformController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        teacherID.setText("");
         teacherDTOS = Teachermodel.getallTeachers();
         ObservableList<String> observableList = FXCollections.observableArrayList();
         for (int i = 0; i < teacherDTOS.size(); i++) {

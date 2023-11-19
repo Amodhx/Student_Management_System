@@ -8,7 +8,21 @@ import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 import java.util.Random;
 
-public class Mailsend {
+public class Mailsend extends Thread{
+    public Mailsend(String email, String subject, String text) {
+        this.email = email;
+        this.subject = subject;
+        this.text = text;
+    }
+
+    private String email;
+    private String subject ;
+    private String text;
+
+    @Override
+    public void run(){
+        sendMail(email,subject,text);
+    }
     public static void sendMail(String email,String subject ,String text){
 
             String to = email;

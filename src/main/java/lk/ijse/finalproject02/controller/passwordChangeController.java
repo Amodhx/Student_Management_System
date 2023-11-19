@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -19,8 +20,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
-public class passwordChangeController implements Initializable {
+public class passwordChangeController  extends Thread implements Initializable {
 
     @FXML
     private JFXButton cancelButton;
@@ -97,12 +99,18 @@ public class passwordChangeController implements Initializable {
 
     @FXML
     void sendvirificationClick(MouseEvent event) {
-        String text = email.getText();
         Random random = new Random();
         randomNumber = random.nextInt(100000);
-        Mailsend.sendMail(text, String.valueOf(randomNumber),"");
-        sendvirification.setText("");
-
+        Mailsend thredd = new Mailsend(email.getText(),String.valueOf(randomNumber),"");
+        String text = email.getText();
+        boolean matches = Pattern.matches("^[\\w\\.-]+@[a-zA-Z\\d\\.-]+\\.[a-zA-Z]{2,}$", text);
+        if (matches) {
+           thredd.start();
+            sendvirification.setText("");
+            new Alert(Alert.AlertType.CONFIRMATION,"You have to check your mailbox to get Verification code").show();
+        }else{
+            new Alert(Alert.AlertType.ERROR,"Invalid Email").show();
+        }
     }
     @FXML
     void onRetyperpassword(KeyEvent event) {
@@ -119,4 +127,6 @@ public class passwordChangeController implements Initializable {
         savebutton.setDisable(true);
         usernamevalid.setText("");
     }
+
+
 }
