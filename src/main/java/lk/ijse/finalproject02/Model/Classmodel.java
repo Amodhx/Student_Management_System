@@ -104,6 +104,25 @@ public class Classmodel {
         }
         return arrayList;
     }
+    public static String getClassFee(String clasID){
+        String fee = null;
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(" select fee from class where classId = ?");
+            preparedStatement.setString(1,clasID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                fee = resultSet.getString(1);
+            }
+
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return fee;
+    }
 
     public static int getClassCount(){
         int x = 0;
@@ -125,9 +144,9 @@ public class Classmodel {
         String clsid = null;
         try {
             Connection connection = DBConnection.getInstance().getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("select classId from class where teacherID = ? & batch = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement(" select classId from class where teacherID = ? && batch = ?");
             preparedStatement.setInt(1,teacherID);
-            preparedStatement.setString(2,batch);
+            preparedStatement.setInt(2, Integer.parseInt(batch));
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 clsid = resultSet.getString(1);

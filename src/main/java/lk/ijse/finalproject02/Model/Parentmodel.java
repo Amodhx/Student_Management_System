@@ -11,6 +11,28 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Parentmodel {
+    public static ParentDTO getParentbyID(int parentID){
+        ParentDTO parentDTO = new ParentDTO();
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from parent where parentId = ?");
+            preparedStatement.setInt(1,parentID);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                parentDTO.setParentId(resultSet.getInt(1));
+                parentDTO.setName(resultSet.getString(2));
+                parentDTO.setContactNumber(resultSet.getString(3));
+                parentDTO.setJob(resultSet.getString(4));
+                parentDTO.setEmail(resultSet.getString(5));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return parentDTO;
+    }
     public static boolean saveParent(ParentDTO parentDTO){
         Connection connection;
         try {

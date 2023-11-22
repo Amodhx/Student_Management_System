@@ -63,7 +63,10 @@ public class alreadyregisteredStudentController implements Initializable {
         String sub = (String) subjectComco.getValue();
         String tea = (String) teacherCombo.getValue();
         int teacherId = Teachermodel.getTeacherId(tea);
-        String s = Classmodel.getclassID(teacherId, sub);
+        System.out.println(teacherId);
+        String studentBatch = Studentmodel.getStudentBatch(studentID);
+        String s = Classmodel.getclassID(teacherId, studentBatch);
+        System.out.println(s);
         ClassDetailDTO classDetailDTO = new ClassDetailDTO(studentID,s,"asdas");
         Boolean aBoolean = ClassDetailmodel.saveClassDetail(classDetailDTO);
 

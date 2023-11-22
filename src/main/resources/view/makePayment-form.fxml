@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="492.0" prefWidth="698.0" style="-fx-background-radius: 10; -fx-background-color: rgba(62, 118, 91, 1);" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.finalproject02.controller.makePaymentController">
    <children>
       <Label layoutX="41.0" layoutY="33.0" style="-fx-background-radius: 15;" text="Transaction" textFill="WHITE">
@@ -15,7 +14,7 @@
             <Font name="Arial Bold" size="23.0" />
          </font>
       </Label>
-      <JFXComboBox fx:id="classIDCombo" focusColor="WHITE" layoutX="49.0" layoutY="161.0" prefHeight="26.0" prefWidth="214.0" unFocusColor="WHITE" />
+      <JFXComboBox fx:id="classIDCombo" focusColor="WHITE" layoutX="49.0" layoutY="161.0" onAction="#onclassSelected" prefHeight="26.0" prefWidth="214.0" unFocusColor="WHITE" />
       <Label layoutX="49.0" layoutY="129.0" style="-fx-background-radius: 15;" text="Select class" textFill="WHITE">
          <font>
             <Font name="Arial" size="16.0" />

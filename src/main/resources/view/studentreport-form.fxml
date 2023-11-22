@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
@@ -17,7 +18,7 @@
             <Font name="Arial Bold" size="23.0" />
          </font>
       </Label>
-      <AnchorPane layoutX="81.0" layoutY="185.0" prefHeight="208.0" prefWidth="370.0" style="-fx-background-color: rgba(222, 235, 255, 1); -fx-background-radius: 10;">
+      <AnchorPane layoutX="81.0" layoutY="185.0" prefHeight="208.0" prefWidth="370.0" style="-fx-background-color: rgba(222, 235, 255, 1); -fx-background-radius: 10;" styleClass="shadow" stylesheets="@../css/buttonborder.css">
          <children>
             <Label layoutX="14.0" layoutY="16.0" style="-fx-background-radius: 15;" text="Personal Information">
                <font>
@@ -29,7 +30,7 @@
                   <Font name="Arial Bold" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="160.0" layoutY="64.0" style="-fx-background-radius: 15;" text="Male" textFill="#4e4e4e">
+            <Label fx:id="studentgender" layoutX="160.0" layoutY="64.0" style="-fx-background-radius: 15;" text="Male" textFill="#4e4e4e">
                <font>
                   <Font name="Arial Bold" size="14.0" />
                </font>
@@ -39,7 +40,7 @@
                   <Font name="Arial Bold" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="159.0" layoutY="98.0" style="-fx-background-radius: 15;" text="200227000940" textFill="#4e4e4e">
+            <Label fx:id="studentnic" layoutX="159.0" layoutY="98.0" style="-fx-background-radius: 15;" text="200227000940" textFill="#4e4e4e">
                <font>
                   <Font name="Arial Bold" size="14.0" />
                </font>
@@ -49,7 +50,7 @@
                   <Font name="Arial Bold" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="157.0" layoutY="131.0" style="-fx-background-radius: 15;" text="amxdhnanditha@gmail.com" textFill="#4e4e4e">
+            <Label fx:id="studentEmail" layoutX="157.0" layoutY="131.0" style="-fx-background-radius: 15;" text="amxdhnanditha@gmail.com" textFill="#4e4e4e">
                <font>
                   <Font name="Arial Bold" size="14.0" />
                </font>
@@ -59,7 +60,7 @@
                   <Font name="Arial Bold" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="158.0" layoutY="159.0" style="-fx-background-radius: 15;" text="0789173934" textFill="#4e4e4e">
+            <Label fx:id="studentContact" layoutX="158.0" layoutY="159.0" style="-fx-background-radius: 15;" text="0789173934" textFill="#4e4e4e">
                <font>
                   <Font name="Arial Bold" size="14.0" />
                </font>
@@ -71,12 +72,12 @@
             <Font name="Arial Bold" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="162.0" layoutY="126.0" style="-fx-background-radius: 15;" text="22" textFill="#535252">
+      <Label fx:id="studentbatch" layoutX="162.0" layoutY="126.0" style="-fx-background-radius: 15;" text="22" textFill="#535252">
          <font>
             <Font name="Arial Bold" size="20.0" />
          </font>
       </Label>
-      <AnchorPane layoutX="486.0" layoutY="184.0" prefHeight="208.0" prefWidth="370.0" style="-fx-background-color: rgba(222, 235, 255, 1); -fx-background-radius: 10;">
+      <AnchorPane layoutX="486.0" layoutY="184.0" prefHeight="208.0" prefWidth="370.0" style="-fx-background-color: rgba(222, 235, 255, 1); -fx-background-radius: 10;" styleClass="shadow" stylesheets="@../css/buttonborder.css">
          <children>
             <Label layoutX="14.0" layoutY="16.0" style="-fx-background-radius: 15;" text="Parent Information">
                <font>
@@ -88,7 +89,7 @@
                   <Font name="Arial Bold" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="160.0" layoutY="64.0" style="-fx-background-radius: 15;" text="Thamara Nilanthi" textFill="#4e4e4e">
+            <Label fx:id="parentName" layoutX="160.0" layoutY="64.0" style="-fx-background-radius: 15;" text="Thamara Nilanthi" textFill="#4e4e4e">
                <font>
                   <Font name="Arial Bold" size="14.0" />
                </font>
@@ -98,7 +99,7 @@
                   <Font name="Arial Bold" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="159.0" layoutY="98.0" style="-fx-background-radius: 15;" text="200227000940" textFill="#4e4e4e">
+            <Label fx:id="parentJOb" layoutX="159.0" layoutY="98.0" style="-fx-background-radius: 15;" text="200227000940" textFill="#4e4e4e">
                <font>
                   <Font name="Arial Bold" size="14.0" />
                </font>
@@ -108,7 +109,7 @@
                   <Font name="Arial Bold" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="157.0" layoutY="131.0" style="-fx-background-radius: 15;" text="amxdhnanditha@gmail.com" textFill="#4e4e4e">
+            <Label fx:id="parentEmail" layoutX="157.0" layoutY="131.0" style="-fx-background-radius: 15;" text="amxdhnanditha@gmail.com" textFill="#4e4e4e">
                <font>
                   <Font name="Arial Bold" size="14.0" />
                </font>
@@ -118,14 +119,14 @@
                   <Font name="Arial Bold" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="158.0" layoutY="159.0" style="-fx-background-radius: 15;" text="0789173934" textFill="#4e4e4e">
+            <Label fx:id="parnetContactnum" layoutX="158.0" layoutY="159.0" style="-fx-background-radius: 15;" text="0789173934" textFill="#4e4e4e">
                <font>
                   <Font name="Arial Bold" size="14.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="891.0" layoutY="184.0" prefHeight="208.0" prefWidth="370.0" style="-fx-background-color: rgba(222, 235, 255, 1); -fx-background-radius: 10;">
+      <AnchorPane layoutX="891.0" layoutY="184.0" prefHeight="208.0" prefWidth="370.0" style="-fx-background-color: rgba(222, 235, 255, 1); -fx-background-radius: 10;" styleClass="shadow" stylesheets="@../css/buttonborder.css">
          <children>
             <Label layoutX="14.0" layoutY="16.0" style="-fx-background-radius: 15;" text="Class Information">
                <font>
@@ -143,14 +144,14 @@
             </ScrollPane>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="81.0" layoutY="433.0" prefHeight="342.0" prefWidth="555.0" style="-fx-background-color: rgba(222, 235, 255, 1); -fx-background-radius: 10;">
+      <AnchorPane layoutX="81.0" layoutY="433.0" prefHeight="342.0" prefWidth="555.0" style="-fx-background-color: rgba(222, 235, 255, 1); -fx-background-radius: 10;" styleClass="shadow" stylesheets="@../css/buttonborder.css">
          <children>
             <Label layoutX="14.0" layoutY="16.0" style="-fx-background-radius: 15;" text="Exam Details">
                <font>
                   <Font name="Arial Bold" size="17.0" />
                </font>
             </Label>
-            <LineChart layoutX="20.0" layoutY="46.0" prefHeight="281.0" prefWidth="500.0">
+            <LineChart fx:id="examDetail" layoutX="20.0" layoutY="62.0" prefHeight="295.0" prefWidth="500.0">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
@@ -160,13 +161,21 @@
             </LineChart>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="705.0" layoutY="433.0" prefHeight="342.0" prefWidth="555.0" style="-fx-background-color: rgba(222, 235, 255, 1); -fx-background-radius: 10;">
+      <AnchorPane layoutX="705.0" layoutY="433.0" prefHeight="342.0" prefWidth="555.0" style="-fx-background-color: rgba(222, 235, 255, 1); -fx-background-radius: 10;" styleClass="shadow" stylesheets="@../css/buttonborder.css">
          <children>
             <Label layoutX="14.0" layoutY="16.0" style="-fx-background-radius: 15;" text="Attendence Details">
                <font>
                   <Font name="Arial Bold" size="17.0" />
                </font>
             </Label>
+            <BarChart fx:id="attendenceBarGraph" layoutX="28.0" layoutY="45.0" prefHeight="278.0" prefWidth="500.0">
+              <xAxis>
+                <CategoryAxis side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis side="LEFT" />
+              </yAxis>
+            </BarChart>
          </children>
       </AnchorPane>
    </children>

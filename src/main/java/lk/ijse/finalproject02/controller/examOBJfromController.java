@@ -33,6 +33,8 @@ public class examOBJfromController implements Initializable {
 
     @FXML
     private Label name;
+    public static String searchtext;
+
 
     @FXML
     private Label nic;
@@ -54,7 +56,11 @@ public class examOBJfromController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-       studentClassVise =  Studentmodel.getStudentClassVise(clasid);
+        if (searchtext == null){
+            studentClassVise =  Studentmodel.getStudentClassVise(clasid);
+        }else{
+            studentClassVise = Studentmodel.getStudentSearching(clasid,searchtext);
+        }
         name.setText(studentClassVise.get(x).getFirstName()+" "+studentClassVise.get(x).getLastName());
         mail.setText(studentClassVise.get(x).getEmail());
         nic.setText(studentClassVise.get(x).getNIC());

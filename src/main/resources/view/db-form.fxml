@@ -105,14 +105,19 @@
       </AnchorPane>
       <AnchorPane layoutX="74.0" layoutY="378.0" prefHeight="358.0" prefWidth="734.0" style="-fx-background-color: rgba(255, 255, 255, 1); -fx-background-radius: 10;" styleClass="shadow" stylesheets="@../css/buttonborder.css">
          <children>
-            <LineChart layoutX="20.0" layoutY="10.0" prefHeight="346.0" prefWidth="701.0" style="-fx-background-color: rgba(255, 255, 255, 1);">
+            <LineChart fx:id="chart" layoutX="24.0" layoutY="43.0" prefHeight="314.0" prefWidth="658.0" style="-fx-background-color: rgba(255, 255, 255, 1);">
                <xAxis>
-                  <CategoryAxis side="BOTTOM" />
+                  <CategoryAxis prefWidth="609.0" side="BOTTOM" />
                </xAxis>
                <yAxis>
-                  <NumberAxis side="LEFT" />
+                  <NumberAxis minorTickCount="8" side="LEFT" />
                </yAxis>
             </LineChart>
+            <Label layoutX="46.0" layoutY="8.0" style="-fx-background-radius: 15;" text="Marks AVG" textFill="#9b9898">
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="892.0" layoutY="377.0" prefHeight="112.0" prefWidth="322.0" style="-fx-background-color: rgba(255, 255, 255, 1); -fx-background-radius: 10;" styleClass="shadow" stylesheets="@../css/buttonborder.css">

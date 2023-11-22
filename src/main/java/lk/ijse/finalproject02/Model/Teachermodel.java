@@ -10,6 +10,24 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Teachermodel {
+    public static ArrayList<String> getSubject(){
+        ArrayList<String> arrayList = new ArrayList<>();
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("select subject from teacher group by subject");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                String x = resultSet.getString(1);
+                arrayList.add(x);
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return arrayList;
+    }
     public static boolean deleteTeacher(int teacherID) {
         try {
             Connection connection = DBConnection.getInstance().getConnection();

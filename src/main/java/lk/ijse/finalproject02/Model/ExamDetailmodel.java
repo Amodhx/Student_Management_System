@@ -12,6 +12,46 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ExamDetailmodel {
+    public static ArrayList<ExamDetailDTO> getMarksStudentVIse(int studentID){
+        ArrayList<ExamDetailDTO> arrayList = new ArrayList<>();
+        try {
+            Connection connection =DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from exam_detail where studentId = ?");
+            preparedStatement.setInt(1,studentID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                ExamDetailDTO examDetailDTO = new ExamDetailDTO(resultSet.getInt(1),resultSet.getInt(2),resultSet.getString(3));
+                arrayList.add(examDetailDTO);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return arrayList;
+    }
+    public static ArrayList<ExamDetailDTO> getMarksSubjectAndBatchVise(String stream){
+        ArrayList<ExamDetailDTO> arrayList = new ArrayList<>();
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("select ed.* from exam_detail ed" +
+                    " join exam e on e.examId = ed.examId " +
+                    "join class c on c.classId = e.classId where c.stream = ?");
+            preparedStatement.setString(1,stream);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                ExamDetailDTO examDetailDTO = new ExamDetailDTO(resultSet.getInt(1),resultSet.getInt(2),resultSet.getString(3));
+                arrayList.add(examDetailDTO);
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return arrayList;
+    }
     public static boolean saveExamDetail(ExamDetailDTO examDetailDTO){
         try {
             Connection connection = DBConnection.getInstance().getConnection();

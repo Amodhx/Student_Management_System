@@ -1,5 +1,6 @@
 package lk.ijse.finalproject02.controller;
 
+import com.jfoenix.controls.JFXComboBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -8,16 +9,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import lk.ijse.finalproject02.DTO.ExamDetailDTO;
 import lk.ijse.finalproject02.DTO.StudentDTO;
 import lk.ijse.finalproject02.DTO.TeacherDTO;
-import lk.ijse.finalproject02.Model.Classmodel;
-import lk.ijse.finalproject02.Model.Paymentmodel;
-import lk.ijse.finalproject02.Model.Studentmodel;
-import lk.ijse.finalproject02.Model.Teachermodel;
+import lk.ijse.finalproject02.Model.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -45,6 +46,9 @@ public class dbformController implements Initializable {
 
     @FXML
     private Label teachercount;
+    @FXML
+    private LineChart<?, ?> chart;
+
     @FXML
     void onMakeaPamentClick(ActionEvent event) {
         Parent parent = null;
@@ -85,17 +89,20 @@ public class dbformController implements Initializable {
     void onstudentrepotClick(ActionEvent event) {
         Parent parent = null;
         try {
-            parent = FXMLLoader.load(getClass().getResource("/view/studentreport-form.fxml"));
+            parent = FXMLLoader.load(getClass().getResource("/view/studentReportfilter-form.fxml"));
         } catch (IOException e) {
 
-            
+
         }
-        pane.getChildren().clear();
-        pane.getChildren().add(parent);
+        Stage stage = new Stage();
+        Scene scene = new Scene(parent);
+        stage.setScene(scene);
+        stage.setX(880);
+        stage.setY(520);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.show();
 
     }
-
-
 
 
     @Override
@@ -105,7 +112,7 @@ public class dbformController implements Initializable {
         LocalDate localDate = LocalDate.now();
         String month = String.valueOf(localDate.getMonth());
         String toMonth = null;
-        if (month.equals("NOVEMBER")){
+        if (month.equals("NOVEMBER")) {
             toMonth = "November";
         }
         String totale = Paymentmodel.totalAmountMonthVise(toMonth);
@@ -115,5 +122,63 @@ public class dbformController implements Initializable {
         studentcount.setText(String.valueOf(Studentmodel.getStudentCount()));
         classcount.setText(String.valueOf(Classmodel.getClassCount()));
         teachercount.setText(String.valueOf(Teachermodel.getteachersCount()));
+        lineChart();
+    }
+
+    private void lineChart() {
+        XYChart.Series series = new XYChart.Series();
+        XYChart.Series series1 = new XYChart.Series();
+        XYChart.Series series2 = new XYChart.Series();
+        XYChart.Series series3 = new XYChart.Series();
+
+        series.setName("Physical Science");
+        series1.setName("Bio Science");
+        series2.setName("Commerce");
+        series3.setName("Arts");
+
+        ArrayList<ExamDetailDTO> marksSubjectAndBatchVise = ExamDetailmodel.getMarksSubjectAndBatchVise("Physical Science");
+        ArrayList<ExamDetailDTO> marksSubjectAndBatchVise1 = ExamDetailmodel.getMarksSubjectAndBatchVise("Bio Science");
+        ArrayList<ExamDetailDTO> marksSubjectAndBatchVise2 = ExamDetailmodel.getMarksSubjectAndBatchVise("Commerce");
+        ArrayList<ExamDetailDTO> marksSubjectAndBatchVise3 = ExamDetailmodel.getMarksSubjectAndBatchVise("Arts");
+
+        for (int i = 0; i < marksSubjectAndBatchVise.size(); i++) {
+
+
+        }
+        for (int i = 0; i < marksSubjectAndBatchVise1.size(); i++) {
+
+        }
+        for (int i = 0; i < marksSubjectAndBatchVise2.size(); i++) {
+
+        }
+        for (int i = 0; i < marksSubjectAndBatchVise3.size(); i++) {
+
+        }
+
+        series.getData().add(new XYChart.Data("1",45));
+        series.getData().add(new XYChart.Data("2",75));
+        series.getData().add(new XYChart.Data("3",25));
+        series.getData().add(new XYChart.Data("4",95));
+        series.getData().add(new XYChart.Data("5",55));
+
+        series1.getData().add(new XYChart.Data("1",55));
+        series1.getData().add(new XYChart.Data("2",95));
+        series1.getData().add(new XYChart.Data("3",45));
+        series1.getData().add(new XYChart.Data("4",25));
+        series1.getData().add(new XYChart.Data("5",85));
+
+        series2.getData().add(new XYChart.Data("1",85));
+        series2.getData().add(new XYChart.Data("2",45));
+        series2.getData().add(new XYChart.Data("3",95));
+        series2.getData().add(new XYChart.Data("4",85));
+        series2.getData().add(new XYChart.Data("5",25));
+
+        series3.getData().add(new XYChart.Data("1",95));
+        series3.getData().add(new XYChart.Data("2",85));
+        series3.getData().add(new XYChart.Data("3",25));
+        series3.getData().add(new XYChart.Data("4",55));
+        series3.getData().add(new XYChart.Data("5",45));
+
+        chart.getData().addAll(series,series1,series2,series3);
     }
 }

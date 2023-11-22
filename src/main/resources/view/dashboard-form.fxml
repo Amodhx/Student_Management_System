@@ -4,7 +4,6 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -114,16 +113,6 @@
       </AnchorPane>
       <AnchorPane layoutX="210.0" layoutY="-1.0" prefHeight="58.0" prefWidth="1327.0" style="-fx-background-color: rgba(255, 255, 255, 1);">
          <children>
-            <TextField fx:id="textfield" layoutX="66.0" layoutY="12.0" onKeyPressed="#onsearching" prefHeight="36.0" prefWidth="321.0" promptText="      Tap to search...." styleClass="textfield" stylesheets="@../css/buttonborder.css">
-               <font>
-                  <Font name="Arial" size="19.0" />
-               </font>
-            </TextField>
-            <ImageView layoutX="75.0" layoutY="18.0">
-               <image>
-                  <Image url="@../assets/search.png" />
-               </image>
-            </ImageView>
             <Label fx:id="fulNameLable" layoutX="1123.0" layoutY="11.0" style="-fx-background-radius: 15;" text="Amodh Nanditha">
                <font>
                   <Font name="Arial Bold" size="18.0" />
@@ -146,6 +135,15 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
+            <AnchorPane layoutX="31.0" layoutY="17.0" prefHeight="29.0" prefWidth="298.0" styleClass="shadow" stylesheets="@../css/buttonborder.css">
+               <children>
+                  <Label fx:id="fulNameLable1" layoutX="12.0" layoutY="4.0" style="-fx-background-radius: 15;" text="Thursday, NOVEMBER 23 , 2023">
+                     <font>
+                        <Font name="Arial Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
       <Label fx:id="time" layoutX="451.0" layoutY="172.0" style="-fx-background-radius: 15;" textFill="#4f4f4f">
@@ -153,10 +151,5 @@
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <ImageView layoutX="1224.0" layoutY="14.0">
-         <image>
-            <Image url="@../assets/notifi.png" />
-         </image>
-      </ImageView>
    </children>
 </AnchorPane>

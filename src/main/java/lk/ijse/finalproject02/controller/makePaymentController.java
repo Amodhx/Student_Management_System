@@ -38,6 +38,14 @@ public class makePaymentController implements Initializable {
 
     @FXML
     private TextField studentNICCombo;
+    @FXML
+    void onclassSelected(ActionEvent event) {
+        String clsID = (String) classIDCombo.getValue();
+        String classFee = Classmodel.getClassFee(clsID);
+
+        amountCOmbo.setText(classFee);
+
+    }
 
     @FXML
     void onSaveClick(ActionEvent event) {
@@ -72,5 +80,6 @@ public class makePaymentController implements Initializable {
             observableList1.add(classDTOS.get(i).getClassId());
         }
         classIDCombo.setItems(observableList1);
+        amountCOmbo.setEditable(false);
     }
 }

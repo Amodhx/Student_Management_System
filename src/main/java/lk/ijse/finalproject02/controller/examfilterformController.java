@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.finalproject02.DTO.ClassDTO;
@@ -19,10 +20,13 @@ import lk.ijse.finalproject02.Model.Teachermodel;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class examfilterformController implements Initializable {
+    @FXML
+    private DatePicker selecttheDate;
 
     @FXML
     private JFXButton createbutton;
@@ -62,7 +66,7 @@ public class examfilterformController implements Initializable {
     @FXML
     void oncreateclikc(ActionEvent event) {
         examAddformController.clsID =  (String) createclassIdcombo.getValue();
-        examAddformController.dat = enterthedate.getText();
+        examAddformController.dat = String.valueOf(selecttheDate.getValue());
         try {
             Parent parent = FXMLLoader.load(getClass().getResource("/view/examAddform.fxml"));
             pane.getChildren().clear();

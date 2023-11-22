@@ -176,7 +176,6 @@ public class studentadd2Controller extends Thread implements Initializable {
             studentadd3formController.parenContct = parentcontact.getText();
 
             studentadd2Controller thred= new studentadd2Controller();
-            thred.start();
 
 
             Stage stage1 = (Stage) nextButton.getScene().getWindow();
@@ -193,6 +192,7 @@ public class studentadd2Controller extends Thread implements Initializable {
             stage2.setScene(scene);
             stage2.setResizable(false);
             stage2.show();
+            thred.start();
         }else {
             new Alert(Alert.AlertType.ERROR,"Invalid Contact Number").show();
         }

@@ -175,6 +175,69 @@ public class Studentmodel {
         }
         return false;
     }
+    public static String getStudentBatch(int studentID){
+        String batch = null;
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("select batch from student where studentId = ?");
+            preparedStatement.setInt(1,studentID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                batch = resultSet.getString(1);
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return batch;
+    }
+    public static StudentDTO getStudentByStudentID(int studentID){
+        StudentDTO studentDTO = new StudentDTO();
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from student where studentId =?");
+            preparedStatement.setInt(1,studentID);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                studentDTO.setStudentid(resultSet.getInt(1));
+                studentDTO.setFirstName(resultSet.getString(2));
+                studentDTO.setLastName(resultSet.getString(3));
+                studentDTO.setGender(resultSet.getString(4));
+                studentDTO.setNIC(resultSet.getString(5));
+                studentDTO.setContactnumber(resultSet.getString(6));
+                studentDTO.setEmail(resultSet.getString(7));
+                studentDTO.setParentId(resultSet.getInt(8));
+                studentDTO.setBatch(resultSet.getString(9));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return studentDTO;
+    }
+    public static ArrayList<StudentDTO> getStudentSearching(String batch,String text){
+        ArrayList<StudentDTO> arrayList = new ArrayList<>();
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(" select s.* from student s join class_detail c on s.studentId = c.studentId  where classId = ? && NIC = ?");
+            preparedStatement.setString(1,batch);
+            preparedStatement.setString(2,text);
+            ResultSet rs =preparedStatement.executeQuery();
+            while (rs.next()){
+                StudentDTO st = new StudentDTO(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getInt(8),rs.getString(9));
+                arrayList.add(st);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return arrayList;
+    }
     public static ArrayList<StudentDTO> getStudentBatchVise(String batch){
         ArrayList<StudentDTO> arrayList = new ArrayList<>();
         try {

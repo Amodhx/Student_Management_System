@@ -94,13 +94,14 @@ public class studentadd3formController implements Initializable {
 
         ArrayList<StudentDTO> allStudents = Studentmodel.getAllStudents();
         int studentID = allStudents.get(allStudents.size()-1).getStudentid();
-
+        System.out.println(batc);
         String tname = (String) teacherCombo.getValue();
         int teacherId = Teachermodel.getTeacherId(tname);
-
+        System.out.println(teacherId);
         String s = Classmodel.getclassID(teacherId, batc);
+        System.out.println(s);
 
-        ClassDetailDTO classDetailDTO = new ClassDetailDTO(studentID,"s","das");
+        ClassDetailDTO classDetailDTO = new ClassDetailDTO(studentID,s,"das");
         ClassDetailmodel.saveClassDetail(classDetailDTO);
 
         Stage stage1 = (Stage) finishButton.getScene().getWindow();
