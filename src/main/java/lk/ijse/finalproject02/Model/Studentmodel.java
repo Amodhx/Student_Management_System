@@ -11,7 +11,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Studentmodel {
-
     public static boolean savStudent(StudentDTO student){
         Connection con;
         try {

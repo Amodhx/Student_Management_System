@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import lk.ijse.finalproject02.DTO.ClassDTO;
 import lk.ijse.finalproject02.DTO.StudentDTO;
@@ -40,8 +41,11 @@ public class mailsendformController implements Initializable {
         String classID = (String) classcombo.getValue();
         ArrayList<StudentDTO> studentClassVise = Studentmodel.getStudentClassVise(classID);
         for (int i = 0; i < studentClassVise.size(); i++) {
-            Mailsend.sendMail(studentClassVise.get(i).getEmail(),subjec,text);
+            Mailsend mailsend = new Mailsend(studentClassVise.get(i).getEmail(),subjec,text);
+            mailsend.start();
         }
+        new Alert(Alert.AlertType.INFORMATION,"Mails Send Successfully!!").show();
+        classcombo.setValue("");
         comboinizia();
         subject.setText("");
 
@@ -49,7 +53,7 @@ public class mailsendformController implements Initializable {
 
     }
     public void comboinizia(){
-        ObservableList<String> grade = FXCollections.observableArrayList("12","13");
+        ObservableList<String> grade = FXCollections.observableArrayList("23","24");
         gradecombo.setItems(grade);
         ArrayList<ClassDTO> classDTOS = Classmodel.getallClasses();
         ObservableList<String> clas = FXCollections.observableArrayList();

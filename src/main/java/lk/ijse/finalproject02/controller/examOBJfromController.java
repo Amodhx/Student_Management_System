@@ -1,6 +1,7 @@
 package lk.ijse.finalproject02.controller;
 
 import com.beust.ah.A;
+import com.jfoenix.controls.JFXRadioButton;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -24,6 +25,8 @@ public class examOBJfromController implements Initializable {
     public static int x;
     public static int studentId;
     public static String clasid;
+    @FXML
+    private JFXRadioButton oksavedradioButton;
 
     @FXML
     private Label mail;
@@ -45,6 +48,7 @@ public class examOBJfromController implements Initializable {
     @FXML
     void onmarkadded(KeyEvent event) {
         if (event.getCode().equals(KeyCode.ENTER)){
+            oksavedradioButton.setSelected(true);
             ArrayList<ExamDTO> getallexam = Exammodel.getallexam();
             int z = getallexam.get(getallexam.size()-1).getExamId();
             String text = mark.getText();

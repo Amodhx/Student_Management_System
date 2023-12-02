@@ -6,8 +6,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.finalproject02.DTO.ClassDetailDTO;
 import lk.ijse.finalproject02.DTO.ParentDTO;
@@ -15,12 +18,14 @@ import lk.ijse.finalproject02.DTO.StudentDTO;
 import lk.ijse.finalproject02.DTO.TeacherDTO;
 import lk.ijse.finalproject02.Model.*;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class studentadd3formController implements Initializable {
     public static Stage stage;
+    public static AnchorPane ancpane;
 
     @FXML
     private JFXButton backButton;
@@ -84,7 +89,7 @@ public class studentadd3formController implements Initializable {
     }
 
     @FXML
-    void onFinishClick(ActionEvent event) {
+    void onFinishClick(ActionEvent event) throws IOException {
         ParentDTO parentDTO = new ParentDTO(0,parentName,parenContct,pjob,pmail);
         Parentmodel.saveParent(parentDTO);
         ArrayList<ParentDTO> parentDTOS = Parentmodel.getallParent();
@@ -106,6 +111,10 @@ public class studentadd3formController implements Initializable {
 
         Stage stage1 = (Stage) finishButton.getScene().getWindow();
         stage1.close();
+
+        Parent parent = FXMLLoader.load(getClass().getResource("/view/student-form.fxml"));
+        ancpane.getChildren().clear();
+        ancpane.getChildren().add(parent);
     }
 
     @Override

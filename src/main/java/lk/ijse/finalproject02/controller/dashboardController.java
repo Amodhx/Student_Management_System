@@ -11,20 +11,28 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import lk.ijse.finalproject02.DTO.StudentDTO;
+import lk.ijse.finalproject02.Model.Studentmodel;
+import org.controlsfx.control.textfield.TextFields;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 public class dashboardController implements Initializable {
     public static String ty;
     public static String fullname;
+
 
 
 
@@ -46,6 +54,8 @@ public class dashboardController implements Initializable {
     private JFXButton mailbutton;
 
     public static JFXButton button;
+    @FXML
+    private TextField searchfield;
 
 
 
@@ -72,6 +82,18 @@ public class dashboardController implements Initializable {
 
     @FXML
     private Button iconButton;
+
+    ArrayList<StudentDTO> allStudents = Studentmodel.getAllStudents();
+    private Set<String> studentlistDTO = new HashSet<>();
+
+    @FXML
+    void onsearching(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.ENTER)){
+            String searchfieldText = searchfield.getText();
+        }
+
+
+    }
     @FXML
     void oniconCLick(ActionEvent event) {
         Stage stage = new Stage();
@@ -141,16 +163,6 @@ public class dashboardController implements Initializable {
     }
 
     @FXML
-    void onnotificlick(MouseEvent event) {
-
-    }
-
-    @FXML
-    void onsearching(KeyEvent event) {
-
-    }
-
-    @FXML
     void onsettingclick(ActionEvent event) throws IOException {
         colourRemove();
         changePage("/view/setting-form.fxml");
@@ -179,24 +191,23 @@ public class dashboardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        searching();
         fulNameLable.setText(fullname);
         typeLable.setText(ty);
             if (ty.equals("Admin")){
 
         }else if(ty.equals("Cashier")){
-                iconButton.setDisable(true);
+                settingbutton.setDisable(true);
 
 
         }else if(ty.equals("Security")){
             studentbutton1.setDisable(true);
-
             mailbutton.setDisable(true);
             teacherbutton.setDisable(true);
             classbutton.setDisable(true);
             settingbutton.setDisable(true);
             exambutton.setDisable(true);
             studentbutton.setDisable(true);
-            iconButton.setDisable(true);
 
         }
         colourRemove();
@@ -205,6 +216,17 @@ public class dashboardController implements Initializable {
         studentbutton1.setTextFill(Color.rgb(5, 75, 180, 1));
         dbformController.pane = pane;
     }
+
+    private void searching() {
+        allStudents.forEach(StudentDTO -> {
+            studentlistDTO.add(StudentDTO.getFirstName() +" "+ StudentDTO.getLastName()+" - " + StudentDTO.getNIC());
+        });
+
+        TextFields.bindAutoCompletion(searchfield, studentlistDTO);
+
+
+    }
+
     public void changePage(String uiName){
         try {
             Parent parent = FXMLLoader.load(getClass().getResource(uiName));

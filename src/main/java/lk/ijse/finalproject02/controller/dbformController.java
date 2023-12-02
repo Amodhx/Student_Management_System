@@ -114,6 +114,8 @@ public class dbformController implements Initializable {
         String toMonth = null;
         if (month.equals("NOVEMBER")) {
             toMonth = "November";
+        }else if(month.equals("DECEMBER")){
+            toMonth = "December";
         }
         String totale = Paymentmodel.totalAmountMonthVise(toMonth);
         seminarcount.setText(totale);

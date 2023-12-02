@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXRadioButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -21,5 +22,6 @@
          </font></Label>
       <TextField fx:id="mark" layoutX="823.0" layoutY="11.0" onKeyPressed="#onmarkadded" />
       <Label layoutX="1086.0" layoutY="16.0" />
+      <JFXRadioButton fx:id="oksavedradioButton" layoutX="1000.0" layoutY="16.0" prefHeight="18.0" prefWidth="2.0" />
    </children>
 </AnchorPane>

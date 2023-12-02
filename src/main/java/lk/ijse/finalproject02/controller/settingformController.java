@@ -48,6 +48,18 @@ public class settingformController {
 
 
     }
+    @FXML
+    void onTeacherClick(ActionEvent event) throws JRException, SQLException, ClassNotFoundException {
+        InputStream inputStream = getClass().getResourceAsStream("/reports/Teacher.jrxml");
+        JasperDesign load = JRXmlLoader.load(inputStream);
+        JasperReport jasperReport = JasperCompileManager.compileReport(load);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(
+                jasperReport,
+                null,
+                DBConnection.getInstance().getConnection()
+        );
+        JasperViewer.viewReport(jasperPrint,false);
+    }
 
     @FXML
     void onAddAdinCLick(ActionEvent event) {

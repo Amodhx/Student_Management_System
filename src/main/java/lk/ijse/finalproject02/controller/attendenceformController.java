@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -26,6 +27,7 @@ import java.util.ResourceBundle;
 
 public class attendenceformController implements Initializable {
 
+    public DatePicker tenderhearted;
     @FXML
     private TextField createteacherName;
     @FXML
@@ -74,7 +76,8 @@ public class attendenceformController implements Initializable {
 
     @FXML
     void oncreateclikc(ActionEvent event) throws IOException {
-        attendenceAddformController.dat = enterthedate.getText();
+        attendenceAddformController.dat = String.valueOf(tenderhearted.getValue());
+        System.out.println(tenderhearted.getValue());
         attendenceAddformController.clasID = (String) createclassIdcombo.getValue();
         Parent parent = FXMLLoader.load(getClass().getResource("/view/attendenceAdd-form.fxml"));
         pane.getChildren().clear();

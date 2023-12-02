@@ -24,6 +24,7 @@ import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
 public class studentaddController implements Initializable {
+    public static AnchorPane studentAncPane;
 
     @FXML
     private AnchorPane anchorpane;
@@ -121,10 +122,13 @@ public class studentaddController implements Initializable {
             boolean matches1 = Pattern.matches("^\\d{9,12}$", nic.getText());
             if (matches1){
                 boolean matches2 = Pattern.matches("^[\\w\\.-]+@[a-zA-Z\\d\\.-]+\\.[a-zA-Z]{2,}$", email.getText());
-               if (matches2){
-                   firstName.getText();
+               if (matches2) {
+                   boolean matches3 = Pattern.matches("^(?:\\+94|0)?\\d{9}$", contactNum.getText());
+                   if (matches3){
+                       firstName.getText();
                    Stage stage = (Stage) nextButton.getScene().getWindow();
                    stage.hide();
+                   studentadd2Controller.stuAncPane = studentAncPane;
                    Parent parent = null;
                    studentadd2Controller.stage = stage;
                    try {
@@ -144,6 +148,9 @@ public class studentaddController implements Initializable {
                    studentadd2Controller.nicc = nic.getText();
                    studentadd2Controller.contctnum = contactNum.getText();
                    studentadd2Controller.maill = email.getText();
+               }else {
+                       new Alert(Alert.AlertType.ERROR,"Invalid Contact Number").show();
+                   }
                }else {
                    new Alert(Alert.AlertType.ERROR,"Invalid Email address").show();
                }

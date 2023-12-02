@@ -94,6 +94,12 @@ public class studentController implements Initializable {
         loadValues(bach,stream,subject);
 
     }
+    @FXML
+    void onselected(ActionEvent event) {
+        String x = streamCombo.getValue();
+        loadValues(x);
+
+    }
 
     @FXML
     void alreadyhaveaccOnClick(ActionEvent event) {
@@ -113,6 +119,7 @@ public class studentController implements Initializable {
 
     @FXML
     void onaddStudentClick(ActionEvent event) {
+        studentaddController.studentAncPane = pane;
         Parent parent = null;
         try {
             parent = FXMLLoader.load(getClass().getResource("/view/studentadd-form.fxml"));
@@ -205,13 +212,7 @@ public class studentController implements Initializable {
         actioncolumn.setCellValueFactory(new PropertyValueFactory<Studenttm,JFXButton>("button"));
     }
 
-    @FXML
-    void onselected(ActionEvent event) {
-        String x = streamCombo.getValue();
-        loadValues(x);
-        stream1Combo.setValue("");
 
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
