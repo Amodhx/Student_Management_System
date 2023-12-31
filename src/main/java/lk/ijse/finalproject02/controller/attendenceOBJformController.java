@@ -4,14 +4,16 @@ import com.jfoenix.controls.JFXRadioButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import lk.ijse.finalproject02.DTO.AttendenceDetailDTO;
 import lk.ijse.finalproject02.DTO.StudentDTO;
-import lk.ijse.finalproject02.Model.AttendenceDetailmodel;
-import lk.ijse.finalproject02.Model.Studentmodel;
+import lk.ijse.finalproject02.service.ServiceFactory;
+import lk.ijse.finalproject02.service.custom.impl.AttendenceDetailServiceImpl;
+import lk.ijse.finalproject02.service.custom.impl.StudentServiceImpl;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -35,6 +37,9 @@ public class attendenceOBJformController implements Initializable {
     private JFXRadioButton precentradio;
 
     public static ArrayList<String> arrayList = new ArrayList<>();
+
+    AttendenceDetailServiceImpl attendenceDetailService = (AttendenceDetailServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.ATTENDENCEDETAIL);
+    StudentServiceImpl studentService = (StudentServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.STUDENT);
     @FXML
     void onselectedAbsent(ActionEvent event) {
 
@@ -43,16 +48,24 @@ public class attendenceOBJformController implements Initializable {
     @FXML
     void onprecentRadioclick(ActionEvent event) {
         AttendenceDetailDTO attendenceDetailDTO = new AttendenceDetailDTO(studentID,attendenceId,"Precent");
-        boolean b = AttendenceDetailmodel.saveAttendeceDetail(attendenceDetailDTO);
+        try {
+            boolean b = attendenceDetailService.saveAttendence(attendenceDetailDTO);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
-
-
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        ArrayList<StudentDTO> studentClassVise = Studentmodel.getStudentClassVise(classID);
+        ArrayList<StudentDTO> studentClassVise = null;
+        try {
+            studentClassVise = studentService.getStudentClassVise(classID);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
         for (int i = 0; i < arrayList.size(); i++) {
             if (studentClassVise.get(x).getNIC().equals(arrayList.get(i))){
                 precentradio.setSelected(true);
@@ -65,7 +78,13 @@ public class attendenceOBJformController implements Initializable {
 
         if (studentClassVise.get(x).getNIC().equals(markNIC)){
             AttendenceDetailDTO attendenceDetailDTO = new AttendenceDetailDTO(studentID,attendenceId,"precent");
-            AttendenceDetailmodel.saveAttendeceDetail(attendenceDetailDTO);
+            try {
+                attendenceDetailService.saveAttendence(attendenceDetailDTO);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

@@ -9,18 +9,21 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.finalproject02.DTO.ClassDTO;
 import lk.ijse.finalproject02.DTO.ExamDTO;
-import lk.ijse.finalproject02.Model.Classmodel;
-import lk.ijse.finalproject02.Model.Exammodel;
-import lk.ijse.finalproject02.Model.Teachermodel;
+import lk.ijse.finalproject02.service.ServiceFactory;
+import lk.ijse.finalproject02.service.custom.impl.ClassServiceImpl;
+import lk.ijse.finalproject02.service.custom.impl.ExamServiceImpl;
+import lk.ijse.finalproject02.service.custom.impl.TeacherServiceImpl;
+import lombok.SneakyThrows;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -54,12 +57,23 @@ public class examfilterformController implements Initializable {
 
     @FXML
     private JFXComboBox examIdcombo;
+    TeacherServiceImpl teacherService = (TeacherServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.TEACHER);
+    ClassServiceImpl classService = (ClassServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.CLASS);
+    ExamServiceImpl examService = (ExamServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.EXAM);
 
+    @SneakyThrows
     @FXML
     void oncreateclassIDcombo(ActionEvent event) {
        String classID = (String) createclassIdcombo.getValue();
-        int teacherid = Classmodel.getTeacherid(classID);
-        String teacherNa = Teachermodel.getTeacherName(teacherid);
+        int teacherid = classService.getTeacherID(classID);
+        String teacherNa = null;
+        try {
+            teacherNa = teacherService.getTeacherName(teacherid);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
         createteacherName.setText(teacherNa);
     }
 
@@ -77,11 +91,19 @@ public class examfilterformController implements Initializable {
 
 
     }
+    @SneakyThrows
     @FXML
     void onviewClassIdClombo(ActionEvent event) {
         String classID = (String) viewclassIDClombo.getValue();
-        int teacherid = Classmodel.getTeacherid(classID);
-        String teacherNa = Teachermodel.getTeacherName(teacherid);
+        int teacherid = classService.getTeacherID(classID);
+        String teacherNa = null;
+        try {
+            teacherNa = teacherService.getTeacherName(teacherid);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
         viewTeacherName.setText(teacherNa);
     }
 
@@ -101,16 +123,17 @@ public class examfilterformController implements Initializable {
 
     }
 
+    @SneakyThrows
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ArrayList<ClassDTO> classDTOS = Classmodel.getallClasses();
+        ArrayList<ClassDTO> classDTOS = classService.getAll();
         ObservableList<String> observableList = FXCollections.observableArrayList();
         for (int i = 0; i < classDTOS.size(); i++) {
             observableList.add(classDTOS.get(i).getClassId());
         }
         createclassIdcombo.setItems(observableList);
         viewclassIDClombo.setItems(observableList);
-        ArrayList<ExamDTO> getallexam = Exammodel.getallexam();
+        ArrayList<ExamDTO> getallexam = examService.getAll();
         ObservableList<String>  observableList1 = FXCollections.observableArrayList();
         for (int i = 0; i < getallexam.size(); i++) {
             observableList1.add(String.valueOf(getallexam.get(i).getExamId()));

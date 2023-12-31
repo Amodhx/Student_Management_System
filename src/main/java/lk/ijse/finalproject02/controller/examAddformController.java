@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -12,12 +13,14 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import lk.ijse.finalproject02.DTO.ExamDTO;
 import lk.ijse.finalproject02.DTO.StudentDTO;
-import lk.ijse.finalproject02.Model.Exammodel;
-import lk.ijse.finalproject02.Model.Studentmodel;
+import lk.ijse.finalproject02.service.ServiceFactory;
+import lk.ijse.finalproject02.service.custom.impl.ExamServiceImpl;
+import lk.ijse.finalproject02.service.custom.impl.StudentServiceImpl;
 import lombok.SneakyThrows;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -37,6 +40,8 @@ public class examAddformController implements Initializable {
     private GridPane gridpane;
     int colomn = 0;
     int row = 0;
+    StudentServiceImpl studentService = (StudentServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.STUDENT);
+    ExamServiceImpl examService = (ExamServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.EXAM);
 
     @FXML
     void onseachPress(KeyEvent event) {
@@ -46,7 +51,14 @@ public class examAddformController implements Initializable {
                 loadValues();
             } else {
                 gridpane.getChildren().clear();
-                ArrayList<StudentDTO> studentSearching = Studentmodel.getStudentSearching(clsID, searchfieldText);
+                ArrayList<StudentDTO> studentSearching = null;
+                try {
+                    studentSearching = studentService.getStudentSearching(clsID, searchfieldText);
+                } catch (SQLException e) {
+                    new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+                } catch (ClassNotFoundException e) {
+                    new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+                }
                 examOBJfromController.clasid = clsID;
                 for (int i = 0; i < studentSearching.size(); i++) {
                     try {
@@ -71,8 +83,8 @@ public class examAddformController implements Initializable {
         classIDD.setText(clsID);
         date.setText(dat);
         ExamDTO examDTO = new ExamDTO(0,clsID,dat);
-        boolean saveexam = Exammodel.saveexam(examDTO);
-        ArrayList<StudentDTO> studentClassVise = Studentmodel.getStudentClassVise(clsID);
+        boolean saveexam = examService.save(examDTO);
+        ArrayList<StudentDTO> studentClassVise = studentService.getStudentClassVise(clsID);
         examOBJfromController.clasid = clsID;
 
         for (int i = 0; i < studentClassVise.size(); i++) {
@@ -90,12 +102,20 @@ public class examAddformController implements Initializable {
 
     }
 
+    @SneakyThrows
     private void loadValues() {
         classIDD.setText(clsID);
         date.setText(dat);
         ExamDTO examDTO = new ExamDTO(0,clsID,dat);
-        boolean saveexam = Exammodel.saveexam(examDTO);
-        ArrayList<StudentDTO> studentClassVise = Studentmodel.getStudentClassVise(clsID);
+        boolean saveexam = examService.save(examDTO);
+        ArrayList<StudentDTO> studentClassVise = null;
+        try {
+            studentClassVise = studentService.getStudentClassVise(clsID);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
         examOBJfromController.clasid = clsID;
 
         for (int i = 0; i < studentClassVise.size(); i++) {

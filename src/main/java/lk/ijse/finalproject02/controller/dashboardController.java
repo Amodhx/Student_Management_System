@@ -7,10 +7,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -19,11 +19,13 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import lk.ijse.finalproject02.DTO.StudentDTO;
-import lk.ijse.finalproject02.Model.Studentmodel;
+import lk.ijse.finalproject02.service.ServiceFactory;
+import lk.ijse.finalproject02.service.custom.impl.StudentServiceImpl;
 import org.controlsfx.control.textfield.TextFields;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.ResourceBundle;
@@ -82,8 +84,21 @@ public class dashboardController implements Initializable {
 
     @FXML
     private Button iconButton;
+    StudentServiceImpl studentService = (StudentServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.STUDENT);
 
-    ArrayList<StudentDTO> allStudents = Studentmodel.getAllStudents();
+    ArrayList<StudentDTO> allStudents;
+
+    {
+        try {
+            allStudents = studentService.getAll();
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
+    }
+
+    ;
     private Set<String> studentlistDTO = new HashSet<>();
 
     @FXML

@@ -8,17 +8,20 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.finalproject02.DTO.PaymentDTO;
 import lk.ijse.finalproject02.DTO.tm.paymentViewtm;
-import lk.ijse.finalproject02.Model.Paymentmodel;
-import lk.ijse.finalproject02.Model.Studentmodel;
+import lk.ijse.finalproject02.service.ServiceFactory;
+import lk.ijse.finalproject02.service.custom.impl.PaymentServiceImpl;
+import lk.ijse.finalproject02.service.custom.impl.StudentServiceImpl;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -46,6 +49,8 @@ public class viewpaymentController implements Initializable {
 
     @FXML
     private TableView table;
+    StudentServiceImpl studentService = (StudentServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.STUDENT);
+    PaymentServiceImpl paymentService = (PaymentServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.PAYMENT);
 
     @FXML
     void oncloseClick(ActionEvent event) {
@@ -61,9 +66,23 @@ public class viewpaymentController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        int studentID = Studentmodel.getStudentID(nic);
+        int studentID = 0;
+        try {
+            studentID = studentService.getStudentId(nic);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();;
+        }
 
-        ArrayList<PaymentDTO> paymentDTOS = Paymentmodel.getAllPaymentStudentVise(studentID);
+        ArrayList<PaymentDTO> paymentDTOS = null;
+        try {
+            paymentDTOS = paymentService.getAllPaymentStudentVise(studentID);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
 
         namecolumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         niccolumn.setCellValueFactory(new PropertyValueFactory<>("nic"));
@@ -73,10 +92,17 @@ public class viewpaymentController implements Initializable {
 
         ObservableList<paymentViewtm> observableList = FXCollections.observableArrayList();
         for (int i = 0; i < paymentDTOS.size(); i++) {
-            String studentName = Studentmodel.getStudentName(paymentDTOS.get(i).getStudentId());
-            String studentNIC = Studentmodel.getStudentNIC(paymentDTOS.get(i).getStudentId());
-            paymentViewtm paymentViewtm = new paymentViewtm(studentName,studentNIC,paymentDTOS.get(i).getMonth(),paymentDTOS.get(i).getClasid(),paymentDTOS.get(i).getAmount());
-            observableList.add(paymentViewtm);
+            try {
+                String studentName = studentService.getStudentName(paymentDTOS.get(i).getStudentId());
+                String studentNIC = studentService.getStudentNIC(paymentDTOS.get(i).getStudentId());
+                paymentViewtm paymentViewtm = new paymentViewtm(studentName, studentNIC, paymentDTOS.get(i).getMonth(), paymentDTOS.get(i).getClasid(), paymentDTOS.get(i).getAmount());
+                observableList.add(paymentViewtm);
+            }catch (SQLException e){
+                new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+            }catch (ClassNotFoundException e){
+                new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+            }
+
         }
         table.setItems(observableList);
 

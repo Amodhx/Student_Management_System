@@ -12,12 +12,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import lk.ijse.finalproject02.DTO.UserDTO;
-import lk.ijse.finalproject02.Model.Studentmodel;
-import lk.ijse.finalproject02.Model.Usermodel;
+import lk.ijse.finalproject02.service.ServiceFactory;
+import lk.ijse.finalproject02.service.custom.impl.AdminServiceImpl;
 
 import java.io.IOException;
 import java.net.URL;
@@ -40,6 +39,7 @@ public class loginController implements Initializable {
 
     @FXML
     private TextField username;
+    AdminServiceImpl adminService = (AdminServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.USER);
     @FXML
     void onchangepasswordclikc(MouseEvent event) throws IOException {
         Parent parent = FXMLLoader.load(getClass().getResource("/view/passwordChange-form.fxml"));
@@ -86,7 +86,8 @@ public class loginController implements Initializable {
         String usernameText = username.getText();
         String passwordText = password.getText();
 
-        ArrayList<UserDTO> allUsers = Usermodel.getAllUsers();
+        ArrayList<UserDTO> allUsers = null;
+        allUsers = adminService.getAllUsers();
         for (UserDTO user : allUsers) {
             dashboardController.ty = user.getType();
             dashboardController.fullname = user.getFullname();

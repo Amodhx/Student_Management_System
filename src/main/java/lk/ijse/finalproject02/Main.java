@@ -6,19 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import lk.ijse.finalproject02.DB.DBConnection;
-import lk.ijse.finalproject02.DTO.UserDTO;
-import lk.ijse.finalproject02.Model.Usermodel;
-import lombok.SneakyThrows;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.design.JasperDesign;
-import net.sf.jasperreports.engine.xml.JRXmlLoader;
-import net.sf.jasperreports.view.JasperViewer;
-
-import java.io.InputStream;
 
 public class Main extends Application {
 

@@ -19,10 +19,12 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import lk.ijse.finalproject02.DTO.TeacherDTO;
 import lk.ijse.finalproject02.DTO.tm.teacherDeletetm;
-import lk.ijse.finalproject02.Model.Teachermodel;
+import lk.ijse.finalproject02.service.ServiceFactory;
+import lk.ijse.finalproject02.service.custom.impl.TeacherServiceImpl;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -61,6 +63,7 @@ public class deleteUpdateTeacherformController implements Initializable {
 
     @FXML
     private TableColumn<teacherDeletetm, JFXButton> updatecolumn;
+    TeacherServiceImpl teacherService = (TeacherServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.TEACHER);
     @FXML
     void onsearching(KeyEvent event) {
 
@@ -74,7 +77,14 @@ public class deleteUpdateTeacherformController implements Initializable {
     }
 
     private void loadValues() {
-        ArrayList<TeacherDTO> teacherDTOS = Teachermodel.getallTeachers();
+        ArrayList<TeacherDTO> teacherDTOS = null;
+        try {
+            teacherDTOS = teacherService.getAll();
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
         ObservableList<teacherDeletetm> observableList = FXCollections.observableArrayList();
         for (int i = 0; i < teacherDTOS.size(); i++) {
             teacherDeletetm deletetm =
@@ -129,7 +139,14 @@ public class deleteUpdateTeacherformController implements Initializable {
 
             });
             observableList.get(i).getDeleteButton().setOnAction(event ->{
-                boolean b = Teachermodel.deleteTeacher(teaID);
+                boolean b = false;
+                try {
+                    b = teacherService.deleteTeacher(teaID);
+                } catch (SQLException e) {
+                    new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+                } catch (ClassNotFoundException e) {
+                    new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+                }
                 if (b){
                     new Alert(Alert.AlertType.CONFIRMATION,"Teacher Deleted").show();
                     loadValues();

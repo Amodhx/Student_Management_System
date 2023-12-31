@@ -11,7 +11,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import lk.ijse.finalproject02.DTO.UserDTO;
-import lk.ijse.finalproject02.Model.Usermodel;
+import lk.ijse.finalproject02.service.ServiceFactory;
+import lk.ijse.finalproject02.service.custom.impl.AdminServiceImpl;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -38,6 +39,7 @@ public class addminAddpopformController implements Initializable {
 
     @FXML
     private JFXComboBox<String> typeCombo;
+    AdminServiceImpl adminService = (AdminServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.USER);
 
     @FXML
     void onCanselButton(ActionEvent event) {
@@ -48,15 +50,14 @@ public class addminAddpopformController implements Initializable {
 
     @FXML
     void onSaveClick(ActionEvent event) {
-        String namefieldText = UserNamefield.getText();
-        String text = namefeild.getText();
-        String passwordFieldText = passwordField.getText();
-        String emailFieldText = emailField.getText();
-        String type = typeCombo.getValue();
+        UserDTO userDTO = new UserDTO(0,
+                UserNamefield.getText(),
+                passwordField.getText(),
+                typeCombo.getValue(),
+                emailField.getText(),
+                namefeild.getText());
 
-        UserDTO userDTO = new UserDTO(0,namefieldText,passwordFieldText,type,emailFieldText,text);
-        boolean b = Usermodel.savUser(userDTO);
-        if (b){
+        if (adminService.saveUser(userDTO)){
             Stage stage = (Stage) canselButton.getScene().getWindow();
             stage.close();
             new Alert(Alert.AlertType.CONFIRMATION,"Admin add successfully");

@@ -2,14 +2,12 @@ package lk.ijse.finalproject02.controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -17,13 +15,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import lk.ijse.finalproject02.DTO.ClassDetailDTO;
 import lk.ijse.finalproject02.DTO.StudentDTO;
 import lk.ijse.finalproject02.DTO.tm.Studenttm;
-import lk.ijse.finalproject02.Model.ClassDetailmodel;
-import lk.ijse.finalproject02.Model.Classmodel;
-import lk.ijse.finalproject02.Model.Studentmodel;
+import lk.ijse.finalproject02.service.ServiceFactory;
+import lk.ijse.finalproject02.service.custom.impl.ClassDetailServiceImpl;
+import lk.ijse.finalproject02.service.custom.impl.ClassServiceImpl;
+import lk.ijse.finalproject02.service.custom.impl.StudentServiceImpl;
+import lombok.SneakyThrows;
 
 import java.io.IOException;
 import java.net.URL;
@@ -70,12 +68,16 @@ public class studentController implements Initializable {
     private JFXComboBox<String> subjectCombo;
     @FXML
     private TableColumn<Studenttm, JFXButton> updatecolumn;
+    StudentServiceImpl studentService = (StudentServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.STUDENT);
+    ClassServiceImpl classService = (ClassServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.CLASS);
+    ClassDetailServiceImpl classDetailService = (ClassDetailServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.CLASSDETAIL);
+    @SneakyThrows
     @FXML
     void onStreamSelected(ActionEvent event) {
         String bach = streamCombo.getValue();
         String stream = stream1Combo.getValue();
         loadValues(bach,stream);
-        ArrayList<String> getsubjects = Classmodel.getsubjects(stream);
+        ArrayList<String> getsubjects = classService.getSubjects(stream);
         ObservableList<String> observableList = FXCollections.observableArrayList();
         for (int i = 0; i < getsubjects.size(); i++) {
             observableList.add(getsubjects.get(i));
@@ -135,21 +137,28 @@ public class studentController implements Initializable {
 
 
     }
+    @SneakyThrows
     public void loadValues(String... s){
         ArrayList<StudentDTO> allStudents = new ArrayList<>();
-        if (s.length == 1) {
-           allStudents = Studentmodel.getStudentBatchVise(s[0]);
-        }else if (s.length == 2){
-            allStudents = Studentmodel.getStudentBatchAndStreamVise(s[0],s[1]);
-        }else if (s.length == 3){
-            allStudents = Studentmodel.getStudentBatchAndStreamViseAndSubjectVise(s[0],s[1],s[2]);
+        try {
+            if (s.length == 1) {
+                allStudents = studentService.getStudentBatchVise(s[0]);
+            } else if (s.length == 2) {
+                allStudents = studentService.getStudentBatchAndStreamVise(s[0], s[1]);
+            } else if (s.length == 3) {
+                allStudents = studentService.getStudentBatchAndStreamViseAndSubjectVise(s[0], s[1], s[2]);
+            }
+        }catch (SQLException e){
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }catch (ClassNotFoundException e){
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
         ObservableList<Studenttm> observableList = FXCollections.observableArrayList();
 
 
         for (int i = 0; i <allStudents.size() ; i++) {
             int iddd = allStudents.get(i).getStudentid();
-            String classIDD = ClassDetailmodel.getclassID(iddd);
+            String classIDD = classDetailService.getclassID(iddd);
             Studenttm studenttm = new Studenttm(allStudents.get(i).getFirstName(),classIDD,allStudents.get(i).getEmail(),allStudents.get(i).getContactnumber(),allStudents.get(i).getGender(),new JFXButton("Update"),new JFXButton("Delete"));
             observableList.add(studenttm);
         }
@@ -163,7 +172,15 @@ public class studentController implements Initializable {
         for (int i = 0; i < observableList.size(); i++) {
             int studentid = allStudents.get(i).getStudentid();
             observableList.get(i).getButton().setOnAction(event -> {
-                    boolean b = Studentmodel.deleteStudent(studentid);
+                boolean b = false;
+                try {
+                    b = studentService.deleteStudent(studentid);
+                } catch (SQLException e) {
+                    new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+                } catch (ClassNotFoundException e) {
+                    new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+                }
+                ;
                     if (b) {
                         new Alert(Alert.AlertType.CONFIRMATION, "Student deleted successfully").show();
                     } else {
@@ -217,7 +234,13 @@ public class studentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setValues();
-        batches = Studentmodel.getBatches();
+        try {
+            batches = studentService.getBatches();
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
         if (batches.size()>0) {
             ObservableList<String> observableList = FXCollections.observableArrayList();
             observableList.addAll(batches);

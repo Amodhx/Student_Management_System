@@ -10,10 +10,12 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import lk.ijse.finalproject02.Model.Classmodel;
+import lk.ijse.finalproject02.service.ServiceFactory;
+import lk.ijse.finalproject02.service.custom.impl.ClassServiceImpl;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class classUpdateformController implements Initializable {
@@ -39,6 +41,7 @@ public class classUpdateformController implements Initializable {
 
     @FXML
     private TextField subjectfield;
+    ClassServiceImpl classService = (ClassServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.CLASS);
 
     @FXML
     void onCanselButton(ActionEvent event) {
@@ -53,7 +56,14 @@ public class classUpdateformController implements Initializable {
         String btch = batchfield.getText();
         String  feee = feefeild.getText();
 
-        boolean b = Classmodel.updateClass(clsID, sub, btch, feee);
+        boolean b = false;
+        try {
+            b = classService.updateClass(clsID, sub, btch, feee);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR,"cant update class names!!").show();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         if (b){
             new Alert(Alert.AlertType.CONFIRMATION,"Class Detail Deleted").show();
             Parent parent = FXMLLoader.load(getClass().getResource("/view/deleteUpdateClass-form.fxml"));

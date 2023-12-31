@@ -1,9 +1,5 @@
 package lk.ijse.finalproject02.controller;
 
-import com.jfoenix.controls.JFXComboBox;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,19 +8,23 @@ import javafx.scene.Parent;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import lk.ijse.finalproject02.DTO.ClassDTO;
 import lk.ijse.finalproject02.DTO.ExamDetailDTO;
 import lk.ijse.finalproject02.DTO.ParentDTO;
 import lk.ijse.finalproject02.DTO.StudentDTO;
-import lk.ijse.finalproject02.Model.Classmodel;
-import lk.ijse.finalproject02.Model.ExamDetailmodel;
-import lk.ijse.finalproject02.Model.Parentmodel;
-import lk.ijse.finalproject02.Model.Studentmodel;
+import lk.ijse.finalproject02.service.ServiceFactory;
+import lk.ijse.finalproject02.service.custom.impl.ClassServiceImpl;
+import lk.ijse.finalproject02.service.custom.impl.ExamDetailServiceImpl;
+import lk.ijse.finalproject02.service.custom.impl.ParentServiceImpl;
+import lk.ijse.finalproject02.service.custom.impl.StudentServiceImpl;
+import lombok.SneakyThrows;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -65,13 +65,25 @@ public class studentreportformController implements Initializable {
     private int ParentID;
     @FXML
     private BarChart<?, ?> attendenceBarGraph;
+    StudentServiceImpl studentService = (StudentServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.STUDENT);
+    ClassServiceImpl classService = (ClassServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.CLASS);
+    ExamDetailServiceImpl examDetailService = (ExamDetailServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.EXAMDETAIL);
+    ParentServiceImpl parentService = (ParentServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.PARENT);
 
 
 
 
+    @SneakyThrows
     public void loadClass(){
-        int studentID = Studentmodel.getStudentID(nic);
-        ArrayList<ClassDTO> classDTOS = Classmodel.getclassObjStudentVIse(studentID);
+        int studentID = 0;
+        try {
+            studentID = studentService.getStudentId(nic);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
+        ArrayList<ClassDTO> classDTOS = classService.getclassObjStudentVIse(studentID);
         int colomn = 0;
         int row = 0;
         for (int i = 0; i < classDTOS.size(); i++) {
@@ -110,11 +122,19 @@ public class studentreportformController implements Initializable {
 
     }
 
+    @SneakyThrows
     private void examMarkaddChart() {
-        int studentID = Studentmodel.getStudentID(nic);
+        int studentID = 0;
+        try {
+            studentID = studentService.getStudentId(nic);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
         XYChart.Series series = new XYChart.Series();
         series.setName("Last exam marks");
-        ArrayList<ExamDetailDTO> marksStudentVIse = ExamDetailmodel.getMarksStudentVIse(studentID);
+        ArrayList<ExamDetailDTO> marksStudentVIse = examDetailService.getMarksStudentVIse(studentID);
         for (int i = 0; i < marksStudentVIse.size(); i++) {
             if (i == 6 ){
                 break;
@@ -135,7 +155,14 @@ public class studentreportformController implements Initializable {
     private void parentInfo() {
 
 
-        ParentDTO parentbyID = Parentmodel.getParentbyID(ParentID);
+        ParentDTO parentbyID = null;
+        try {
+            parentbyID = parentService.getParentbyID(ParentID);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
 
         parentName.setText(parentbyID.getName());
         parentEmail.setText(parentbyID.getEmail());
@@ -144,7 +171,14 @@ public class studentreportformController implements Initializable {
     }
 
     private void studentpersonalInfo() {
-        StudentDTO studentByStudentID = Studentmodel.getStudentByStudentID(Studentmodel.getStudentID(nic));
+        StudentDTO studentByStudentID = null;
+        try {
+            studentByStudentID = studentService.getStudentByStudentID(studentService.getStudentId(nic));
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
         ParentID = studentByStudentID.getParentId();
         studentgender.setText(studentByStudentID.getGender());
         studentnic.setText(studentByStudentID.getNIC());

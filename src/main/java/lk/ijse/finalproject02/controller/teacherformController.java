@@ -8,15 +8,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.finalproject02.DTO.TeacherDTO;
-import lk.ijse.finalproject02.Model.Teachermodel;
+import lk.ijse.finalproject02.service.ServiceFactory;
+import lk.ijse.finalproject02.service.custom.impl.TeacherServiceImpl;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -44,6 +47,7 @@ public class teacherformController implements Initializable {
 
     @FXML
     private TableColumn<TeacherDTO, String> tablesubject;
+    TeacherServiceImpl teacherService = (TeacherServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.TEACHER);
 
     @FXML
     void onaddteacherClick(ActionEvent event) {
@@ -60,7 +64,14 @@ public class teacherformController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ArrayList<TeacherDTO> teacherDTOS = Teachermodel.getallTeachers();
+        ArrayList<TeacherDTO> teacherDTOS = null;
+        try {
+            teacherDTOS = teacherService.getAll();
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
         ObservableList<TeacherDTO> observableList = FXCollections.observableArrayList();
         observableList.addAll(teacherDTOS);
 

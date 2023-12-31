@@ -14,13 +14,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import lk.ijse.finalproject02.DTO.TeacherDTO;
-import lk.ijse.finalproject02.Model.Parentmodel;
-import lk.ijse.finalproject02.Model.Teachermodel;
+import lk.ijse.finalproject02.service.ServiceFactory;
+import lk.ijse.finalproject02.service.custom.impl.TeacherServiceImpl;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
@@ -59,6 +59,7 @@ public class teacheraddformController implements Initializable {
 
     @FXML
     private TextField nic;
+    TeacherServiceImpl teacherService = (TeacherServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.TEACHER);
 
     @FXML
     void fonFirstname(KeyEvent event) {
@@ -171,7 +172,13 @@ public class teacheraddformController implements Initializable {
                     String addressText = address.getText();
 
                     TeacherDTO teacherDTO = new TeacherDTO(0,fname,lname,gender,datebirth,sub,connub,mail,Nic,cityText,addressText);
-                    Boolean aBoolean = Teachermodel.saveTeacher(teacherDTO);
+                    try {
+                        Boolean aBoolean = teacherService.save(teacherDTO);
+                    } catch (SQLException e) {
+                        new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+                    } catch (ClassNotFoundException e) {
+                        new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+                    }
                     Parent parent = null;
                     try {
                         parent = FXMLLoader.load(getClass().getResource("/view/teacher-form.fxml"));

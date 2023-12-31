@@ -9,19 +9,19 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import lk.ijse.finalproject02.DTO.ClassDTO;
-import lk.ijse.finalproject02.Model.Attendencemodel;
-import lk.ijse.finalproject02.Model.Classmodel;
-import lk.ijse.finalproject02.Model.Teachermodel;
+import lk.ijse.finalproject02.service.ServiceFactory;
+import lk.ijse.finalproject02.service.custom.impl.AttendenceServiceImpl;
+import lk.ijse.finalproject02.service.custom.impl.ClassServiceImpl;
+import lk.ijse.finalproject02.service.custom.impl.TeacherServiceImpl;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -56,11 +56,23 @@ public class attendenceformController implements Initializable {
 
     @FXML
     private JFXComboBox viewclassIdcombo;
+    ClassServiceImpl classService = (ClassServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.CLASS);
+    TeacherServiceImpl teacherService = (TeacherServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.TEACHER);
+    AttendenceServiceImpl attendenceService = (AttendenceServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.ATTENDENCE);
+
     @FXML
     void oncreateclassIDcombo(ActionEvent event) {
         String classId = (String) createclassIdcombo.getValue();
-        int teacherid = Classmodel.getTeacherid(classId);
-        String teacherName = Teachermodel.getTeacherName(teacherid);
+        int teacherid = 0;
+        String teacherName = null;
+        try {
+            teacherid = classService.getTeacherID(classId);
+            teacherName = teacherService.getTeacherName(teacherid);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
         createteacherName.setText(teacherName);
 
     }
@@ -68,8 +80,16 @@ public class attendenceformController implements Initializable {
     @FXML
     void onviewclassIdcombo(ActionEvent event) {
         String classID = (String) viewclassIdcombo.getValue();
-        int teacherid = Classmodel.getTeacherid(classID);
-        String teacherName = Teachermodel.getTeacherName(teacherid);
+        int teacherid = 0;
+        String teacherName = null;
+        try {
+            teacherid = classService.getTeacherID(classID);
+            teacherName = teacherService.getTeacherName(teacherid);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
         viewteachername.setText(teacherName);
 
     }
@@ -99,21 +119,26 @@ public class attendenceformController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        viewteachername.setEditable(false);
-        createteacherName.setEditable(false);
-        ArrayList<ClassDTO> classDTOS = Classmodel.getallClasses();
-        ObservableList<String> observableList = FXCollections.observableArrayList();
-        for (int i = 0; i < classDTOS.size(); i++) {
-            observableList.add(classDTOS.get(i).getClassId());
+        try {
+            viewteachername.setEditable(false);
+            createteacherName.setEditable(false);
+            ArrayList<ClassDTO> classDTOS = classService.getAllClasses();
+            ObservableList<String> observableList = FXCollections.observableArrayList();
+            for (int i = 0; i < classDTOS.size(); i++) {
+                observableList.add(classDTOS.get(i).getClassId());
+            }
+            createclassIdcombo.setItems(observableList);
+            viewclassIdcombo.setItems(observableList);
+
+            ArrayList<String> arrayList = attendenceService.getAllDates();
+            ObservableList<String> observableList1 = FXCollections.observableArrayList();
+            observableList1.addAll(arrayList);
+
+            selecttheDateCOmbo.setItems(observableList1);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
         }
-        createclassIdcombo.setItems(observableList);
-        viewclassIdcombo.setItems(observableList);
-
-        ArrayList<String> arrayList = Attendencemodel.getallDates();
-        ObservableList<String> observableList1 = FXCollections.observableArrayList();
-        observableList1.addAll(arrayList);
-
-        selecttheDateCOmbo.setItems(observableList1);
-
     }
 }

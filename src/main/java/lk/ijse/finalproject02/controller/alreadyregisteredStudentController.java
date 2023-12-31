@@ -7,19 +7,21 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import lk.ijse.finalproject02.DTO.ClassDetailDTO;
 import lk.ijse.finalproject02.DTO.TeacherDTO;
-import lk.ijse.finalproject02.Model.ClassDetailmodel;
-import lk.ijse.finalproject02.Model.Classmodel;
-import lk.ijse.finalproject02.Model.Studentmodel;
-import lk.ijse.finalproject02.Model.Teachermodel;
+import lk.ijse.finalproject02.service.ServiceFactory;
+import lk.ijse.finalproject02.service.custom.impl.ClassDetailServiceImpl;
+import lk.ijse.finalproject02.service.custom.impl.ClassServiceImpl;
+import lk.ijse.finalproject02.service.custom.impl.StudentServiceImpl;
+import lk.ijse.finalproject02.service.custom.impl.TeacherServiceImpl;
 
 import java.net.URL;
-import java.security.Key;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -45,6 +47,11 @@ public class alreadyregisteredStudentController implements Initializable {
 
     @FXML
     private JFXComboBox teacherCombo;
+    StudentServiceImpl studentService = (StudentServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.STUDENT);
+    TeacherServiceImpl teacherService = (TeacherServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.TEACHER);
+    ClassServiceImpl classService = (ClassServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.CLASS);
+    ClassDetailServiceImpl classDetailService = (ClassDetailServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.CLASSDETAIL);
+
     @FXML
     void onselectedTeacher(ActionEvent event) {
         finishButton.requestFocus();
@@ -58,30 +65,41 @@ public class alreadyregisteredStudentController implements Initializable {
 
     @FXML
     void onFinishClick(ActionEvent event) {
-        String text = studentNIC.getText();
-        int studentID = Studentmodel.getStudentID(text);
-        String sub = (String) subjectComco.getValue();
-        String tea = (String) teacherCombo.getValue();
-        int teacherId = Teachermodel.getTeacherId(tea);
-        System.out.println(teacherId);
-        String studentBatch = Studentmodel.getStudentBatch(studentID);
-        String s = Classmodel.getclassID(teacherId, studentBatch);
-        System.out.println(s);
-        ClassDetailDTO classDetailDTO = new ClassDetailDTO(studentID,s,"asdas");
-        Boolean aBoolean = ClassDetailmodel.saveClassDetail(classDetailDTO);
+        boolean b = false;
+        try {
+            int studentId = studentService.getStudentId(studentNIC.getText());
+            String classID = classService.getClassID(
+                    teacherService.getTeacherID((String) teacherCombo.getValue()),
+                    studentService.getStudentBatch(studentId));
 
-        Stage stage = (Stage) finishButton.getScene().getWindow();
-        stage.close();
+             b = classDetailService.saveClassDetail(new ClassDetailDTO(studentId, classID, "asd"));
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        if (b) {
+            Stage stage = (Stage) finishButton.getScene().getWindow();
+            stage.close();
+        }else {
+            new Alert(Alert.AlertType.ERROR,"Cant add Student to class").show();
+        }
     }
 
     @FXML
     void onNIcadd(KeyEvent event) {
-        if (event.getCode().equals(KeyCode.ENTER)){
-            String text = studentNIC.getText();
-            int studentID = Studentmodel.getStudentID(text);
-            String studentName1 = Studentmodel.getStudentName(studentID);
-            studentName.setText(studentName1);
-            streamcombo.requestFocus();
+        try {
+            if (event.getCode().equals(KeyCode.ENTER)) {
+                String text = studentNIC.getText();
+                int studentID = studentService.getStudentId(text);
+                String studentName1 = studentService.getStudentName(studentID);
+                studentName.setText(studentName1);
+                streamcombo.requestFocus();
+            }
+        }catch (SQLException e){
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }catch (ClassNotFoundException e){
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
 
     }
@@ -89,7 +107,14 @@ public class alreadyregisteredStudentController implements Initializable {
     @FXML
     void onselectStream(ActionEvent event) {
         String stream = (String) streamcombo.getValue();
-        ArrayList<String> getsubjects = Classmodel.getsubjects(stream);
+        ArrayList<String> getsubjects = null;
+        try {
+            getsubjects = classService.getSubjects(stream);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR,"cant load Classes").show();
+        } catch (ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR,"cant load Classes").show();
+        }
         ObservableList<String> observableList = FXCollections.observableArrayList();
         observableList.addAll(getsubjects);
         subjectComco.setItems(observableList);
@@ -99,7 +124,14 @@ public class alreadyregisteredStudentController implements Initializable {
     @FXML
     void onsubjectselected(ActionEvent event) {
         String sub = (String) subjectComco.getValue();
-        ArrayList<TeacherDTO> teacherDTOS = Teachermodel.getteachersSubjectVise(sub);
+        ArrayList<TeacherDTO> teacherDTOS = null;
+        try {
+            teacherDTOS = teacherService.getTeacherSubVise(sub);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
         ObservableList<String> observableList = FXCollections.observableArrayList();
         for (int i = 0; i < teacherDTOS.size(); i++) {
             observableList.add(teacherDTOS.get(i).getFirstName());

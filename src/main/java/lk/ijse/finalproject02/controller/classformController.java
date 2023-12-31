@@ -10,13 +10,14 @@ import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import lk.ijse.finalproject02.DTO.ClassDTO;
-import lk.ijse.finalproject02.Model.Classmodel;
+import lk.ijse.finalproject02.service.ServiceFactory;
+import lk.ijse.finalproject02.service.custom.impl.ClassServiceImpl;
+import lombok.SneakyThrows;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.Scanner;
 
 public class classformController implements Initializable {
     @FXML
@@ -26,6 +27,8 @@ public class classformController implements Initializable {
 
     @FXML
     private GridPane gridpane;
+
+    ClassServiceImpl classService = (ClassServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.CLASS);
 
     @FXML
     void onaddclassClick(ActionEvent event) {
@@ -40,9 +43,10 @@ public class classformController implements Initializable {
 
     }
 
+    @SneakyThrows
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ArrayList<ClassDTO> classDTOS = Classmodel.getallClasses();
+        ArrayList<ClassDTO> classDTOS = classService.getAll();
         int colomn = 0;
         int row = 0;
         for (int i = 0; i < classDTOS.size(); i++) {

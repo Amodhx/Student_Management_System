@@ -9,17 +9,19 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import lk.ijse.finalproject02.DTO.ClassDTO;
 import lk.ijse.finalproject02.DTO.TeacherDTO;
-import lk.ijse.finalproject02.Model.Classmodel;
-import lk.ijse.finalproject02.Model.Teachermodel;
+import lk.ijse.finalproject02.service.ServiceFactory;
+import lk.ijse.finalproject02.service.custom.impl.ClassServiceImpl;
+import lk.ijse.finalproject02.service.custom.impl.TeacherServiceImpl;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -53,11 +55,20 @@ public class classaddformController implements Initializable {
     private TextField monthlyfee;
     @FXML
     private Label teacherID;
+    TeacherServiceImpl teacherService = (TeacherServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.TEACHER);
+    ClassServiceImpl classService = (ClassServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.CLASS);
 
     @FXML
     void onteacherSelected(ActionEvent event) {
         String teacherName = (String) gendercombo.getValue();
-        int teacherId = Teachermodel.getTeacherId(teacherName);
+        int teacherId = 0;
+        try {
+            teacherId = teacherService.getTeacherID(teacherName);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
         teacherID.setText("Teacher id :"+ teacherId);
     }
     @FXML
@@ -77,12 +88,25 @@ public class classaddformController implements Initializable {
         String subjectText = subject.getText();
         String teacherName = (String) gendercombo.getValue();
         String gradeText = grade.getText();
-        int teacherId = Teachermodel.getTeacherId(teacherName);
+        int teacherId = 0;
+        try {
+            teacherId = teacherService.getTeacherID(teacherName);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
         String strem = (String) Streamcombo.getValue();
         String fee= monthlyfee.getText();
 
         ClassDTO classDTO = new ClassDTO(classIDText,subjectText,teacherId,gradeText,strem,fee);
-        Classmodel.saveclass(classDTO);
+        try {
+            classService.saveClass(classDTO);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR,"Cant save Class values!!!").show();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
         try {
             Parent parent = FXMLLoader.load(getClass().getResource("/view/class-form.fxml"));
@@ -98,7 +122,13 @@ public class classaddformController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         teacherID.setText("");
-        teacherDTOS = Teachermodel.getallTeachers();
+        try {
+            teacherDTOS = teacherService.getAll();
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
         ObservableList<String> observableList = FXCollections.observableArrayList();
         for (int i = 0; i < teacherDTOS.size(); i++) {
             observableList.add(teacherDTOS.get(i).getFirstName());

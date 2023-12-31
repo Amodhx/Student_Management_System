@@ -1,8 +1,5 @@
 package lk.ijse.finalproject02.controller;
 
-import com.jfoenix.controls.JFXComboBox;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,24 +8,24 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import lk.ijse.finalproject02.DTO.ExamDetailDTO;
-import lk.ijse.finalproject02.DTO.StudentDTO;
-import lk.ijse.finalproject02.DTO.TeacherDTO;
-import lk.ijse.finalproject02.Model.*;
+import lk.ijse.finalproject02.service.ServiceFactory;
+import lk.ijse.finalproject02.service.custom.impl.*;
+import lombok.SneakyThrows;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Time;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
-import java.util.Timer;
 
 public class dbformController implements Initializable {
 
@@ -48,6 +45,11 @@ public class dbformController implements Initializable {
     private Label teachercount;
     @FXML
     private LineChart<?, ?> chart;
+    StudentServiceImpl studentService = (StudentServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.STUDENT);
+    TeacherServiceImpl teacherService = (TeacherServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.TEACHER);
+    ClassServiceImpl classService = (ClassServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.CLASS);
+    PaymentServiceImpl paymentService = (PaymentServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.PAYMENT);
+    ExamDetailServiceImpl examDetailService = (ExamDetailServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.EXAMDETAIL);
 
     @FXML
     void onMakeaPamentClick(ActionEvent event) {
@@ -105,6 +107,7 @@ public class dbformController implements Initializable {
     }
 
 
+    @SneakyThrows
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Date time = new Date();
@@ -117,16 +120,38 @@ public class dbformController implements Initializable {
         }else if(month.equals("DECEMBER")){
             toMonth = "December";
         }
-        String totale = Paymentmodel.totalAmountMonthVise(toMonth);
+        String totale = null;
+        try {
+            totale = paymentService.totalAmountMonthVise(toMonth);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
         seminarcount.setText(totale);
         String timenow = simpleDateFormat.format(time);
         timeadd.setText(timenow);
-        studentcount.setText(String.valueOf(Studentmodel.getStudentCount()));
-        classcount.setText(String.valueOf(Classmodel.getClassCount()));
-        teachercount.setText(String.valueOf(Teachermodel.getteachersCount()));
+        int studentCount = 0;
+        try {
+            studentCount = studentService.getCount();
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
+        studentcount.setText(String.valueOf(studentCount));
+        classcount.setText(String.valueOf(classService.getCount()));
+        try {
+            teachercount.setText(String.valueOf(teacherService.getCount()));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
         lineChart();
     }
 
+    @SneakyThrows
     private void lineChart() {
         XYChart.Series series = new XYChart.Series();
         XYChart.Series series1 = new XYChart.Series();
@@ -138,10 +163,10 @@ public class dbformController implements Initializable {
         series2.setName("Commerce");
         series3.setName("Arts");
 
-        ArrayList<ExamDetailDTO> marksSubjectAndBatchVise = ExamDetailmodel.getMarksSubjectAndBatchVise("Physical Science");
-        ArrayList<ExamDetailDTO> marksSubjectAndBatchVise1 = ExamDetailmodel.getMarksSubjectAndBatchVise("Bio Science");
-        ArrayList<ExamDetailDTO> marksSubjectAndBatchVise2 = ExamDetailmodel.getMarksSubjectAndBatchVise("Commerce");
-        ArrayList<ExamDetailDTO> marksSubjectAndBatchVise3 = ExamDetailmodel.getMarksSubjectAndBatchVise("Arts");
+        ArrayList<ExamDetailDTO> marksSubjectAndBatchVise = examDetailService.getMarksSubjectAndBatchVise("Physical Science");
+        ArrayList<ExamDetailDTO> marksSubjectAndBatchVise1 = examDetailService.getMarksSubjectAndBatchVise("Bio Science");
+        ArrayList<ExamDetailDTO> marksSubjectAndBatchVise2 = examDetailService.getMarksSubjectAndBatchVise("Commerce");
+        ArrayList<ExamDetailDTO> marksSubjectAndBatchVise3 = examDetailService.getMarksSubjectAndBatchVise("Arts");
 
         for (int i = 0; i < marksSubjectAndBatchVise.size(); i++) {
 

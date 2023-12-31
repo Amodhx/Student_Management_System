@@ -17,11 +17,14 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import lk.ijse.finalproject02.DTO.ClassDTO;
 import lk.ijse.finalproject02.DTO.tm.classDeletetm;
-import lk.ijse.finalproject02.Model.Classmodel;
-import lk.ijse.finalproject02.Model.Teachermodel;
+import lk.ijse.finalproject02.service.ServiceFactory;
+import lk.ijse.finalproject02.service.custom.impl.ClassServiceImpl;
+import lk.ijse.finalproject02.service.custom.impl.TeacherServiceImpl;
+import lombok.SneakyThrows;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -53,6 +56,8 @@ public class deleteUpdateClassformController implements Initializable {
 
     @FXML
     private TableColumn<classDeletetm, JFXButton> updatecolumn;
+    TeacherServiceImpl teacherService = (TeacherServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.TEACHER);
+    ClassServiceImpl classService = (ClassServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.CLASS);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -60,11 +65,19 @@ public class deleteUpdateClassformController implements Initializable {
         loadValues();
     }
 
+    @SneakyThrows
     private void loadValues() {
-        ArrayList<ClassDTO> classDTOS = Classmodel.getallClasses();
+        ArrayList<ClassDTO> classDTOS = classService.getAll();
         ObservableList<classDeletetm> observableList = FXCollections.observableArrayList();
         for (int i = 0; i < classDTOS.size(); i++) {
-            String teacherName = Teachermodel.getTeacherName(classDTOS.get(i).getTeacherId());
+            String teacherName = null;
+            try {
+                teacherName = teacherService.getTeacherName(classDTOS.get(i).getTeacherId());
+            } catch (SQLException e) {
+                new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+            } catch (ClassNotFoundException e) {
+                new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+            }
             classDeletetm classDeletetm = new classDeletetm(classDTOS.get(i).getClassId(),
                     classDTOS.get(i).getSubject(),
                     teacherName,classDTOS.get(i).getGrade(),
@@ -108,7 +121,14 @@ public class deleteUpdateClassformController implements Initializable {
 
             });
             observableList.get(i).getDeleteButton().setOnAction(event ->{
-                boolean b = Classmodel.deleteClass(clasID);
+                boolean b = false;
+                try {
+                    b = classService.deleteClass(clasID);
+                } catch (SQLException e) {
+                    new Alert(Alert.AlertType.ERROR,"Cant delete class Detail!!!").show();
+                } catch (ClassNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
                 if (b){
                     new Alert(Alert.AlertType.CONFIRMATION,"Class Detail Deleted").show();
                     loadValues();

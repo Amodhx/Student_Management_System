@@ -12,7 +12,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import lk.ijse.finalproject02.DTO.UserDTO;
-import lk.ijse.finalproject02.Model.Usermodel;
+import lk.ijse.finalproject02.service.ServiceFactory;
+import lk.ijse.finalproject02.service.custom.impl.AdminServiceImpl;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,11 +32,12 @@ public class adminVrifyformController {
     @FXML
     private JFXButton okButton;
 
+    AdminServiceImpl adminService = (AdminServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.USER);
     @FXML
     void onOkClick(ActionEvent event) throws IOException {
         String adminnameText = adminname.getText();
         String adminpasswordText = adminpassword.getText();
-        ArrayList<UserDTO> allUsers = Usermodel.getAllUsers();
+        ArrayList<UserDTO> allUsers =adminService.getAllUsers();
         for (int i = 0; i < allUsers.size(); i++) {
             if (allUsers.get(i).getUserName().equals(adminnameText) && allUsers.get(i).getPassword().equals(adminpasswordText) && allUsers.get(i).getType().equals("Admin")){
                 Parent parent = FXMLLoader.load(getClass().getResource("/view/adminAddpop-form.fxml"));

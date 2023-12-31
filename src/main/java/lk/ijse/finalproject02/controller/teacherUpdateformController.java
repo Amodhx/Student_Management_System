@@ -10,10 +10,12 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import lk.ijse.finalproject02.Model.Teachermodel;
+import lk.ijse.finalproject02.service.ServiceFactory;
+import lk.ijse.finalproject02.service.custom.impl.TeacherServiceImpl;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class teacherUpdateformController implements Initializable {
@@ -46,6 +48,7 @@ public class teacherUpdateformController implements Initializable {
 
     @FXML
     private JFXButton saveButton;
+    TeacherServiceImpl teacherService = (TeacherServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.TEACHER);
 
     @FXML
     void onCanselButton(ActionEvent event) {
@@ -62,7 +65,14 @@ public class teacherUpdateformController implements Initializable {
         String mail = EmailField.getText();
         String nic = NICField.getText();
 
-        boolean b = Teachermodel.updateTeacher(teacherID, fname, lname, contact, mail, nic);
+        boolean b = false;
+        try {
+            b = teacherService.updateTeacher(teacherID, fname, lname, contact, mail, nic);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
         if (b){
             new Alert(Alert.AlertType.CONFIRMATION,"Teacher Updated").show();
             Parent parent = null;
